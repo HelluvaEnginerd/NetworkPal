@@ -50,4 +50,20 @@ Strings for ApplicationSearchActivity
     <string name="title">Title</string>
     <string name="business_card">Business Card</string>
     <string name="done">Done</string>
+
+    <!--
+    Strings for NewEvent Layout
+    -->
+    <string name="new_event_activity">New Event</string>
+    <string name="event_title">Event Name: </string>
+    <string name="time_text">Date: </string>
+    <string name="company_text">Company: </string>
+    <string name="details_text">Details: </string>
+    <string name="create_text">Create Event</string>
+    <string name="enter_text">Enter Text</string>
+
+    <!--
+    Strings for Calendar Layout
+    -->
+    <string name="new_event_button">New Event</string>
 </resources>
