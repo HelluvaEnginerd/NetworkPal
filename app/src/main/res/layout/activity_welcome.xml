@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/events_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/events_button"
+        />
+        <Button
+            android:id="@+id/apps_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/events_button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/applications_button"
+        />
+        <Button
+            android:id="@+id/contacts_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apps_button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/contacts_button"
+        />
+        <Button
+            android:id="@+id/diggernet_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contacts_button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/diggernet_button"
+        />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/recent_activity_text_view"
+        android:layout_below="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recent_activity"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="35sp"
+    />
+
+    <RelativeLayout
+        android:id="@+id/relative_application_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recent_activity_text_view"
+        android:textColor="@android:color/black"
+    >
+
+        <TextView
+            android:id="@+id/application_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/application_recent"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:layout_marginLeft="40sp"
+        />
+
+        <TextView
+            android:id="@+id/application_date_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/application_view"
+            android:textSize="25sp"
+            android:layout_marginLeft="65sp"
+            android:text="@string/date"
+            android:textColor="@android:color/black"
+        />
+
+    </RelativeLayout>
+
+</RelativeLayout>

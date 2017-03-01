@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">NetworkingPal</string>
+    <!--
+Strings for welcome activity
+-->
+    <string name="drawer_open">YO</string>
+    <string name="drawer_close">BYE</string>
+    <string name="recent_activity">Recent Activity</string>
+    <string name="application_recent">Application</string>
+    <string name="date">Date</string>
+    <string name="events_button">Events</string>
+    <string name="applications_button">Applications</string>
+    <string name="contacts_button">Contacts</string>
+    <string name="diggernet_button">Diggernet</string>
+
+    <!--
+Strings for ApplicationSearchActivity
+-->
+
+    <string name="navigation_menu">Navigation Menu</string>
+    <string name="applications_header">Applications</string>
+    <string name="search_hint">What do U wanna find</string>
+
+    <string-array name="sort_choice_array">
+        <item>A</item>
+        <item>Z</item>
+        <item>DateS</item>
+        <item>DateD</item>
+    </string-array>
+
+    <!--
+    Strings for new company layout
+-->
+    <string name ="company_name">Company Name</string>
+    <string name="job_title">Job Title</string>
+    <string name="company_contact">Company Contact</string>
+    <string name="date_due">Date Due</string>
+    <string name="cover_letter">Cover letter</string>
+    <string name="resume">Resume</string>
+    <string name="submitted">Submitted"</string>
+    <string name="create_new">Create New</string>
+    <string name="choose_existing">Choose Existing</string>
+
+    <!--
+    Strings for new contact layout
+-->
+    <string name = "contact_name">Contact Name</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="title">Title</string>
+    <string name="business_card">Business Card</string>
+    <string name="done">Done</string>
+</resources>
