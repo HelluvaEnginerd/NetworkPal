@@ -35,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //go to events
-                Intent i = NewEventActivity.newIntent(WelcomeActivity.this);
+                Intent i = CalendarActivity.newIntent(WelcomeActivity.this);
                 startActivity(i);
             }
         });
