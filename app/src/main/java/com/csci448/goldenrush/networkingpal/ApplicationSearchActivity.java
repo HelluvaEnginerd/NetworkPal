@@ -2,6 +2,7 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,6 +24,7 @@ public class ApplicationSearchActivity extends FragmentActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState){
+        Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_search);
 
@@ -41,9 +43,13 @@ public class ApplicationSearchActivity extends FragmentActivity{
                     .commit();
         }
     }
-
+    /**
+     * TODO add application UUIDs and make the list go into the newApplicationView
+     */
+/*
     @Override
     public void onAppSelected(Application application) {
+        Log.d(TAG, "onAppSelected()");
         Log.d(TAG, "onCrimeSelected()");
         if (findViewById(R.id.detail_fragment_container) == null) {
             Intent intent = CrimePagerActivity.newIntent(this, crime.getID());
@@ -55,4 +61,5 @@ public class ApplicationSearchActivity extends FragmentActivity{
                     .commit();
         }
     }
+    */
 }
