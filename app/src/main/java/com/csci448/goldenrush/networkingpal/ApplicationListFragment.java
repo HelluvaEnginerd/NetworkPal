@@ -92,15 +92,17 @@ public class ApplicationListFragment extends Fragment {
         private Application mApp;
         private TextView mTitleTextView;
         private TextView mDateTextView;
-        private CheckBox mSolvedCheckBox;
+        private TextView mCompanyTextView;
+        private TextView mContactTextView;
 
         public void bindCrime(Application app) {
             Log.d(TAG, "bindCrime()");
             formatter = new SimpleDateFormat(pattern);
             mApp = app;
-            mTitleTextView.setText(mApp.getName());
+            mTitleTextView.setText(mApp.getName() + mApp.getJobTitle());
             mDateTextView.setText(formatter.format(mApp.getDateDue()));
-            //mSolvedCheckBox.setChecked(mCrime.isSolved());
+            mCompanyTextView.setText(mApp.getCompany());
+            mContactTextView.setText(mApp.getCompanyContact());
         }
 
         public ApplicationHolder(View itemView) {
@@ -109,7 +111,8 @@ public class ApplicationListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_application_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_application_date_text_view);
-            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_application_check_box);
+            mCompanyTextView = (TextView) itemView.findViewById(R.id.list_item_application_company_text_view);
+            mContactTextView = (TextView) itemView.findViewById(R.id.list_item_application_contact_text_view);
         }
 
         @Override
