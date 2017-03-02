@@ -58,7 +58,7 @@ public class ApplicationListFragment extends Fragment {
     }
 
     private class ApplicationAdapter extends RecyclerView.Adapter<ApplicationHolder> {
-        private static final String TAG = "CLF:CrimeAdapter";
+        private static final String TAG = "ALF:ApplicationAdapter";
         private List<Application> mApps;
 
         public ApplicationAdapter(List<Application> apps) {
@@ -69,7 +69,7 @@ public class ApplicationListFragment extends Fragment {
         public ApplicationHolder onCreateViewHolder( ViewGroup parent, int viewType) {
             Log.d(TAG, "onCreateViewHolder()");
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            Log.d(TAG, "inflate list_item_crime");
+            Log.d(TAG, "inflate list_item_application");
             View view = layoutInflater.inflate(R.layout.list_item_application, parent, false);
             return new ApplicationHolder(view);
         }
@@ -99,7 +99,7 @@ public class ApplicationListFragment extends Fragment {
             Log.d(TAG, "bindCrime()");
             formatter = new SimpleDateFormat(pattern);
             mApp = app;
-            mTitleTextView.setText(mApp.getName() + mApp.getJobTitle());
+            mTitleTextView.setText(mApp.getName() + " " + mApp.getJobTitle());
             mDateTextView.setText(formatter.format(mApp.getDateDue()));
             mCompanyTextView.setText(mApp.getCompany());
             mContactTextView.setText(mApp.getCompanyContact());
@@ -107,7 +107,7 @@ public class ApplicationListFragment extends Fragment {
 
         public ApplicationHolder(View itemView) {
             super(itemView);
-            Log.d(TAG, "CrimeHolder()");
+            Log.d(TAG, "ApplicationHolder()");
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_application_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_application_date_text_view);
@@ -118,6 +118,7 @@ public class ApplicationListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
+
         }
     }
 
