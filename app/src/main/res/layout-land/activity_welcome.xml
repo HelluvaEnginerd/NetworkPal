@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+    >
+        <Button
+            android:id="@+id/events_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/events_button"
+        />
+        <Button
+            android:id="@+id/apps_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/events_button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/applications_button"
+        />
+        <Button
+            android:id="@+id/contacts_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apps_button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/contacts_button"
+        />
+        <Button
+            android:id="@+id/diggernet_button"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contacts_button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/diggernet_button"
+        />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/recent_activity_text_view"
+        android:layout_toRightOf="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recent_activity"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="35sp"
+    />
+
+    <FrameLayout
+        android:layout_below="@+id/recent_activity_text_view"
+        android:id="@+id/fragment_welcome_list_host"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    >
+    </FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/application_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/applications_header"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"/>
+
+    <Spinner
+        android:id="@+id/sort_by_spinner"
+        android:layout_width="250sp"
+        android:layout_height="50sp"
+        android:layout_below="@id/application_header"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:entries="@array/sort_choice_array"
+        android:textAlignment="center">
+    </Spinner>
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="250dp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/application_header"
+        android:layout_toRightOf="@+id/sort_by_spinner"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:queryHint="@string/search_hint">
+
+    </SearchView>
+
+    <ImageButton
+        android:id="@+id/add_newApp_Button"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/application_header"
+        android:layout_toRightOf="@+id/search_view"
+        android:background="@mipmap/add"
+        />
+
+    <FrameLayout
+        android:layout_below="@+id/search_view"
+        android:id="@+id/fragment_app_search_list_host"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+</RelativeLayout>

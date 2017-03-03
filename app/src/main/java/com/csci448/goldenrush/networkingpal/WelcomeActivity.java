@@ -73,6 +73,8 @@ public class WelcomeActivity extends AppCompatActivity{
                  * go to contacts view,
                  * TODO decide if its companies or people shown first
                  */
+                Intent intent = ContactsActivity.newIntent(WelcomeActivity.this);
+                startActivity(intent);
             }
         });
 
