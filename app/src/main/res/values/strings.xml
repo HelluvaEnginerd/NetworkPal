@@ -76,4 +76,5 @@ Strings for ApplicationSearchActivity
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="cancel">Cancel</string>
+    <string name = "diggernet_activity">Diggernet</string>
 </resources>
