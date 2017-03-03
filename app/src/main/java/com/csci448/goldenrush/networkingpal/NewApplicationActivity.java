@@ -70,7 +70,9 @@ public class NewApplicationActivity extends AppCompatActivity{
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //something
+                //THIS WILL NEED TO BE CHANGED
+                Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
+                startActivity(intent);
             }
         });
     }
