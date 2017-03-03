@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="6">
+
+        <TextView
+            android:id="@+id/contact_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_name"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"/>
+
+        <TextView
+            android:id="@+id/company_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/company_name"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/contact_name"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+
+        <EditText
+            android:id="@+id/company_name"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/email_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"/>
+
+        <TextView
+            android:id="@+id/phone_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/title_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"/>
+
+        <TextView
+            android:id="@+id/business_card_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/business_card"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"/>
+        <EditText
+            android:id="@+id/title_edittext"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+
+
+        <include layout = "@layout/view_and_camera_title"/>
+    </GridLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <Button
+            android:id ="@+id/done_company_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/done"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

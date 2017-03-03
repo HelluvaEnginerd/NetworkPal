@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +27,15 @@ public class ApplicationListFragment extends Fragment {
 
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
+
+    private Callbacks mCallbacks;
+
+    /**
+     * Required interface for hosting activities
+     */
+    public interface Callbacks {
+        void onAppSelected(Application application);
+    }
 
 
     private void updateUI(){
@@ -117,7 +126,8 @@ public class ApplicationListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Log.d(TAG, "onClick()");
+            Intent intent = NewApplicationActivity.newIntent(getActivity(), mApp.getId());
+            startActivity(intent);
 
         }
     }

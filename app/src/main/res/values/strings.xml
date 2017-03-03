@@ -61,9 +61,20 @@ Strings for ApplicationSearchActivity
     <string name="details_text">Details: </string>
     <string name="create_text">Create Event</string>
     <string name="enter_text">Enter Text</string>
+    <string name="empty_text"></string>
 
     <!--
     Strings for Calendar Layout
     -->
+    <string name="calendar_activity">Calendar</string>
     <string name="new_event_button">New Event</string>
+
+    <!--
+    Strings for Diggerenet-->
+    <string name="diggernet">Diggernet</string>
+    <string name="username">Username(CWID)</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="cancel">Cancel</string>
+    <string name = "diggernet_activity">Diggernet</string>
 </resources>

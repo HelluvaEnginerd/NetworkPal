@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:layout_margin="20dp">
@@ -14,18 +14,21 @@
             android:padding="10dp"
             android:orientation="horizontal"
             >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/event_title"
                 android:padding="10dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:id="@+id/textView" />
+
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/event_box"
                 android:padding="10dp"
-                android:hint="@string/enter_text"
+                android:text="@string/enter_text"
                 android:inputType="text" />
 
         </LinearLayout>
@@ -46,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/time_box"
                 android:padding="10dp"
-
-                android:hint="@string/enter_text"
+                android:text="@string/enter_text"
 
                 android:inputType="text" />
 
@@ -69,45 +71,45 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/company_box"
-
                 android:padding="10dp"
-                android:hint="@string/enter_text"
+                android:text="@string/enter_text"
                 android:inputType="text" />
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_weight="7"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/details_text"
-                android:padding="10dp"
-                android:layout_weight="1"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="10"
-                android:padding="10dp"
-                android:id="@+id/details_box"
-                android:gravity="top"
-                android:hint="@string/enter_text"
-                android:background="@drawable/drawableback"
-                android:inputType="textMultiLine"/>
-        </LinearLayout>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:padding="10dp"
             android:id="@+id/create_button"
             android:text="@string/create_text">
 
         </Button>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_text"
+            android:padding="10dp"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:layout_weight="10"
+            android:id="@+id/details_box"
+            android:padding="10dp"
+            android:text="@string/enter_text"
+            android:background="@drawable/drawableback"
+            android:inputType="textMultiLine"/>
     </LinearLayout>
 
 </LinearLayout>
