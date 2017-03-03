@@ -82,12 +82,7 @@
         android:paddingLeft="20dp"
         android:paddingTop="10dp"/>
 
-    <ImageButton
-        android:id="@+id/business_card_imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_camera"/>
+    <include layout = "@layout/view_and_camera_title"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"

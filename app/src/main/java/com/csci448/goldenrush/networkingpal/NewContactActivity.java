@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -29,6 +30,7 @@ public class NewContactActivity extends AppCompatActivity{
     private EditText mPhoneEditText;
     private EditText mTitleEditText;
     private ImageButton mBusinessCardButton;
+    private ImageView mBusinessCardPhoto;
     private Button mDone;
 
     public static Intent newIntent(Context packageContext){
@@ -50,7 +52,9 @@ public class NewContactActivity extends AppCompatActivity{
         mPhoneEditText = (EditText) findViewById(R.id.phone);
         mTitleEditText = (EditText) findViewById(R.id.title_edittext) ;
 
-        mBusinessCardButton = (ImageButton) findViewById(R.id.business_card_imageButton);
+        mBusinessCardPhoto = (ImageView) findViewById(R.id.business_card_photo);
+
+        mBusinessCardButton = (ImageButton) findViewById(R.id.business_card_camera);
         mBusinessCardButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
