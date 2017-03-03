@@ -46,4 +46,6 @@ public class RecentActivity{
     public UUID getUUID() {
         return mUUID;
     }
+
+    public Intent getIntent(){ return mIntent; }
 }

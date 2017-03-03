@@ -2,7 +2,6 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiEnterpriseConfig;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +11,13 @@ import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity{
+
+
+    /**
+     * TODO plus button w/list of new things
+     * TODO put everything else in the menu (lists and such)
+     */
 
     private static String TAG = WelcomeActivity.class.getSimpleName();
 
@@ -93,6 +98,6 @@ public class WelcomeActivity extends AppCompatActivity {
                     .add(R.id.fragment_welcome_list_host, fragment)
                     .commit();
         }
-
     }
+
 }

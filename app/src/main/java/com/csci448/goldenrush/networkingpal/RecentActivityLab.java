@@ -36,27 +36,27 @@ public class RecentActivityLab {
 
         Date date = new Date();
 
-        Intent intent1 = new Intent(context, NewEventActivity.class);
+        Intent intent1 = NewEventActivity.newIntent(context);
         RecentActivity activity1 = new RecentActivity("Event", "Interview", date, "Lockheed", intent1);
         mRecentActivities.add(activity1);
 
-        Intent intent2 = new Intent(context, NewContactActivity.class);
+        Intent intent2 = NewContactActivity.newIntent(context);
         RecentActivity activity2 = new RecentActivity("Contact", "Steve", date, "NASA", intent2);
         mRecentActivities.add(activity2);
 
-        Intent intent3 = new Intent(context, NewApplicationActivity.class);
+        Intent intent3 = NewApplicationActivity.newIntent(context, null);
         RecentActivity activity3 = new RecentActivity("Application", "Process Engineer", date, "SpaceX", intent3);
         mRecentActivities.add(activity3);
 
-        Intent intent4 = new Intent(context, NewContactActivity.class);
+        Intent intent4 = NewContactActivity.newIntent(context);
         RecentActivity activity4 = new RecentActivity("Contact2", "Jane", date, "Schlumberger", intent4);
         mRecentActivities.add(activity4);
 
-        Intent intent5 = new Intent(context, NewEventActivity.class);
+        Intent intent5 = NewEventActivity.newIntent(context);
         RecentActivity activity5 = new RecentActivity("Event2", "Dinner", date, "MillerCoors", intent5);
         mRecentActivities.add(activity5);
 
-        Intent intent6 = new Intent(context, NewApplicationActivity.class);
+        Intent intent6 = NewApplicationActivity.newIntent(context, null);
         RecentActivity activity6 = new RecentActivity("Application2", "Chemical Engineer", date, "Chevron", intent6);
         mRecentActivities.add(activity6);
     }
