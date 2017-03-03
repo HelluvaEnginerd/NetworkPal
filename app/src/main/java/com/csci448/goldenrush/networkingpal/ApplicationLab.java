@@ -9,6 +9,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * v much in the style of 'CrimeLab'
@@ -40,13 +41,11 @@ public class ApplicationLab {
         }
     }
 
-    public Application getApplication(){
-        for (Application app: mApps){
-            //get application by ID
-            /**
-             * TODO ID the applications (UUID?)
-             */
-            return null;
+    public Application getApplication(UUID id){
+        for (Application application : mApps){
+            if (application.getId().equals(id)){
+                return application;
+            }
         }
         return null;
     }

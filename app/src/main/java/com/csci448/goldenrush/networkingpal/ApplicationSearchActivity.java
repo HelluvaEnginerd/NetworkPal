@@ -13,9 +13,11 @@ import android.util.Log;
  * Created by Hayden on 2/28/17.
  */
 
-public class ApplicationSearchActivity extends FragmentActivity{
+public class ApplicationSearchActivity extends FragmentActivity implements ApplicationListFragment.Callbacks{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
+
+
 
     public static Intent newIntent(Context packageContext){
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
@@ -44,22 +46,13 @@ public class ApplicationSearchActivity extends FragmentActivity{
         }
     }
     /**
-     * TODO add application UUIDs and make the list go into the newApplicationView
+     * TODO make the apps a PagerView
      */
-/*
+
     @Override
     public void onAppSelected(Application application) {
         Log.d(TAG, "onAppSelected()");
-        Log.d(TAG, "onCrimeSelected()");
-        if (findViewById(R.id.detail_fragment_container) == null) {
-            Intent intent = CrimePagerActivity.newIntent(this, crime.getID());
-            startActivity(intent);
-        } else {
-            Fragment newDetail = CrimeFragment.newInstance(crime.getID());
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment_container, newDetail)
-                    .commit();
-        }
+        Intent intent = NewApplicationActivity.newIntent(this, application.getId());
+        startActivity(intent);
     }
-    */
 }

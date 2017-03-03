@@ -1,6 +1,7 @@
 package com.csci448.goldenrush.networkingpal;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by ddunmire on 2/27/2017.
@@ -13,8 +14,10 @@ public class Application {
     private String mCompanyContact;
     private Date mDateDue;
     private String mCompany;
+    private UUID mID;
 
     public Application(String name, String jobTitle, String companyContact, Date dateDue, String company){
+        mID = UUID.randomUUID();
         mName = name;
         mJobTitle = jobTitle;
         mCompanyContact = companyContact;
@@ -39,4 +42,6 @@ public class Application {
     }
 
     public String getCompany() {return mCompany;}
+
+    public UUID getId(){return mID;}
 }
