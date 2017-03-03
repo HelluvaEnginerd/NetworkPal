@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/contacts_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="Contacts"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"/>
+
+    <Spinner
+        android:id="@+id/contacts_spinner"
+        android:layout_width="175sp"
+        android:layout_height="50sp"
+        android:layout_below="@id/application_header"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:entries="@array/sort_choice_array"
+        android:textAlignment="center">
+    </Spinner>
+
+    <SearchView
+        android:id="@+id/contacts_search_view"
+        android:layout_width="175sp"
+        android:layout_height="50sp"
+        android:layout_below="@+id/contacts_header"
+        android:layout_toRightOf="@+id/contacts_spinner"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:queryHint="@string/search_hint">
+    </SearchView>
+
+    <FrameLayout
+        android:layout_below="@+id/contacts_search_view"
+        android:id="@+id/fragment_list_host"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+</RelativeLayout>
