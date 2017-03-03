@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class NewApplicationActivity extends AppCompatActivity{
     private static String TAG = "NewApplicationActivity";
     private static final String EXTRA_UUID = "uuid";
+    private static final int REQUEST_CONTACT = 1;
 
     private TextView mCompanyNameTextview;
     private TextView mJobTitleTextview;
@@ -59,11 +61,13 @@ public class NewApplicationActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         mChooseExistingButton = (Button) findViewById(R.id.choose_existing_button);
         mChooseExistingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //link to contacts
+                startActivityForResult(pickContact, REQUEST_CONTACT);
             }
         });
 
@@ -75,7 +79,9 @@ public class NewApplicationActivity extends AppCompatActivity{
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //something
+                //THIS WILL NEED TO BE CHANGED
+                Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
+                startActivity(intent);
             }
         });
 
