@@ -95,9 +95,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:id="@+id/details_box"
+                android:gravity="top"
                 android:hint="@string/enter_text"
                 android:background="@android:color/darker_gray"
-                android:inputType="text"/>
+                android:inputType="textMultiLine"/>
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
