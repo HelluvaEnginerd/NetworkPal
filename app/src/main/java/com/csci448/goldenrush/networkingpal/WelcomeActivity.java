@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import com.crashlytics.android.Crashlytics;
+
+import java.util.UUID;
+
 import io.fabric.sdk.android.Fabric;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -51,7 +54,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 /**
                  * go to application list view
                  */
-                Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this);
+                Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this, new UUID(1,1));
                 startActivity(intent);
             }
         });

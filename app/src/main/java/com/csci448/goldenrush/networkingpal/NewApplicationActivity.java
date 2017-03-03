@@ -80,8 +80,6 @@ public class NewApplicationActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 //THIS WILL NEED TO BE CHANGED
-                Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
-                startActivity(intent);
             }
         });
 

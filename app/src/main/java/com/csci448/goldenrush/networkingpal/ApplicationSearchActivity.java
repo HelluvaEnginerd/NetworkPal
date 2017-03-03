@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.UUID;
+
 /**
  * Created by Hayden on 2/28/17.
  */
@@ -19,9 +21,13 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
     private ImageButton mAddApplication;
 
+    public static final String EXTRA_APPLICATION_ID = "com.csci448.goldenrush.networkingpal.application_id";
 
-    public static Intent newIntent(Context packageContext){
+
+
+    public static Intent newIntent(Context packageContext, UUID applicationId){
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
+        intent.putExtra(EXTRA_APPLICATION_ID, applicationId);
         return intent;
     }
 
