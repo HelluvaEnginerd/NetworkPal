@@ -16,6 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ApplicationSearchActivity"></activity>
+        <activity android:name=".NewApplicationActivity"></activity>
+        <activity android:name=".NewContactActivity"></activity>
 
         <activity android:name=".NewEventActivity"
             android:label="@string/new_event_activity"></activity>

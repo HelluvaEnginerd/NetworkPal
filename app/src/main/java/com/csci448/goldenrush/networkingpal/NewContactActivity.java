@@ -62,7 +62,9 @@ public class NewContactActivity extends AppCompatActivity{
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //something
+                //THIS WILL NEED TO BE CHANGED
+                Intent intent = NewApplicationActivity.newIntent(NewContactActivity.this, null);
+                startActivity(intent);
             }
         });
     }

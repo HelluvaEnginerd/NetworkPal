@@ -1,6 +1,8 @@
 package com.csci448.goldenrush.networkingpal;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -65,18 +67,15 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        mApplicationLayout = (RelativeLayout) findViewById(R.id.relative_application_view);
-        mApplicationLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /**
-                 * TODO open application activity
-                 */
-                /*Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this);
-                startActivity(intent);*/
-            }
-        });
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_welcome_list_host);
 
+        if (fragment == null){
+            fragment = new RecentActivityFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_welcome_list_host, fragment)
+                    .commit();
+        }
 
     }
 }

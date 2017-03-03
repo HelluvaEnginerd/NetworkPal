@@ -2,20 +2,23 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 /**
  * Created by Hayden on 2/28/17.
  */
 
-public class ApplicationSearchActivity extends FragmentActivity{
+public class ApplicationSearchActivity extends FragmentActivity implements ApplicationListFragment.Callbacks{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
+    private ImageButton mAddApplication;
+
 
     public static Intent newIntent(Context packageContext){
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
@@ -28,38 +31,39 @@ public class ApplicationSearchActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_search);
 
+
+        mAddApplication = (ImageButton) findViewById(R.id.add_newApp_Button);
+
+        mAddApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
+                startActivity(intent);
+            }
+        });
         /**
          * TODO wire up spinner
          * TODO wire up search field
          */
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_list_host);
+        Fragment fragment = fm.findFragmentById(R.id.fragment_app_search_list_host);
 
         if (fragment == null){
             fragment = new ApplicationListFragment();
             fm.beginTransaction()
-                    .add(R.id.fragment_list_host, fragment)
+                    .add(R.id.fragment_app_search_list_host, fragment)
                     .commit();
         }
     }
     /**
-     * TODO add application UUIDs and make the list go into the newApplicationView
+     * TODO make the apps a PagerView
      */
-/*
+
     @Override
     public void onAppSelected(Application application) {
         Log.d(TAG, "onAppSelected()");
-        Log.d(TAG, "onCrimeSelected()");
-        if (findViewById(R.id.detail_fragment_container) == null) {
-            Intent intent = CrimePagerActivity.newIntent(this, crime.getID());
-            startActivity(intent);
-        } else {
-            Fragment newDetail = CrimeFragment.newInstance(crime.getID());
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment_container, newDetail)
-                    .commit();
-        }
+        Intent intent = NewApplicationActivity.newIntent(this, application.getId());
+        startActivity(intent);
     }
-    */
 }
