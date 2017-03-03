@@ -67,4 +67,12 @@ Strings for ApplicationSearchActivity
     -->
     <string name="calendar_activity">Calendar</string>
     <string name="new_event_button">New Event</string>
+
+    <!--
+    Strings for Diggerenet-->
+    <string name="diggernet">Diggernet</string>
+    <string name="username">Username(QWID)</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="cancel">Cancel</string>
 </resources>

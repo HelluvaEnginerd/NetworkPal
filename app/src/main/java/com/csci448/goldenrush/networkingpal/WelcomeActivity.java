@@ -36,7 +36,9 @@ public class WelcomeActivity extends AppCompatActivity {
         mEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //go to events
+                /**
+                 * go to events
+                 */
                 Intent i = CalendarActivity.newIntent(WelcomeActivity.this);
                 startActivity(i);
             }
@@ -46,6 +48,9 @@ public class WelcomeActivity extends AppCompatActivity {
         mApplicationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * go to application list view
+                 */
                 Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this);
                 startActivity(intent);
             }
@@ -55,7 +60,9 @@ public class WelcomeActivity extends AppCompatActivity {
         mContactsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //go to contacts
+                /**
+                 * go to contacts view, decide if its companies or people shown first
+                 */
             }
         });
 
@@ -63,10 +70,18 @@ public class WelcomeActivity extends AppCompatActivity {
         mDiggernetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //go to diggernet
+                /**
+                 * go to diggernet page
+                 */
+                Intent i = DiggernetActivity.newIntent(WelcomeActivity.this);
+                startActivity(i);
             }
         });
 
+
+        /**
+         * Loads the recent activity recyclerview
+         */
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_welcome_list_host);
 
