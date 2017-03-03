@@ -2,12 +2,13 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 /**
  * Created by Hayden on 2/28/17.
@@ -16,7 +17,7 @@ import android.util.Log;
 public class ApplicationSearchActivity extends FragmentActivity implements ApplicationListFragment.Callbacks{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
-
+    private ImageButton mAddApplication;
 
 
     public static Intent newIntent(Context packageContext){
@@ -30,18 +31,28 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_search);
 
+
+        mAddApplication = (ImageButton) findViewById(R.id.add_newApp_Button);
+
+        mAddApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
+                startActivity(intent);
+            }
+        });
         /**
          * TODO wire up spinner
          * TODO wire up search field
          */
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_list_host);
+        Fragment fragment = fm.findFragmentById(R.id.fragment_app_search_list_host);
 
         if (fragment == null){
             fragment = new ApplicationListFragment();
             fm.beginTransaction()
-                    .add(R.id.fragment_list_host, fragment)
+                    .add(R.id.fragment_app_search_list_host, fragment)
                     .commit();
         }
     }
