@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 /**
  * Created by Hayden on 2/28/17.
@@ -16,6 +18,8 @@ import android.util.Log;
 public class ApplicationSearchActivity extends FragmentActivity{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
+
+    private ImageButton mAddApplication;
 
     public static Intent newIntent(Context packageContext){
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
@@ -28,6 +32,16 @@ public class ApplicationSearchActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_search);
 
+
+        mAddApplication = (ImageButton) findViewById(R.id.add_newApp_Button);
+
+        mAddApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this);
+                startActivity(intent);
+            }
+        });
         /**
          * TODO wire up spinner
          * TODO wire up search field
