@@ -13,14 +13,6 @@
 
     </CalendarView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="30dp"
-        android:layout_margin="10dp"
-        android:layout_gravity="center|bottom"
-
-        android:visibility="invisible"/>
     <ImageButton
         android:id="@+id/new_event_button"
         android:layout_width="50sp"
