@@ -9,9 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +27,15 @@ public class ApplicationListFragment extends Fragment {
 
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
+
+    private Callbacks mCallbacks;
+
+    /**
+     * Required interface for hosting activities
+     */
+    public interface Callbacks {
+        void onAppSelected(Application application);
+    }
 
 
     private void updateUI(){
@@ -54,8 +60,6 @@ public class ApplicationListFragment extends Fragment {
 
         mAppRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         mAppRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
 
         updateUI();
 

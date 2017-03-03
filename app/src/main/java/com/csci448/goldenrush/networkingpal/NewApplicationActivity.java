@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +12,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 /**
  * Created by ddunmire on 2/27/2017.
  */
 
 public class NewApplicationActivity extends AppCompatActivity{
     private static String TAG = "NewApplicationActivity";
+    private static final String EXTRA_UUID = "uuid";
     private static final int REQUEST_CONTACT = 1;
 
     private TextView mCompanyNameTextview;
@@ -33,8 +37,9 @@ public class NewApplicationActivity extends AppCompatActivity{
     private CheckBox mSubmittedCheckBox;
     private Button mDone;
 
-    public static Intent newIntent(Context packageContext){
+    public static Intent newIntent(Context packageContext, UUID id){
         Intent intent = new Intent(packageContext, NewApplicationActivity.class);
+        intent.putExtra(EXTRA_UUID, id);
         return intent;
     }
 
@@ -79,6 +84,17 @@ public class NewApplicationActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+/*
+        UUID appId = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+        if (appId != null){
+            ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
+            Application app = appLab.getApplication(appId);
+            mCompanyNameEditText.setText(app.getCompany());
+            mCompanyContact.setText(app.getCompanyContact());
+            m
+        }
+        */
     }
 
     @Override

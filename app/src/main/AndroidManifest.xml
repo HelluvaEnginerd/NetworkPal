@@ -30,6 +30,8 @@
 
         <activity android:name=".NewEventActivity"
             android:label="@string/new_event_activity"></activity>
+        <activity android:name=".CalendarActivity"
+            android:label="@string/calendar_activity"></activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="7f4afeebf514035f01c27ddf18ad8bfe27a05491" />

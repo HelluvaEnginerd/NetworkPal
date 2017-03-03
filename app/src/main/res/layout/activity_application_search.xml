@@ -48,7 +48,7 @@
 
     <FrameLayout
         android:layout_below="@+id/search_view"
-        android:id="@+id/fragment_list_host"
+        android:id="@+id/fragment_app_search_list_host"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
