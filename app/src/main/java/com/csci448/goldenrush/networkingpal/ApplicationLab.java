@@ -35,7 +35,7 @@ public class ApplicationLab {
         Date date = new Date();
         for (int i = 0; i < 50; i++) {
             String jobString = "Job: " + Integer.toString(i);
-            Application app = new Application("App name", jobString, "Contact", date);
+            Application app = new Application("App " + Integer.toString(i), jobString, "Contact", date, "Company " + Integer.toString(i));
             mApps.add(app);
         }
     }
