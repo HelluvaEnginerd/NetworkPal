@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
-        android:layout_marginTop="20dp">
+        android:id="@+id/calendar_widget">
 
     </CalendarView>
     <Button
@@ -15,6 +15,16 @@
         android:padding="30dp"
         android:layout_margin="10dp"
         android:layout_gravity="center|bottom"
+        android:text="@string/new_event_button"
+
+        android:visibility="invisible"/>
+    <ImageButton
         android:id="@+id/new_event_button"
-        android:text="@string/new_event_button"/>
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_margin="10dp"
+        android:layout_gravity="right|bottom"
+        android:background="@mipmap/add"/>
+
+
 </FrameLayout>
