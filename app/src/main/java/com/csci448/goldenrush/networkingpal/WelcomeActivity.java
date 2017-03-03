@@ -1,13 +1,14 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiEnterpriseConfig;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
@@ -19,7 +20,11 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button  mApplicationsButton;
     private Button  mContactsButton;
     private Button  mDiggernetButton;
-    private RelativeLayout mApplicationLayout;
+
+    public static Intent newIntent(Context packageContext){
+        Intent intent = new Intent(packageContext, WelcomeActivity.class);
+        return intent ;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +33,12 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /**
-         * TODO make this a recycler view that shows recent activities from an arraylist
-         */
-
         mEventsButton = (Button) findViewById(R.id.events_button);
         mEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
-                 * go to events
+                 * goes to events
                  */
                 Intent i = CalendarActivity.newIntent(WelcomeActivity.this);
                 startActivity(i);
@@ -49,7 +50,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /**
-                 * go to application list view
+                 * goes to application list view
                  */
                 Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this);
                 startActivity(intent);
@@ -61,7 +62,8 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /**
-                 * go to contacts view, decide if its companies or people shown first
+                 * go to contacts view,
+                 * TODO decide if its companies or people shown first
                  */
             }
         });
@@ -71,7 +73,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /**
-                 * go to diggernet page
+                 * goes to diggernet page
                  */
                 Intent i = DiggernetActivity.newIntent(WelcomeActivity.this);
                 startActivity(i);

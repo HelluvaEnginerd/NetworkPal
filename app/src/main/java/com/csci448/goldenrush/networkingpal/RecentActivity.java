@@ -1,5 +1,7 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.content.Intent;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,14 +15,16 @@ public class RecentActivity{
     private Date mDate;
     private String mCompany;
     private UUID mUUID;
+    private Intent mIntent;
 
 
-    RecentActivity(String category, String name, Date date, String company){
+    RecentActivity(String category, String name, Date date, String company, Intent intent){
         mUUID = UUID.randomUUID();
         mName = name;
         mCategory = category;
         mDate = date;
         mCompany = company;
+        mIntent = intent;
     }
 
     public String getCategory() {
