@@ -26,7 +26,6 @@
                 android:id="@+id/event_box"
                 android:padding="10dp"
                 android:hint="@string/enter_text"
-                android:background="@android:color/darker_gray"
                 android:inputType="text" />
 
         </LinearLayout>
@@ -47,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/time_box"
                 android:padding="10dp"
-                android:background="@android:color/darker_gray"
+
                 android:hint="@string/enter_text"
 
                 android:inputType="text" />
@@ -70,7 +69,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/company_box"
-                android:background="@android:color/darker_gray"
+
                 android:padding="10dp"
                 android:hint="@string/enter_text"
                 android:inputType="text" />
@@ -94,10 +93,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
+                android:padding="10dp"
                 android:id="@+id/details_box"
+                android:gravity="top"
                 android:hint="@string/enter_text"
-                android:background="@android:color/darker_gray"
-                android:inputType="text"/>
+                android:background="@drawable/drawableback"
+                android:inputType="textMultiLine"/>
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
