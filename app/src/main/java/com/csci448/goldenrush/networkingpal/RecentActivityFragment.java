@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,17 +27,7 @@ public class RecentActivityFragment extends Fragment {
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
 
-    //private RecentActivity.Callbacks mCallbacks;
-
-    /**
-     * Required interface for hosting activities
-     */
-    public interface Callbacks {
-        void onRecentActivitySelected(RecentActivity recentActivity);
-    }
-
-
-    private void updateUI(){
+    private void updateUI() {
         RecentActivityLab recentActivityLab = RecentActivityLab.get(getActivity());
         List<RecentActivity> recentActivities = recentActivityLab.getRecentActivities();
 
@@ -125,7 +116,7 @@ public class RecentActivityFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-
+            startActivity(mRecentActivity.getIntent());
         }
     }
 }

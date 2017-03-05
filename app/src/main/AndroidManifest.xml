@@ -27,6 +27,7 @@
         <activity android:name=".ApplicationSearchActivity"></activity>
         <activity android:name=".NewApplicationActivity"></activity>
         <activity android:name=".NewContactActivity"></activity>
+        <activity android:name=".ContactsActivity"></activity>
         <activity android:name=".DiggernetActivity"
             android:label="@string/diggernet_activity"></activity>
 

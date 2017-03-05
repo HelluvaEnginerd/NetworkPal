@@ -39,6 +39,7 @@ public class DiggernetActivity extends AppCompatActivity{
             public void onClick(View v) {
                 /**
                  * TODO link to diggernet
+                 * TODO remember login?
                  */
             }
         });
@@ -48,8 +49,10 @@ public class DiggernetActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 /**
-                 *  TODO Cancel logging in. Maybe clear text fields & Go back to welcome screen?
+                 *  Cancels login, goes back to welcome activity
                  */
+                Intent i = WelcomeActivity.newIntent(DiggernetActivity.this);
+                startActivity(i);
             }
         });
 

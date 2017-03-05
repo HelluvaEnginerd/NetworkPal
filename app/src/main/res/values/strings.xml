@@ -72,7 +72,7 @@ Strings for ApplicationSearchActivity
     <!--
     Strings for Diggerenet-->
     <string name="diggernet">Diggernet</string>
-    <string name="username">Username(QWID)</string>
+    <string name="username">Username(CWID)</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="cancel">Cancel</string>
