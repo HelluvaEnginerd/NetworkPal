@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 
 import java.util.UUID;
 
+import android.support.design.widget.FloatingActionButton;
+
 /**
  * Created by Hayden on 2/28/17.
  */
@@ -19,7 +21,7 @@ import java.util.UUID;
 public class ApplicationSearchActivity extends FragmentActivity implements ApplicationListFragment.Callbacks{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
-    private ImageButton mAddApplication;
+    private FloatingActionButton mAddApplication;
 
     public static final String EXTRA_APPLICATION_ID = "com.csci448.goldenrush.networkingpal.application_id";
 
@@ -38,15 +40,15 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
         setContentView(R.layout.activity_application_search);
 
 
-        mAddApplication = (ImageButton) findViewById(R.id.add_newApp_Button);
+        //mAddApplication = (FloatingActionButton) findViewById(R.id.add_newApp_Button);
 
-        mAddApplication.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
-                startActivity(intent);
-            }
-        });
+        //mAddApplication.setOnClickListener(new View.OnClickListener() {
+            //@Override
+           // public void onClick(View v) {
+               // Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
+                //startActivity(intent);
+            //}
+       // });
         /**
          * TODO wire up spinner
          * TODO wire up search field

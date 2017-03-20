@@ -38,20 +38,19 @@
 
     </SearchView>
 
-    <ImageButton
-        android:id="@+id/add_newApp_Button"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:layout_below="@+id/application_header"
-        android:layout_toRightOf="@+id/search_view"
-        android:background="@mipmap/add"/>
-
     <FrameLayout
         android:layout_below="@+id/search_view"
         android:id="@+id/fragment_app_search_list_host"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@mipmap/ic_launcher"/>
 
     </FrameLayout>
 
