@@ -11,6 +11,9 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import android.support.design.widget.FloatingActionButton;
+
+
 /**
  * Created by Nick on 3/3/17.
  */
@@ -25,6 +28,8 @@ public class ContactsFragment extends Fragment {
     private class ContactsAdapter extends RecyclerView.Adapter<ContactsFragment.ContactsHolder> {
         private static final String TAG = "ALF:ApplicationAdapter";
         private List<Contact> mContacts;
+        private FloatingActionButton mFABadd;
+        //NOT SURE WHERE TO PUT THIS
 
         public ContactsAdapter(List<Contact> contacts) {
             mContacts = contacts;
@@ -37,6 +42,7 @@ public class ContactsFragment extends Fragment {
             Log.d(TAG, "inflate list_item_application");
             View view = layoutInflater.inflate(R.layout.list_item_application, parent, false);
             return new ContactsFragment.ContactsHolder(view);
+
         }
 
         @Override public void onBindViewHolder(ContactsFragment.ContactsHolder holder, int position){
