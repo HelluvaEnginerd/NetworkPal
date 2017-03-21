@@ -39,16 +39,16 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_search);
 
+        mAddApplication = (FloatingActionButton) findViewById(R.id.fab_add_application);
 
-        //mAddApplication = (FloatingActionButton) findViewById(R.id.add_newApp_Button);
-
-        //mAddApplication.setOnClickListener(new View.OnClickListener() {
-            //@Override
-           // public void onClick(View v) {
-               // Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
-                //startActivity(intent);
-            //}
-       // });
+        mAddApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "FAB add application");
+                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
+                startActivity(intent);
+            }
+        });
         /**
          * TODO wire up spinner
          * TODO wire up search field
