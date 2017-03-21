@@ -27,9 +27,8 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
 
 
 
-    public static Intent newIntent(Context packageContext, UUID applicationId){
+    public static Intent newIntent(Context packageContext){
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
-        intent.putExtra(EXTRA_APPLICATION_ID, applicationId);
         return intent;
     }
 
