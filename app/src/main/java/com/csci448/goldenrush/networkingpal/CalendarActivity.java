@@ -3,6 +3,7 @@ package com.csci448.goldenrush.networkingpal;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
     private static final String TAG = "Calendar Activity";
-    ImageButton newEventButton;
+    FloatingActionButton newEventButton;
     CalendarView calendarWidget;
 
     //Strings for save instance state
@@ -39,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity {
 
     private void setUpWidgets(){
 
-        newEventButton = (ImageButton) findViewById(R.id.new_event_button);
+        newEventButton = (FloatingActionButton) findViewById(R.id.fab_add_event);
 
         newEventButton.setOnClickListener(new View.OnClickListener() {
             @Override

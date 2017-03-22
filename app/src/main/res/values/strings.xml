@@ -29,7 +29,7 @@ Strings for ApplicationSearchActivity
     </string-array>
 
     <!--
-    Strings for new company layout
+    Strings for new Application layout
 -->
     <string name ="company_name">Company Name</string>
     <string name="job_title">Job Title</string>
@@ -40,6 +40,7 @@ Strings for ApplicationSearchActivity
     <string name="submitted">Submitted"</string>
     <string name="create_new">Create New</string>
     <string name="choose_existing">Choose Existing</string>
+    <string name="date_picker_title">Date Due:</string>
 
     <!--
     Strings for new contact layout

@@ -23,12 +23,14 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + ApplicationDbSchema.ApplicationTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
-                ApplicationDbSchema.ApplicationTable.Cols.NAME + ", " +
                 ApplicationDbSchema.ApplicationTable.Cols.TITLE + ", " +
                 ApplicationDbSchema.ApplicationTable.Cols.CONTACT + ", " +
                 ApplicationDbSchema.ApplicationTable.Cols.DATE + ", " +
                 ApplicationDbSchema.ApplicationTable.Cols.COMPANY + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.UUID +
+                ApplicationDbSchema.ApplicationTable.Cols.UUID + ", " +
+                ApplicationDbSchema.ApplicationTable.Cols.COVER + ", " +
+                ApplicationDbSchema.ApplicationTable.Cols.RESUME + ", " +
+                ApplicationDbSchema.ApplicationTable.Cols.SUBMITTED +
                 ")"
         );
     }
