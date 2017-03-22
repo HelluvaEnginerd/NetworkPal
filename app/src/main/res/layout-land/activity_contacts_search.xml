@@ -37,13 +37,6 @@
         android:queryHint="@string/search_hint">
     </SearchView>
 
-    <ImageButton
-        android:id="@+id/add_newApp_Button"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:layout_below="@+id/contacts_header"
-        android:layout_toRightOf="@+id/contacts_search_view"
-        android:background="@mipmap/add"/>
 
     <FrameLayout
         android:layout_below="@+id/contacts_search_view"
