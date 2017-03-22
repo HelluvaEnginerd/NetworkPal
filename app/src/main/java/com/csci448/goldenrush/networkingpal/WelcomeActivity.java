@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -58,8 +57,8 @@ public class WelcomeActivity extends AppCompatActivity{
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_welcome);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-  /*    mDrawerList = (ListView) findViewById(R.id.navList);
+/*
+        mDrawerList = (ListView) findViewById(R.id.navList);
         addDrawerItems();
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -146,6 +145,7 @@ public class WelcomeActivity extends AppCompatActivity{
                     .commit();
         }
     }
+
 
     private void addDrawerItems() {
         String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };

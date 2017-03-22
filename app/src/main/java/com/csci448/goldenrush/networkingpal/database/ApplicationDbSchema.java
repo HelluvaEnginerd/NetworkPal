@@ -19,4 +19,5 @@ public class ApplicationDbSchema {
             public static final String SUBMITTED = "submitted";
         }
     }
+
 }
