@@ -1,6 +1,5 @@
 package com.csci448.goldenrush.networkingpal;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,20 +17,20 @@ import java.util.List;
  * Created by Hayden on 3/2/17.
  */
 
-public class RecentActivityFragment extends Fragment {
-    private static final String TAG = "RecentActivityFragment";
+public class RecentActionFragment extends Fragment {
+    private static final String TAG = "RecentActionFragment";
 
     private RecyclerView mRecentActivityRecyclerView;
-    private RecentActivityFragment.RecentActivityAdapter mAdapter;
+    private RecentActionFragment.RecentActivityAdapter mAdapter;
 
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
 
     private void updateUI() {
-        RecentActivityLab recentActivityLab = RecentActivityLab.get(getActivity());
-        List<RecentActivity> recentActivities = recentActivityLab.getRecentActivities();
+        RecentActionLab recentActionLab = RecentActionLab.get(getActivity());
+        List<RecentActions> recentActivities = recentActionLab.getRecentActivities();
 
-        mAdapter = new RecentActivityFragment.RecentActivityAdapter(recentActivities);
+        mAdapter = new RecentActionFragment.RecentActivityAdapter(recentActivities);
         mRecentActivityRecyclerView.setAdapter(mAdapter);
     }
 
@@ -55,27 +54,27 @@ public class RecentActivityFragment extends Fragment {
         return view;
     }
 
-    private class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityFragment.RecentActivityHolder> {
+    private class RecentActivityAdapter extends RecyclerView.Adapter<RecentActionFragment.RecentActivityHolder> {
         private static final String TAG = "RAF:RecentActAdapter";
-        private List<RecentActivity> mRecentActivities;
+        private List<RecentActions> mRecentActivities;
 
-        public RecentActivityAdapter(List<RecentActivity> recentActivities) {
+        public RecentActivityAdapter(List<RecentActions> recentActivities) {
             mRecentActivities = recentActivities;
         }
 
         @Override
-        public RecentActivityFragment.RecentActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecentActionFragment.RecentActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Log.d(TAG, "onCreateViewHolder()");
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             Log.d(TAG, "inflate list_item_application");
             View view = layoutInflater.inflate(R.layout.list_item_recent, parent, false);
-            return new RecentActivityFragment.RecentActivityHolder(view);
+            return new RecentActionFragment.RecentActivityHolder(view);
         }
 
-        @Override public void onBindViewHolder(RecentActivityFragment.RecentActivityHolder holder, int position){
+        @Override public void onBindViewHolder(RecentActionFragment.RecentActivityHolder holder, int position){
             Log.d(TAG, "onBindViewHolder()");
-            RecentActivity recentActivity = mRecentActivities.get(position);
-            holder.bindRecentActivity(recentActivity);
+            RecentActions recentActions = mRecentActivities.get(position);
+            holder.bindRecentActivity(recentActions);
         }
 
         @Override
@@ -87,20 +86,20 @@ public class RecentActivityFragment extends Fragment {
 
     private class RecentActivityHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private static final String TAG = "RAF:RecentActHolder";
-        private RecentActivity mRecentActivity;
+        private RecentActions mRecentActions;
         private TextView mCategoryTextView;
         private TextView mDateTextView;
         private TextView mCompanyTextView;
         private TextView mNameTextView;
 
-        public void bindRecentActivity(RecentActivity recentActivity) {
+        public void bindRecentActivity(RecentActions recentActions) {
             Log.d(TAG, "bindRecentActivity()");
             formatter = new SimpleDateFormat(pattern);
-            mRecentActivity = recentActivity;
-            mNameTextView.setText(mRecentActivity.getName());
-            mDateTextView.setText(formatter.format(mRecentActivity.getDate()));
-            mCompanyTextView.setText(mRecentActivity.getCompany());
-            mCategoryTextView.setText(mRecentActivity.getCategory());
+            mRecentActions = recentActions;
+            mNameTextView.setText(mRecentActions.getName());
+            mDateTextView.setText(formatter.format(mRecentActions.getDate()));
+            mCompanyTextView.setText(mRecentActions.getCompany());
+            mCategoryTextView.setText(mRecentActions.getCategory());
         }
 
         public RecentActivityHolder(View itemView) {
@@ -116,7 +115,7 @@ public class RecentActivityFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            startActivity(mRecentActivity.getIntent());
+            startActivity(mRecentActions.getIntent());
         }
     }
 }

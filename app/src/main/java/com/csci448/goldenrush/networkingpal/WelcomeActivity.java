@@ -98,7 +98,7 @@ public class WelcomeActivity extends AppCompatActivity{
         Fragment fragment = fm.findFragmentById(R.id.fragment_welcome_list_host);
 
         if (fragment == null){
-            fragment = new RecentActivityFragment();
+            fragment = new RecentActionFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_welcome_list_host, fragment)
                     .commit();
