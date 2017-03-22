@@ -15,8 +15,7 @@ public class ApplicationDbSchema {
             public static final String DATE = "date";
             public static final String COMPANY = "company";
             public static final String UUID = "uuid";
-
-
         }
     }
+
 }
