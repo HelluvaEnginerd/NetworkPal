@@ -150,4 +150,7 @@ public class WelcomeActivity extends AppCompatActivity{
         mDrawerList.setAdapter(mAdapter);
     }
 
+    private void setupDrawer() {
+    }
+
 }

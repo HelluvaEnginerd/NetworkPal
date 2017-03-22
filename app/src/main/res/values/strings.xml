@@ -10,7 +10,6 @@ Strings for welcome activity
     <string name="applications_button">Applications</string>
     <string name="contacts_button">Contacts</string>
     <string name="diggernet_button">Diggernet</string>
-
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
@@ -25,8 +24,8 @@ Strings for ApplicationSearchActivity
     <string-array name="sort_choice_array">
         <item>A</item>
         <item>Z</item>
-        <item>DateS</item>
-        <item>DateD</item>
+        <item>Date Submitted</item>
+        <item>Date Due</item>
     </string-array>
 
     <!--
