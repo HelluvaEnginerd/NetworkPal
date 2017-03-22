@@ -60,7 +60,7 @@ public class WelcomeActivity extends AppCompatActivity{
                 /**
                  * goes to application list view
                  */
-                Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this, new UUID(1,1));
+                Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this);
                 startActivity(intent);
             }
         });
