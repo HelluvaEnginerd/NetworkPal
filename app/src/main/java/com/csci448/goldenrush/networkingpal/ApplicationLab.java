@@ -6,9 +6,11 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.csci448.goldenrush.networkingpal.database.ApplicationBaseHelper;
+import com.csci448.goldenrush.networkingpal.database.ApplicationCursorWrapper;
 import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema;
 
 import java.util.ArrayList;
@@ -54,7 +56,20 @@ public class ApplicationLab {
     }
 
     public Application getApplication(UUID id){
-        return null;
+        ApplicationCursorWrapper cursor = queryCrimes(
+                ApplicationDbSchema.ApplicationTable.Cols.UUID + " = ?",
+                new String[] {id.toString()}
+        );
+
+        try {
+            if(cursor.getCount()==0){
+                return null;
+            }
+            cursor.moveToFirst();
+            return cursor.getApplication();
+        } finally {
+            cursor.close();
+        }
     }
 
     public void updateApplication(Application a){
@@ -65,12 +80,24 @@ public class ApplicationLab {
     }
 
     public List<Application> getApps() {
-        return new ArrayList<>();
+        List<Application> applications = new ArrayList<>();
+
+        ApplicationCursorWrapper cursor = queryCrimes(null, null);
+
+        try{
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()){
+                applications.add(cursor.getApplication());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return applications;
     }
 
     private static ContentValues getContentValues(Application application){
         ContentValues values = new ContentValues();
-        values.put(ApplicationDbSchema.ApplicationTable.Cols.NAME, application.getName());
         values.put(ApplicationDbSchema.ApplicationTable.Cols.TITLE, application.getJobTitle());
         values.put(ApplicationDbSchema.ApplicationTable.Cols.CONTACT, application.getCompanyContact());
         values.put(ApplicationDbSchema.ApplicationTable.Cols.DATE, application.getDateDue().getTime());
@@ -78,6 +105,20 @@ public class ApplicationLab {
         values.put(ApplicationDbSchema.ApplicationTable.Cols.UUID, application.getId().toString());
 
         return values;
+    }
+
+    private ApplicationCursorWrapper queryCrimes(String whereClause, String[] whereArgs){
+        Cursor cursor = mDatabase.query(
+                ApplicationDbSchema.ApplicationTable.NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+
+        return new ApplicationCursorWrapper(cursor);
     }
 }
 

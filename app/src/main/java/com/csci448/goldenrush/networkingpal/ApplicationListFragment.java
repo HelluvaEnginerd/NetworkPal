@@ -42,8 +42,13 @@ public class ApplicationListFragment extends Fragment {
         ApplicationLab applicationLab = ApplicationLab.get(getActivity());
         List<Application> apps = applicationLab.getApps();
 
-        mAdapter = new ApplicationAdapter(apps);
-        mAppRecyclerView.setAdapter(mAdapter);
+        if(mAdapter==null){
+            mAdapter = new ApplicationAdapter(apps);
+            mAppRecyclerView.setAdapter(mAdapter);
+        } else{
+            mAdapter.setApplications(apps);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -94,6 +99,10 @@ public class ApplicationListFragment extends Fragment {
             Log.d(TAG, "getItemCount() = " + Integer.toString(mApps.size()));
             return mApps.size();
         }
+
+        public void setApplications(List<Application> apps){
+            mApps = apps;
+        }
     }
 
     private class ApplicationHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -108,7 +117,7 @@ public class ApplicationListFragment extends Fragment {
             Log.d(TAG, "bindCrime()");
             formatter = new SimpleDateFormat(pattern);
             mApp = app;
-            mTitleTextView.setText(mApp.getName() + " " + mApp.getJobTitle());
+            mTitleTextView.setText(mApp.getJobTitle());
             mDateTextView.setText(formatter.format(mApp.getDateDue()));
             mCompanyTextView.setText(mApp.getCompany());
             mContactTextView.setText(mApp.getCompanyContact());

@@ -9,14 +9,14 @@ public class ApplicationDbSchema {
         public static final String NAME = "applications";
 
         public static final class Cols {
-            public static final String NAME = "name";
             public static final String TITLE = "title";
             public static final String CONTACT = "contact";
             public static final String DATE = "date";
             public static final String COMPANY = "company";
             public static final String UUID = "uuid";
-
-
+            public static final String COVER = "cover letter";
+            public static final String RESUME = "resume";
+            public static final String SUBMITTED = "submitted";
         }
     }
 }
