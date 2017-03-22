@@ -17,7 +17,6 @@ public class RecentActions {
     private UUID mUUID;
     private Intent mIntent;
 
-
     RecentActions(String category, String name, Date date, String company, Intent intent){
         mUUID = UUID.randomUUID();
         mName = name;

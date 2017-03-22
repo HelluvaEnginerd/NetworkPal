@@ -1,6 +1,5 @@
 package com.csci448.goldenrush.networkingpal;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**
