@@ -3,8 +3,6 @@
     <!--
 Strings for welcome activity
 -->
-    <string name="drawer_open">YO</string>
-    <string name="drawer_close">BYE</string>
     <string name="recent_activity">Recent Activity</string>
     <string name="application_recent">Application</string>
     <string name="date">Date</string>
@@ -12,6 +10,9 @@ Strings for welcome activity
     <string name="applications_button">Applications</string>
     <string name="contacts_button">Contacts</string>
     <string name="diggernet_button">Diggernet</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <!--
 Strings for ApplicationSearchActivity

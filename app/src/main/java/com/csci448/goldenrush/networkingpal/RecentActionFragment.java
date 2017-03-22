@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +39,8 @@ public class RecentActionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
+
+        setReturnResult();
     }
 
     @Override
@@ -45,6 +48,12 @@ public class RecentActionFragment extends Fragment {
         Log.d(TAG, "onCreateView()");
         Log.d(TAG, "inflate fragment_list");
         View view = inflater.inflate(R.layout.fragment_list, container, false);
+
+        if(savedInstanceState!=null) {
+            /**
+             * Set the things
+             */
+        }
 
         mRecentActivityRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         mRecentActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -117,5 +126,52 @@ public class RecentActionFragment extends Fragment {
             Log.d(TAG, "onClick()");
             startActivity(mRecentActions.getIntent());
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        super.onSaveInstanceState(savedInstanceState);
+        /**
+         * Save things like so
+         *
+        savedInstanceState.putInt(EXTRA_NUM_PLAYERS, mNumPlayers);
+        savedInstanceState.putSerializable(EXTRA_FIRST_PLAYER, mFirstPlayer);
+        savedInstanceState.putSerializable(EXTRA_BB8_SCORE, mBB8Score);
+        savedInstanceState.putSerializable(EXTRA_R2D2_SCORE, mR2D2Score);
+        savedInstanceState.putSerializable(EXTRA_DRAW_SCORE, mDrawScore);
+        savedInstanceState.putSerializable(EXTRA_BOARD, board);
+
+        Log.d(TAG, "onSaveInstanceState()");
+        Log.d(TAG, "first: " + mFirstPlayer +
+                "\nNumPlay: " + mNumPlayers +
+                "\nbb8: " + mBB8Score +
+                "\nr2d2: " + mR2D2Score +
+                "\ndraw: " + mDrawScore);
+        for (int i = 0; i <=2; i++){
+            for (int j = 0; j <= 2; j++){
+                //boardView[i][j].setImageResource(android.R.color.transparent);
+                Log.d(TAG, "board[" + i + "][" + j + "] = " + Integer.toString(board[i][j]));
+            }
+        }
+        */
+    }
+
+    public void setReturnResult() {
+        Log.d(TAG, "setReturnResult() called");
+
+        Intent resultIntent = new Intent();
+        /*
+        resultIntent.putExtra(EXTRA_NUM_PLAYERS, mNumPlayers);
+        resultIntent.putExtra(EXTRA_FIRST_PLAYER, mFirstPlayer);
+        resultIntent.putExtra(EXTRA_BB8_SCORE, mBB8Score);
+        resultIntent.putExtra(EXTRA_R2D2_SCORE, mR2D2Score);
+        resultIntent.putExtra(EXTRA_DRAW_SCORE, mDrawScore);
+
+        getActivity().setResult(GameActivity.RESULT_OK, resultIntent);
+        */
     }
 }
