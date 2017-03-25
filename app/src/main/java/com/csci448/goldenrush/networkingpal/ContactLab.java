@@ -28,7 +28,7 @@ public class ContactLab {
             Contact contact = new Contact("Contact " + String.valueOf(i),
                     "Company " + String.valueOf(i),
                     "contact" + String.valueOf(i) + "@mail.com",
-                    "858-335-5555",
+                    "867-5309",
                     "Title " + String.valueOf(i));
             mContacts.add(contact);
         }

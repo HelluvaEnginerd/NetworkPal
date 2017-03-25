@@ -2,7 +2,6 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
@@ -23,7 +22,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter{
 
         switch (position) {
             case 0:
-                ContactsFragment contactsTab = new ContactsFragment();
+                ContactListFragment contactsTab = new ContactListFragment();
                 return contactsTab;
             case 1:
                 CompaniesFragment companiesTab = new CompaniesFragment();
