@@ -28,15 +28,6 @@ public class ApplicationListFragment extends Fragment {
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
 
-    private Callbacks mCallbacks;
-
-    /**
-     * Required interface for hosting activities
-     */
-    public interface Callbacks {
-        void onAppSelected(Application application);
-    }
-
 
     private void updateUI(){
         ApplicationLab applicationLab = ApplicationLab.get(getActivity());

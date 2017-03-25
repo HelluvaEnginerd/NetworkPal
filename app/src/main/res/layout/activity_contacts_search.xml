@@ -21,7 +21,7 @@
         android:id="@+id/contacts_spinner"
         android:layout_width="175sp"
         android:layout_height="50sp"
-        android:layout_below="@id/application_header"
+        android:layout_below="@id/contacts_header"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:entries="@array/sort_choice_array"
         android:textAlignment="center">

@@ -1,6 +1,8 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,13 +22,51 @@ import android.support.design.widget.FloatingActionButton;
 
 public class ContactsFragment extends Fragment {
 
+
+    /**
+     * TODO make tab layout http://www.truiton.com/2015/06/android-tabs-example-fragments-viewpager/
+     */
+
     private static final String TAG = "ContactsFragment";
 
     private RecyclerView mContactRecyclerView;
     private ContactsFragment.ContactsAdapter mAdapter;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView()");
+        Log.d(TAG, "inflate fragment_list");
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
+
+        mContactRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
+        mContactRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        updateUI();
+
+        return view;
+    }
+
+    private void updateUI(){
+        ContactLab contactLab = ContactLab.get(getActivity());
+        List<Contact> contacts = contactLab.getContacts();
+
+        if(mAdapter==null){
+            mAdapter = new ContactsAdapter(contacts);
+            mContactRecyclerView.setAdapter(mAdapter);
+        } else{
+            mAdapter.setContacts(contacts);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
     private class ContactsAdapter extends RecyclerView.Adapter<ContactsFragment.ContactsHolder> {
-        private static final String TAG = "ALF:ApplicationAdapter";
+        private static final String TAG = "CLF:ContactsAdapter";
         private List<Contact> mContacts;
         private FloatingActionButton mFABadd;
         //NOT SURE WHERE TO PUT THIS
@@ -47,8 +87,8 @@ public class ContactsFragment extends Fragment {
 
         @Override public void onBindViewHolder(ContactsFragment.ContactsHolder holder, int position){
             Log.d(TAG, "onBindViewHolder()");
-            Contact ctact = mContacts.get(position);
-            holder.bindContact(ctact);
+            Contact contact = mContacts.get(position);
+            holder.bindContact(contact);
         }
 
         @Override
@@ -56,10 +96,14 @@ public class ContactsFragment extends Fragment {
             Log.d(TAG, "getItemCount() = " + Integer.toString(mContacts.size()));
             return mContacts.size();
         }
+
+        public void setContacts(List<Contact> contacts){
+            mContacts = contacts;
+        }
     }
 
     private class ContactsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private static final String TAG = "ALF:ApplicationHolder";
+        private static final String TAG = "CLF:ContactsHolder";
         private Contact mContact;
         private TextView mTitleTextView;
         private TextView mDateTextView;
@@ -77,7 +121,7 @@ public class ContactsFragment extends Fragment {
 
         public ContactsHolder(View itemView) {
             super(itemView);
-            Log.d(TAG, "ApplicationHolder()");
+            Log.d(TAG, "ContactsHolder()");
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_application_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_application_date_text_view);
@@ -88,7 +132,6 @@ public class ContactsFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-
         }
     }
 

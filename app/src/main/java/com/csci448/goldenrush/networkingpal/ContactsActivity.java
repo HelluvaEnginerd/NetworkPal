@@ -45,11 +45,10 @@ public class ContactsActivity extends FragmentActivity{
         Fragment fragment = fm.findFragmentById(R.id.fragment_list_host);
 
         if (fragment == null){
-            fragment = new ApplicationListFragment();
+            fragment = new ContactsFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_list_host, fragment)
                     .commit();
         }
     }
-
 }

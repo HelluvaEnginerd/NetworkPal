@@ -16,9 +16,7 @@ public class Company {
         mID = uuid;
     }
 
-    public Company(){
-        this(UUID.randomUUID());
-    }
+    public Company(){this(UUID.randomUUID());}
 
     public String getCompanyName() {
         return mCompanyName;
@@ -32,15 +30,7 @@ public class Company {
         return mPhoneNumber;
     }
 
-    public static void setTAG(String TAG) {
-        Company.TAG = TAG;
-    }
+    public void setCompanyName(String company) {mCompanyName = company;}
 
-    public void setCompanyName(String company) {
-        mCompanyName = company;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        mPhoneNumber = phoneNumber;
-    }
+    public void setPhoneNumber(String phoneNumber) {mPhoneNumber = phoneNumber;}
 }
