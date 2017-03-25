@@ -18,7 +18,7 @@ import android.support.design.widget.FloatingActionButton;
  * Created by Hayden on 2/28/17.
  */
 
-public class ApplicationSearchActivity extends FragmentActivity implements ApplicationListFragment.Callbacks{
+public class ApplicationSearchActivity extends FragmentActivity{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
     private FloatingActionButton mAddApplication;
@@ -67,10 +67,4 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
      * TODO make the apps a PagerView
      */
 
-    @Override
-    public void onAppSelected(Application application) {
-        Log.d(TAG, "onAppSelected()");
-        Intent intent = NewApplicationActivity.newIntent(this, application.getId());
-        startActivity(intent);
-    }
 }
