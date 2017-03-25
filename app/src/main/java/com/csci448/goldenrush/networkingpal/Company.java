@@ -8,18 +8,20 @@ import java.util.UUID;
 
 public class Company {
     private static String TAG = "Company";
-    private String mCompany;
+    private String mCompanyName;
     private UUID mID;
     private String mPhoneNumber;
 
-    public Company(String company, String phoneNumber){
-        mID = UUID.randomUUID();
-        mCompany = company;
-        mPhoneNumber = phoneNumber;
+    public Company(UUID uuid){
+        mID = uuid;
     }
 
-    public String getCompany() {
-        return mCompany;
+    public Company(){
+        this(UUID.randomUUID());
+    }
+
+    public String getCompanyName() {
+        return mCompanyName;
     }
 
     public UUID getID() {
@@ -28,5 +30,17 @@ public class Company {
 
     public String getPhoneNumber() {
         return mPhoneNumber;
+    }
+
+    public static void setTAG(String TAG) {
+        Company.TAG = TAG;
+    }
+
+    public void setCompanyName(String company) {
+        mCompanyName = company;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        mPhoneNumber = phoneNumber;
     }
 }

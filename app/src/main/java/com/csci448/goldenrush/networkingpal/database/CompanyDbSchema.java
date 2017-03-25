@@ -9,7 +9,7 @@ public class CompanyDbSchema {
         public static final String NAME = "companies";
 
         public static final class Cols {
-            public static final String COMPANY = "company";
+            public static final String COMPANYNAME = "companyname";
             public static final String UUID = "uuid";
             public static final String NUMBER = "number";
         }

@@ -159,6 +159,7 @@ public class NewApplicationActivity extends AppCompatActivity{
                 /**
                  * goes to application list view
                  */
+                ApplicationLab.get(getApplicationContext()).addApplication(mApp);
                 Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
                 startActivity(intent);
             }
@@ -178,7 +179,9 @@ public class NewApplicationActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        Log.d(TAG, "onCreate()");
         mApp = new Application();
+        Log.d(TAG, "mApp UUID = " + mApp.getId());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_application_activity);
         setUp();
@@ -186,7 +189,8 @@ public class NewApplicationActivity extends AppCompatActivity{
 
     @Override public void onPause(){
         super.onPause();
-        Log.d("pause", "onPause");
+        Log.d(TAG, "onPause");
+        Log.d(TAG, "UUID = " + mApp.getId().toString());
         ApplicationLab.get(this).updateApplication(mApp);
     }
 

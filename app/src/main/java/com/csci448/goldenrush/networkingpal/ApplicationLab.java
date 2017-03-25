@@ -8,10 +8,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.ApplicationBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.ApplicationCursorWrapper;
-import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema;
+import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema.ApplicationTable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,13 +53,15 @@ public class ApplicationLab {
         }*/
     }
     public void addApplication(Application a){
+        Log.d(TAG, "addApplication()");
         ContentValues values = getContentValues(a);
-        mDatabase.insert(ApplicationDbSchema.ApplicationTable.NAME, null, values);
+        mDatabase.insert(ApplicationTable.NAME, null, values);
     }
 
     public Application getApplication(UUID id){
+        Log.d(TAG, "getApplication()");
         ApplicationCursorWrapper cursor = queryCrimes(
-                ApplicationDbSchema.ApplicationTable.Cols.UUID + " = ?",
+                ApplicationTable.Cols.UUID + " = ?",
                 new String[] {id.toString()}
         );
 
@@ -73,13 +77,16 @@ public class ApplicationLab {
     }
 
     public void updateApplication(Application a){
+        Log.d(TAG, "updateApplication()");
         String uuidString = a.getId().toString();
+        Log.d(TAG, "UUID = " + a.getId().toString());
         ContentValues values = getContentValues(a);
 
-        mDatabase.update(ApplicationDbSchema.ApplicationTable.NAME, values, ApplicationDbSchema.ApplicationTable.Cols.UUID + " = ?", new String[] {uuidString});
+        mDatabase.update(ApplicationTable.NAME, values, ApplicationTable.Cols.UUID + " = ?", new String[] {uuidString});
     }
 
     public List<Application> getApps() {
+        Log.d(TAG, "getApps()");
         List<Application> applications = new ArrayList<>();
 
         ApplicationCursorWrapper cursor = queryCrimes(null, null);
@@ -98,24 +105,27 @@ public class ApplicationLab {
 
     private static ContentValues getContentValues(Application application){
         ContentValues values = new ContentValues();
-        values.put(ApplicationDbSchema.ApplicationTable.Cols.TITLE, application.getJobTitle());
-        values.put(ApplicationDbSchema.ApplicationTable.Cols.CONTACT, application.getCompanyContact());
-        values.put(ApplicationDbSchema.ApplicationTable.Cols.DATE, application.getDateDue().getTime());
-        values.put(ApplicationDbSchema.ApplicationTable.Cols.COMPANY, application.getCompany());
-        values.put(ApplicationDbSchema.ApplicationTable.Cols.UUID, application.getId().toString());
+        values.put(ApplicationTable.Cols.TITLE, application.getJobTitle());
+        values.put(ApplicationTable.Cols.CONTACT, application.getCompanyContact());
+        values.put(ApplicationTable.Cols.DATE, application.getDateDue().getTime());
+        values.put(ApplicationTable.Cols.COMPANY, application.getCompany());
+        values.put(ApplicationTable.Cols.UUID, application.getId().toString());
+        values.put(ApplicationTable.Cols.COVER, application.hasCoverLetter());
+        values.put(ApplicationTable.Cols.RESUME, application.hasResume());
+        values.put(ApplicationTable.Cols.SUBMITTED, application.isSubmitted());
 
         return values;
     }
 
     private ApplicationCursorWrapper queryCrimes(String whereClause, String[] whereArgs){
         Cursor cursor = mDatabase.query(
-                ApplicationDbSchema.ApplicationTable.NAME,
-                null,
+                ApplicationTable.NAME,
+                null, //Columns - null selects all columns
                 whereClause,
                 whereArgs,
-                null,
-                null,
-                null
+                null, //groupBy
+                null, //having
+                null //orderBy
         );
 
         return new ApplicationCursorWrapper(cursor);

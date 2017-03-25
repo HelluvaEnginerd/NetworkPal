@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.csci448.goldenrush.networkingpal.Application;
+import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema.ApplicationTable;
 
 /**
  * Created by ddunmire on 3/20/2017.
@@ -21,16 +22,16 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + ApplicationDbSchema.ApplicationTable.NAME + "(" +
+        db.execSQL("create table " + ApplicationTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
-                ApplicationDbSchema.ApplicationTable.Cols.TITLE + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.CONTACT + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.DATE + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.COMPANY + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.UUID + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.COVER + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.RESUME + ", " +
-                ApplicationDbSchema.ApplicationTable.Cols.SUBMITTED +
+                ApplicationTable.Cols.TITLE + ", " +
+                ApplicationTable.Cols.CONTACT + ", " +
+                ApplicationTable.Cols.DATE + ", " +
+                ApplicationTable.Cols.COMPANY + ", " +
+                ApplicationTable.Cols.UUID + ", " +
+                ApplicationTable.Cols.COVER + ", " +
+                ApplicationTable.Cols.RESUME + ", " +
+                ApplicationTable.Cols.SUBMITTED +
                 ")"
         );
     }

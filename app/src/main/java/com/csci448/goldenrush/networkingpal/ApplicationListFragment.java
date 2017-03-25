@@ -139,7 +139,10 @@ public class ApplicationListFragment extends Fragment {
             startActivity(intent);
 
         }
+
     }
+
+
 
 }
 

@@ -23,7 +23,7 @@ public class CompanyBaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + CompanyDbSchema.CompanyTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
                 CompanyTable.Cols.NUMBER + ", " +
-                CompanyTable.Cols.COMPANY + ", " +
+                CompanyTable.Cols.COMPANYNAME + ", " +
                 CompanyTable.Cols.UUID + ")"
         );
     }

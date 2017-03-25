@@ -14,6 +14,26 @@ public class Application {
     private Date mDateDue;
     private String mCompany;
     private UUID mID;
+    private boolean mCoverLetter;
+    private boolean mResume;
+    private boolean mSubmitted;
+
+    public Application(UUID id){
+        mID = id;
+        mDateDue = new Date();
+        mResume = false;
+        mCoverLetter = false;
+        mSubmitted = false;
+        mCompany = "TEST";
+        mJobTitle = "TEST";
+        mCompanyContact = "TEST";
+        mDateDue = new Date();
+        mCompany = "TEST";
+    }
+
+    public Application(){
+        this(UUID.randomUUID());
+    }
 
     public void setJobTitle(String mJobTitle) {
         this.mJobTitle = mJobTitle;
@@ -31,11 +51,7 @@ public class Application {
         this.mCompany = mCompany;
     }
 
-    private boolean mCoverLetter;
-    private boolean mResume;
-    private boolean mSubmitted;
-
-    public boolean isCoverLetter() {
+    public boolean hasCoverLetter() {
         return mCoverLetter;
     }
 
@@ -43,7 +59,7 @@ public class Application {
         this.mCoverLetter = mCoverLetter;
     }
 
-    public boolean isResume() {
+    public boolean hasResume() {
         return mResume;
     }
 
@@ -58,17 +74,6 @@ public class Application {
     public void setSubmitted(boolean mSubmitted) {
         this.mSubmitted = mSubmitted;
     }
-
-    public Application(){
-        this(UUID.randomUUID());
-    }
-
-    public Application(UUID id){
-        mID = id;
-        mDateDue = new Date();
-    }
-
-
 
     public String getJobTitle(){
         return mJobTitle;

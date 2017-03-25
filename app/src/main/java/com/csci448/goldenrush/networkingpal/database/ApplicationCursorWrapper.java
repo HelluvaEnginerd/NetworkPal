@@ -4,8 +4,9 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.csci448.goldenrush.networkingpal.Application;
+import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema.ApplicationTable;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -19,14 +20,14 @@ public class ApplicationCursorWrapper extends CursorWrapper {
     }
 
     public Application getApplication(){
-        String uuidString = getString(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.UUID));
-        String title = getString(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.TITLE));
-        String company = getString(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.COMPANY));
-        String contact = getString(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.CONTACT));
-        long date = getLong(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.DATE));
-        int cover = getInt(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.COVER));
-        int resume = getInt(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.RESUME));
-        int submitted = getInt(getColumnIndex(ApplicationDbSchema.ApplicationTable.Cols.SUBMITTED));
+        String uuidString = getString(getColumnIndex(ApplicationTable.Cols.UUID));
+        String title = getString(getColumnIndex(ApplicationTable.Cols.TITLE));
+        String company = getString(getColumnIndex(ApplicationTable.Cols.COMPANY));
+        String contact = getString(getColumnIndex(ApplicationTable.Cols.CONTACT));
+        long date = getLong(getColumnIndex(ApplicationTable.Cols.DATE));
+        int cover = getInt(getColumnIndex(ApplicationTable.Cols.COVER));
+        int resume = getInt(getColumnIndex(ApplicationTable.Cols.RESUME));
+        int submitted = getInt(getColumnIndex(ApplicationTable.Cols.SUBMITTED));
 
         Application application = new Application(UUID.fromString(uuidString));
         application.setJobTitle(title);
