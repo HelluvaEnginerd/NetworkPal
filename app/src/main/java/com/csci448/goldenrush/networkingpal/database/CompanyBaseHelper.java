@@ -24,8 +24,7 @@ public class CompanyBaseHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 CompanyTable.Cols.NUMBER + ", " +
                 CompanyTable.Cols.COMPANY + ", " +
-                CompanyTable.Cols.UUID +
-                ")"
+                CompanyTable.Cols.UUID + ")"
         );
     }
     @Override

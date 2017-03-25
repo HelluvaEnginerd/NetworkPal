@@ -27,8 +27,7 @@ public class RecentActionBaseHelper extends SQLiteOpenHelper {
                 RecentActionTable.Cols.INTENT + ", " +
                 RecentActionTable.Cols.NAME + ", " +
                 RecentActionTable.Cols.COMPANY + ", " +
-                RecentActionTable.Cols.UUID +
-                ")"
+                RecentActionTable.Cols.UUID + ")"
         );
     }
     @Override

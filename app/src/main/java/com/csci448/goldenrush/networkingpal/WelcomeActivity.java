@@ -56,23 +56,26 @@ public class WelcomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_welcome);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-/*
+
+        /*
         mDrawerList = (ListView) findViewById(R.id.navList);
-        addDrawerItems();
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(WelcomeActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
             }
         });
-
+        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+        //addDrawerItems();
+        */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
-*/
+
         mEventsButton = (Button) findViewById(R.id.events_button);
         mEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +149,7 @@ public class WelcomeActivity extends AppCompatActivity{
         }
     }
 
-
+/*
     private void addDrawerItems() {
         String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
@@ -157,14 +160,14 @@ public class WelcomeActivity extends AppCompatActivity{
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
 
-            /** Called when a drawer has settled in a completely open state. */
+
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("Navigation!");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
-            /** Called when a drawer has settled in a completely closed state. */
+
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mActivityTitle);
@@ -175,7 +178,6 @@ public class WelcomeActivity extends AppCompatActivity{
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
-/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -200,6 +202,6 @@ public class WelcomeActivity extends AppCompatActivity{
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    */
+*/
 
 }
