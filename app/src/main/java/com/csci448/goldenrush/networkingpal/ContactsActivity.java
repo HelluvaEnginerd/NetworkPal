@@ -50,7 +50,7 @@ public class ContactsActivity extends FragmentActivity{
                 startActivity(intent);
             }
         });
-
+/*
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_list_host);
 
@@ -60,7 +60,7 @@ public class ContactsActivity extends FragmentActivity{
                     .add(R.id.fragment_list_host, fragment)
                     .commit();
         }
-
+*/
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("People"));
         tabLayout.addTab(tabLayout.newTab().setText("Companies"));
@@ -80,14 +80,6 @@ public class ContactsActivity extends FragmentActivity{
                  * position 0 is people
                  * position 1 is companies
                  */
-
-                FragmentManager fm = getSupportFragmentManager();
-                Fragment newFragment = fm.findFragmentById(R.id.fragment_list_host);
-
-                newFragment = ContactListFragment.newInstance(mPosition);
-                fm.beginTransaction()
-                        .add(R.id.fragment_list_host, newFragment)
-                        .commit();
             }
 
             @Override

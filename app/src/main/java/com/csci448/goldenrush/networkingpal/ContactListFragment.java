@@ -28,11 +28,10 @@ public class ContactListFragment extends Fragment {
      */
 
     private static final String TAG = "ContactListFragment";
-    private static final String EXTRA_POSITION = "com.csci448.goldenrush.networkingpal.position";
+    private static final String EXTRA_POSITION = "com.csci448.goldenrush.contactlistfragment.networkingpal.position";
 
     private RecyclerView mContactRecyclerView;
     private ContactListFragment.ContactsAdapter mContactsAdapter;
-    private ContactListFragment.CompaniesAdapter mCompaniesAdapter;
     private int mPosition;
 
     public static ContactListFragment newInstance(int position) {
@@ -71,28 +70,15 @@ public class ContactListFragment extends Fragment {
     }
 
     private void updateUI(){
-        if (mPosition == 0) {
-            ContactLab contactLab = ContactLab.get(getActivity());
-            List<Contact> contacts = contactLab.getContacts();
+        ContactLab contactLab = ContactLab.get(getActivity());
+        List<Contact> contacts = contactLab.getContacts();
 
-            if (mContactsAdapter == null) {
-                mContactsAdapter = new ContactsAdapter(contacts);
-                mContactRecyclerView.setAdapter(mContactsAdapter);
-            } else {
-                mContactsAdapter.setContacts(contacts);
-                mContactsAdapter.notifyDataSetChanged();
-            }
+        if (mContactsAdapter == null) {
+            mContactsAdapter = new ContactsAdapter(contacts);
+            mContactRecyclerView.setAdapter(mContactsAdapter);
         } else {
-            CompanyLab companyLab = CompanyLab.get(getActivity());
-            List<Company> companies = companyLab.getCompanies();
-
-            if (mCompaniesAdapter == null) {
-                mCompaniesAdapter = new CompaniesAdapter(companies);
-                mContactRecyclerView.setAdapter(mCompaniesAdapter);
-            } else {
-                mCompaniesAdapter.setCompanies(companies);
-                mCompaniesAdapter.notifyDataSetChanged();
-            }
+            mContactsAdapter.setContacts(contacts);
+            mContactsAdapter.notifyDataSetChanged();
         }
     }
 
@@ -168,82 +154,4 @@ public class ContactListFragment extends Fragment {
             Log.d(TAG, "onClick()");
         }
     }
-
-
-    private class CompaniesAdapter extends RecyclerView.Adapter<ContactListFragment.CompaniesHolder> {
-        private List<Company> mCompanies;
-        public CompaniesAdapter(List<Company> companies) {
-            mCompanies = companies;
-        }
-
-        @Override
-        public ContactListFragment.CompaniesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            Log.d(TAG, "onCreateContactsHolder()");
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            Log.d(TAG, "inflate list_item_application");
-            View view = layoutInflater.inflate(R.layout.list_item_contact, parent, false);
-            return new ContactListFragment.CompaniesHolder(view);
-
-        }
-
-        @Override
-        public void onBindViewHolder(ContactListFragment.CompaniesHolder holder, int position){
-            Log.d(TAG, "onBindViewHolder()");
-            Company company = mCompanies.get(position);
-            holder.bindContact(company);
-        }
-
-        @Override
-        public int getItemCount() {
-            Log.d(TAG, "getItemCount() = " + Integer.toString(mCompanies.size()));
-            return mCompanies.size();
-        }
-
-        public void setCompanies(List<Company> companies) {mCompanies = companies;}
-    }
-    private class CompaniesHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private static final String TAG = "CLF:CompaniesHolder";
-        private Company mCompany;
-        private TextView mTitleTextView;
-        private TextView mDateTextView;
-        private TextView mCompanyTextView;
-        private TextView mContactTextView;
-
-        public void bindContact(Contact contact) {
-            Log.d(TAG, "bindContact()");
-
-            /*
-            formatter = new SimpleDateFormat(pattern);
-            mApp = app;
-            mTitleTextView.setText(mApp.getJobTitle());
-            mDateTextView.setText(formatter.format(mApp.getDateDue()));
-            mCompanyTextView.setText(mApp.getCompany());
-            mContactTextView.setText(mApp.getCompanyContact());
-            */
-        }
-
-        public void bindContact(Company company){
-
-        }
-
-        public CompaniesHolder(View itemView) {
-            super(itemView);
-            Log.d(TAG, "ContactsHolder()");
-            itemView.setOnClickListener(this);
-            /*
-            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_application_title_text_view);
-            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_application_date_text_view);
-            mCompanyTextView = (TextView) itemView.findViewById(R.id.list_item_application_company_text_view);
-            mContactTextView = (TextView) itemView.findViewById(R.id.list_item_application_contact_text_view);
-            */
-        }
-
-        @Override
-        public void onClick(View v) {
-            Log.d(TAG, "onClick()");
-        }
-    }
-
-
-
 }

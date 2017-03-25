@@ -25,7 +25,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter{
                 ContactListFragment contactsTab = new ContactListFragment();
                 return contactsTab;
             case 1:
-                CompaniesFragment companiesTab = new CompaniesFragment();
+                CompanyListFragment companiesTab = new CompanyListFragment();
                 return companiesTab;
             default:
                 return null;
