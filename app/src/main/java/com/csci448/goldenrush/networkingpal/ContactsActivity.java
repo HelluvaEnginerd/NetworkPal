@@ -46,21 +46,11 @@ public class ContactsActivity extends FragmentActivity{
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FAB add application");
-                Intent intent = NewContactActivity.newIntent(ContactsActivity.this);
+                Intent intent = NewContactActivity.newIntent(ContactsActivity.this, null);
                 startActivity(intent);
             }
         });
-/*
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_list_host);
 
-        if (fragment == null) {
-            fragment = ContactListFragment.newInstance(mPosition);
-            fm.beginTransaction()
-                    .add(R.id.fragment_list_host, fragment)
-                    .commit();
-        }
-*/
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("People"));
         tabLayout.addTab(tabLayout.newTab().setText("Companies"));

@@ -29,6 +29,7 @@ public class CompanyLab {
             Company company = new Company();
             company.setCompanyName("Company: " + i);
             company.setPhoneNumber("Number: " + i);
+            company.setAddress("Address: " + i);
             mCompanies.add(company);
         }
     }

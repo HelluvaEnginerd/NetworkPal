@@ -5,25 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/drawableback"
-    android:padding="4dp"
 >
 
     <TextView
         android:id="@+id/list_item_company_name"
         android:layout_width="200sp"
-        android:layout_height="40sp"
+        android:layout_height="50sp"
         android:textStyle="bold"
+        android:textSize="24sp"
         android:padding="4dp"
-        android:textSize="20sp"
         tools:text="Company Name"/>
 
     <TextView
         android:id="@+id/list_item_company_phone"
         android:layout_width="200sp"
-        android:layout_height="40sp"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/list_item_company_name"
+        android:textSize="12sp"
         android:padding="4dp"
-        android:textSize="20sp"
         tools:text="Company Phone"/>
+
+    <TextView
+        android:id="@+id/list_item_company_address"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/list_item_company_name"
+        android:layout_below="@id/list_item_company_phone"
+        android:textSize="12sp"
+        android:padding="4dp"
+        tools:text="Company Address"/>
 
 </RelativeLayout>

@@ -78,4 +78,9 @@ Strings for ApplicationSearchActivity
     <string name="password">Password</string>
     <string name="cancel">Cancel</string>
     <string name = "diggernet_activity">Diggernet</string>
+
+    <!--
+    Strings for new Company Layout
+    -->
+    <string name="address">Address</string>
 </resources>

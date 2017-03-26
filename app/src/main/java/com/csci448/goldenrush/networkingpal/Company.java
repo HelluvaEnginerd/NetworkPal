@@ -11,6 +11,7 @@ public class Company {
     private String mCompanyName;
     private UUID mID;
     private String mPhoneNumber;
+    private String mAddress;
 
     public Company(UUID uuid){
         mID = uuid;
@@ -33,4 +34,12 @@ public class Company {
     public void setCompanyName(String company) {mCompanyName = company;}
 
     public void setPhoneNumber(String phoneNumber) {mPhoneNumber = phoneNumber;}
+
+    public String getAddress() {
+        return mAddress;
+    }
+
+    public void setAddress(String address) {
+        mAddress = address;
+    }
 }

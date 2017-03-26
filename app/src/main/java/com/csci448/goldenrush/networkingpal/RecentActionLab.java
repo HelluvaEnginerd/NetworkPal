@@ -40,7 +40,7 @@ public class RecentActionLab {
         RecentActions activity1 = new RecentActions("Event", "Interview", date, "Lockheed", intent1);
         mRecentActivities.add(activity1);
 
-        Intent intent2 = NewContactActivity.newIntent(context);
+        Intent intent2 = NewContactActivity.newIntent(context, null);
         RecentActions activity2 = new RecentActions("Contact", "Steve", date, "NASA", intent2);
         mRecentActivities.add(activity2);
 
@@ -48,7 +48,7 @@ public class RecentActionLab {
         RecentActions activity3 = new RecentActions("Application", "Process Engineer", date, "SpaceX", intent3);
         mRecentActivities.add(activity3);
 
-        Intent intent4 = NewContactActivity.newIntent(context);
+        Intent intent4 = NewContactActivity.newIntent(context, null);
         RecentActions activity4 = new RecentActions("Contact2", "Jane", date, "Schlumberger", intent4);
         mRecentActivities.add(activity4);
 

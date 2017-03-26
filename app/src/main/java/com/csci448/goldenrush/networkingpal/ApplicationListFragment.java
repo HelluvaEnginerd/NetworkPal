@@ -128,7 +128,6 @@ public class ApplicationListFragment extends Fragment {
         public void onClick(View v) {
             Intent intent = NewApplicationActivity.newIntent(getActivity(), mApp.getId());
             startActivity(intent);
-
         }
 
     }

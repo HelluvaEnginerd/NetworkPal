@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -109,6 +110,7 @@ public class CompanyListFragment extends Fragment{
         private Company mCompany;
         private TextView mCompanyNameView;
         private TextView mCompanyPhoneView;
+        private TextView mCompanyAddressView;
 
         public void bindCompany(Company company) {
             Log.d(TAG, "bindContact()");
@@ -116,7 +118,7 @@ public class CompanyListFragment extends Fragment{
             mCompany = company;
             mCompanyNameView.setText(mCompany.getCompanyName());
             mCompanyPhoneView.setText(mCompany.getPhoneNumber());
-
+            mCompanyAddressView.setText((mCompany.getAddress()));
         }
 
         public CompaniesHolder(View itemView) {
@@ -126,11 +128,14 @@ public class CompanyListFragment extends Fragment{
 
             mCompanyNameView = (TextView) itemView.findViewById(R.id.list_item_company_name);
             mCompanyPhoneView= (TextView) itemView.findViewById(R.id.list_item_company_phone);
+            mCompanyAddressView = (TextView) itemView.findViewById(R.id.list_item_company_address);
         }
 
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
+            Intent intent = NewCompanyActivity.newIntent(getActivity(), null);
+            startActivity(intent);
         }
     }
 }

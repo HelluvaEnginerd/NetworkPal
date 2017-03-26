@@ -34,10 +34,6 @@ public class NewApplicationActivity extends AppCompatActivity{
     private static final int REQUEST_CONTACT = 1;
     private static final String DIALOG_DATE = "DialogDate";
 
-    private TextView mCompanyNameTextview;
-    private TextView mJobTitleTextview;
-    private TextView mCompanyContactTextview;
-    private TextView mDateDueTextview;
     private EditText mCompanyNameEditText;
     private EditText mJobTitleEditText;
     private Button mCreateNewButton;
@@ -50,6 +46,10 @@ public class NewApplicationActivity extends AppCompatActivity{
 
     private Application mApp;
 
+    /**
+     * TODO when making edits to an application, edit the DB don't create a new entry
+     */
+
     public static Intent newIntent(Context packageContext, UUID id){
         Intent intent = new Intent(packageContext, NewApplicationActivity.class);
         intent.putExtra(EXTRA_UUID, id);
@@ -57,12 +57,6 @@ public class NewApplicationActivity extends AppCompatActivity{
     }
 
     private void setUp(){
-        mCompanyNameTextview = (TextView) findViewById(R.id.company_name_textview);
-        mJobTitleTextview= (TextView) findViewById(R.id.job_title_textview);
-
-        mCompanyContactTextview = (TextView) findViewById(R.id.company_contact_textview);
-        mDateDueTextview = (TextView) findViewById(R.id.date_due_textview);
-
         mCompanyNameEditText = (EditText) findViewById(R.id.company_name);
         mCompanyNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,7 +108,7 @@ public class NewApplicationActivity extends AppCompatActivity{
         mCreateNewButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = NewContactActivity.newIntent(NewApplicationActivity.this);
+                Intent intent = NewContactActivity.newIntent(NewApplicationActivity.this, null);
                 startActivity(intent);
             }
         });
@@ -165,16 +159,18 @@ public class NewApplicationActivity extends AppCompatActivity{
             }
         });
 
-/*
+
         UUID appId = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
         if (appId != null){
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
             Application app = appLab.getApplication(appId);
             mCompanyNameEditText.setText(app.getCompany());
-            mCompanyContact.setText(app.getCompanyContact());
-            m
+            mJobTitleEditText.setText(app.getJobTitle());
+            mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
+            mResumeCheckBox.setChecked(app.hasResume());
+            mSubmittedCheckBox.setChecked(app.isSubmitted());
         }
-        */
+
     }
 
     @Override
