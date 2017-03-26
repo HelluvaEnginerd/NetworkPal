@@ -9,11 +9,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.awt.font.TextAttribute;
 import java.util.UUID;
 
 /**
@@ -42,6 +37,7 @@ public class NewCompanyActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_company_activity);
+        mCompany = new Company();
         setUp();
     }
 
@@ -109,12 +105,26 @@ public class NewCompanyActivity extends AppCompatActivity{
                 /**
                  * TODO figure out how to make this either go to contacts or back to new application/contact activity. Back to where it came from basically
                  */
+                CompanyLab.get(getApplicationContext()).addCompany(mCompany);
                 Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this);
                 startActivity(intent);
             }
         });
+        UUID companyID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+        if (companyID != null){
+            CompanyLab companyLab = CompanyLab.get(NewCompanyActivity.this);
+            Company company = companyLab.getCompany(companyID);
+            mPhoneEditText.setText(company.getPhoneNumber());
+            mAddressEditText.setText(company.getAddress());
+            mCompanyEditText.setText(company.getCompanyName());
+        }
+
     }
 
-
+    @Override
+    public void  onPause(){
+        super.onPause();
+        CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
+    }
 
 }

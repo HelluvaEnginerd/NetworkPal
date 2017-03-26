@@ -36,22 +36,7 @@ public class ContactsActivity extends FragmentActivity{
         mPosition = 0;
 
 
-        /**
-         * TODO make FAB go to person or company contact depending on selected tab
-         */
-
-        mFABaddContact = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
-
-        mFABaddContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "FAB add application");
-                Intent intent = NewContactActivity.newIntent(ContactsActivity.this, null);
-                startActivity(intent);
-            }
-        });
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("People"));
         tabLayout.addTab(tabLayout.newTab().setText("Companies"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -66,10 +51,6 @@ public class ContactsActivity extends FragmentActivity{
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 mPosition = tab.getPosition();
-                /**
-                 * position 0 is people
-                 * position 1 is companies
-                 */
             }
 
             @Override
@@ -80,6 +61,31 @@ public class ContactsActivity extends FragmentActivity{
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        /**
+         * TODO make FAB go to person or company contact depending on selected tab
+         * I think I did it.
+         */
+        mFABaddContact = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
+        mFABaddContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "FAB add application");
+                /**
+                 * position 0 is people
+                 * position 1 is companies
+                 */
+                if (tabLayout.getSelectedTabPosition() == 0) {
+                    Log.d(TAG, "start newContactActivity");
+                    Intent intent = NewContactActivity.newIntent(ContactsActivity.this, null);
+                    startActivity(intent);
+                }else {
+                    Log.d(TAG, "Start newCompanyActivity");
+                    Intent intent = NewCompanyActivity.newIntent(ContactsActivity.this, null);
+                    startActivity(intent);
+                }
             }
         });
     }

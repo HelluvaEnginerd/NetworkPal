@@ -12,6 +12,7 @@ public class CompanyDbSchema {
             public static final String COMPANYNAME = "companyname";
             public static final String UUID = "uuid";
             public static final String NUMBER = "number";
+            public static final String ADDRESS = "address";
         }
     }
 }
