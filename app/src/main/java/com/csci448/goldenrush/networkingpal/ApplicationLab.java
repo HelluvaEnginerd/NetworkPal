@@ -8,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
 import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.ApplicationBaseHelper;
@@ -16,7 +15,6 @@ import com.csci448.goldenrush.networkingpal.database.ApplicationCursorWrapper;
 import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema.ApplicationTable;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,19 +37,11 @@ public class ApplicationLab {
     }
 
     private ApplicationLab(Context context){
+        Log.d(TAG, "ApplicationLab()");
         mContext = context.getApplicationContext();
         mDatabase = new ApplicationBaseHelper(mContext).getWritableDatabase();
-        /**
-         * TODO remove fake jobs
-         */
-
-       /* Date date = new Date();
-        for (int i = 0; i < 50; i++) {
-            String jobString = "Job: " + Integer.toString(i);
-            Application app = new Application("App " + Integer.toString(i), jobString, "Contact", date, "Company " + Integer.toString(i));
-            mApps.add(app);
-        }*/
     }
+
     public void addApplication(Application a){
         Log.d(TAG, "addApplication()");
         ContentValues values = getContentValues(a);
@@ -104,6 +94,7 @@ public class ApplicationLab {
     }
 
     private static ContentValues getContentValues(Application application){
+        Log.d(TAG, "getContentValues()");
         ContentValues values = new ContentValues();
         values.put(ApplicationTable.Cols.TITLE, application.getJobTitle());
         values.put(ApplicationTable.Cols.CONTACT, application.getCompanyContact());
@@ -118,6 +109,7 @@ public class ApplicationLab {
     }
 
     private ApplicationCursorWrapper queryCrimes(String whereClause, String[] whereArgs){
+        Log.d(TAG, "queryCrimes()");
         Cursor cursor = mDatabase.query(
                 ApplicationTable.NAME,
                 null, //Columns - null selects all columns

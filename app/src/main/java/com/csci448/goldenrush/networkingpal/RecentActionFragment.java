@@ -28,6 +28,7 @@ public class RecentActionFragment extends Fragment {
     private String pattern = "EEE, MMM d, yyyy";
 
     private void updateUI() {
+        Log.d(TAG, "updateUI()");
         RecentActionLab recentActionLab = RecentActionLab.get(getActivity());
         List<RecentActions> recentActivities = recentActionLab.getRecentActivities();
 

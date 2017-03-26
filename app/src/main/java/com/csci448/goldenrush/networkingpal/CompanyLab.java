@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.CompanyBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.CompanyCursorWrapper;
@@ -19,12 +20,14 @@ import java.util.UUID;
  */
 
 public class CompanyLab {
+    private static final String TAG = "CompanyLab";
     private static CompanyLab sCompanyLab;
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
     public static CompanyLab get(Context context){
+        Log.d(TAG, "get()");
         if (sCompanyLab == null){
             sCompanyLab = new CompanyLab(context);
         }
@@ -32,16 +35,18 @@ public class CompanyLab {
     }
 
     private CompanyLab(Context context) {
+        Log.d(TAG, "CompanyLab()");
         mContext = context.getApplicationContext();
         mDatabase = new CompanyBaseHelper(mContext).getWritableDatabase();
     }
 
     public void addCompany(Company c){
+        Log.d(TAG, "addCompany()");
         ContentValues values = getContentValues(c);
         mDatabase.insert(CompanyTable.NAME, null, values);
     }
     public Company getCompany(UUID id){
-
+        Log.d(TAG, "getCompany()");
         CompanyCursorWrapper cursor = queryCompanies(CompanyTable.Cols.UUID + " = ?", new String[] {id.toString()});
 
         try {
@@ -55,6 +60,7 @@ public class CompanyLab {
     }
 
     public List<Company> getCompanies() {
+        Log.d(TAG, "getCompanies()");
         List<Company> companies = new ArrayList<>();
 
         CompanyCursorWrapper cursor = queryCompanies(null, null);
@@ -73,6 +79,7 @@ public class CompanyLab {
     }
 
     private static ContentValues getContentValues(Company company){
+        Log.d(TAG, "getContentValues()");
         ContentValues values = new ContentValues();
         values.put(CompanyTable.Cols.UUID, company.getID().toString());
         values.put(CompanyTable.Cols.ADDRESS, company.getAddress());
@@ -83,6 +90,7 @@ public class CompanyLab {
     }
 
     public void updateCompany(Company company){
+        Log.d(TAG, "updateCompany()");
         String uuidString = company.getID().toString();
         ContentValues values = getContentValues(company);
 
@@ -90,6 +98,7 @@ public class CompanyLab {
     }
 
     private CompanyCursorWrapper queryCompanies(String whereClause, String[] whereArgs){
+        Log.d(TAG, "queryCompanies()");
         Cursor cursor = mDatabase.query(
                 CompanyTable.NAME,
                 null, //columns - null selects all

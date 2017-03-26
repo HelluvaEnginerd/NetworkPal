@@ -40,8 +40,8 @@ public class CalendarActivity extends AppCompatActivity {
 
     private void setUpWidgets(){
 
+        Log.d(TAG, "setupWidgets()");
         newEventButton = (FloatingActionButton) findViewById(R.id.fab_add_event);
-
         newEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,8 +55,11 @@ public class CalendarActivity extends AppCompatActivity {
 
     }
     public static Intent newIntent(Context packageContext){
+        Log.d(TAG, "newIntent()");
         Intent i = new Intent(packageContext, CalendarActivity.class);
-        //TODO: Add any extras you may need when creating an event
+        /**
+         * TODO: Add any extras you may need when creating an event
+         */
 
         return i ;
     }

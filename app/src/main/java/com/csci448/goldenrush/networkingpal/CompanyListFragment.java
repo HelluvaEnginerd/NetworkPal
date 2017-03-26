@@ -27,6 +27,7 @@ public class CompanyListFragment extends Fragment{
     private int mPosition;
 
     public static CompanyListFragment newInstance(int position) {
+        Log.d(TAG, "newInstance()");
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_POSITION, position);
 
@@ -39,7 +40,6 @@ public class CompanyListFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
-
     }
 
     @Override
@@ -62,6 +62,7 @@ public class CompanyListFragment extends Fragment{
     }
 
     private void updateUI(){
+        Log.d(TAG, "updateUI()");
         CompanyLab companyLab = CompanyLab.get(getActivity());
         List<Company> companies = companyLab.getCompanies();
 

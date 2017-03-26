@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -21,12 +22,15 @@ import java.util.GregorianCalendar;
 
 public class DatePickerFragment extends DialogFragment {
 
+    private static final String TAG = "DatePickerFragment";
+
     private static final String ARG_Date = "date";
     public static final String EXTRA_DATE="com.csci448.goldenrush.networkingpal.date";
 
     private DatePicker mDatePicker;
 
     public static DatePickerFragment newInstance(Date date){
+        Log.d(TAG, "newInstance()");
         Bundle args = new Bundle();
         args.putSerializable(ARG_Date, date);
 
@@ -37,6 +41,7 @@ public class DatePickerFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
+        Log.d(TAG, "onCreateDialog");
         Date date = (Date) getArguments().getSerializable(ARG_Date);
 
         Calendar calendar = Calendar.getInstance();
@@ -67,6 +72,7 @@ public class DatePickerFragment extends DialogFragment {
     }
 
     private void sendResult(int resultCode, Date date){
+        Log.d(TAG, "sendResult");
         if(getTargetFragment() == null){
             return;
         }

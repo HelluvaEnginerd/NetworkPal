@@ -28,6 +28,7 @@ public class ApplicationSearchActivity extends FragmentActivity{
 
 
     public static Intent newIntent(Context packageContext){
+        Log.d(TAG, "newIntent()");
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
         return intent;
     }
@@ -39,7 +40,6 @@ public class ApplicationSearchActivity extends FragmentActivity{
         setContentView(R.layout.activity_application_search);
 
         mAddApplication = (FloatingActionButton) findViewById(R.id.fab_add_application);
-
         mAddApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

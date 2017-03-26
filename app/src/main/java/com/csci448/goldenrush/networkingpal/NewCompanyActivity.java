@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ public class NewCompanyActivity extends AppCompatActivity{
 
 
     public static Intent newIntent(Context packageContext, UUID uuid){
+        Log.d(TAG, "newIntent()");
         Intent intent = new Intent(packageContext, NewCompanyActivity.class);
         intent.putExtra(EXTRA_UUID, uuid);
         return intent;
@@ -36,12 +38,14 @@ public class NewCompanyActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
         setContentView(R.layout.new_company_activity);
         mCompany = new Company();
         setUp();
     }
 
     private void setUp(){
+        Log.d(TAG, "setup()");
 
         mCompanyEditText = (EditText) findViewById(R.id.company_name);
         mCompanyEditText.addTextChangedListener(new TextWatcher() {
@@ -124,6 +128,7 @@ public class NewCompanyActivity extends AppCompatActivity{
     @Override
     public void  onPause(){
         super.onPause();
+        Log.d(TAG, "onPause()");
         CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
     }
 

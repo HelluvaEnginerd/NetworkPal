@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -38,12 +39,14 @@ public class NewContactActivity extends AppCompatActivity{
     private Button mDone;
 
     public static Intent newIntent(Context packageContext, UUID uuid){
+        Log.d(TAG, "newIntent()");
         Intent intent = new Intent(packageContext, NewContactActivity.class);
         intent.putExtra(EXTRA_UUID, uuid);
         return intent;
     }
 
     private void setUp(){
+        Log.d(TAG, "setUp()");
         mContactNameTextview = (TextView) findViewById(R.id.contact_name_textview);
         mCompanyNameTextview = (TextView) findViewById(R.id.company_name_textview);
         mEmailTextview= (TextView) findViewById(R.id.email_textview);
@@ -81,6 +84,7 @@ public class NewContactActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
         setContentView(R.layout.new_contact_activity);
         setUp();
     }

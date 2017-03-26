@@ -1,6 +1,7 @@
 package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,14 @@ import java.util.List;
  */
 
 public class ContactLab {
+    private static final String TAG = "ContactLab";
+
     private static ContactLab sContactLab;
     private List<Contact> mContacts;
     private Context mContext;
 
     public static ContactLab get(Context context){
+        Log.d(TAG, "get()");
         if (sContactLab == null){
             sContactLab = new ContactLab(context);
         }
@@ -22,6 +26,7 @@ public class ContactLab {
     }
 
     private ContactLab(Context context) {
+        Log.d(TAG, "ContactLab()");
         mContext = context.getApplicationContext();
         mContacts = new ArrayList<>();
         for(int i = 0; i < 20; i++) {
