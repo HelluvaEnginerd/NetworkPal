@@ -1,5 +1,7 @@
 package com.csci448.goldenrush.networkingpal;
 
+import java.util.UUID;
+
 /**
  * Created by ddunmire on 2/27/2017.
  */
@@ -11,6 +13,7 @@ public class Contact {
     private String mEmail;
     private String mPhone;
     private String mTitle;
+    private UUID mUUID;
 
     public Contact(String contactName, String companyName, String email, String phone, String title){
         mCompanyName = companyName;
@@ -18,6 +21,14 @@ public class Contact {
         mEmail = email;
         mPhone = phone;
         mTitle = title;
+    }
+
+    public Contact(UUID id){
+        mUUID = id;
+    }
+
+    public Contact(){
+        this(UUID.randomUUID());
     }
 
     public String getContactName() {
@@ -58,5 +69,9 @@ public class Contact {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public UUID getUUID() {
+        return mUUID;
     }
 }

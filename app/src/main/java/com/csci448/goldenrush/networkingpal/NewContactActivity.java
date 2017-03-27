@@ -12,12 +12,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 /**
  * Created by ddunmire on 2/27/2017.
  */
 
 public class NewContactActivity extends AppCompatActivity{
     private static String TAG = "NewContactActivity";
+    private static final String EXTRA_UUID = "uuid";
+
     private TextView mContactNameTextview;
     private TextView mCompanyNameTextview;
     private TextView mEmailTextview;
@@ -33,8 +37,9 @@ public class NewContactActivity extends AppCompatActivity{
     private ImageView mBusinessCardPhoto;
     private Button mDone;
 
-    public static Intent newIntent(Context packageContext){
+    public static Intent newIntent(Context packageContext, UUID uuid){
         Intent intent = new Intent(packageContext, NewContactActivity.class);
+        intent.putExtra(EXTRA_UUID, uuid);
         return intent;
     }
 
@@ -67,7 +72,7 @@ public class NewContactActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 //THIS WILL NEED TO BE CHANGED
-                Intent intent = NewApplicationActivity.newIntent(NewContactActivity.this, null);
+                Intent intent = ContactsActivity.newIntent(NewContactActivity.this);
                 startActivity(intent);
             }
         });

@@ -9,24 +9,70 @@ import java.util.UUID;
 
 public class Application {
     private static String TAG = "Application";
-    private String mName;
     private String mJobTitle;
     private String mCompanyContact;
     private Date mDateDue;
     private String mCompany;
     private UUID mID;
+    private boolean mCoverLetter;
+    private boolean mResume;
+    private boolean mSubmitted;
 
-    public Application(String name, String jobTitle, String companyContact, Date dateDue, String company){
-        mID = UUID.randomUUID();
-        mName = name;
-        mJobTitle = jobTitle;
-        mCompanyContact = companyContact;
-        mDateDue = dateDue;
-        mCompany = company;
+    public Application(UUID id){
+        mID = id;
+        mDateDue = new Date();
+        mResume = false;
+        mCoverLetter = false;
+        mSubmitted = false;
+        mCompany = "TEST";
+        mJobTitle = "TEST";
+        mCompanyContact = "TEST";
+        mDateDue = new Date();
+        mCompany = "TEST";
     }
 
-    public String getName(){
-        return mName;
+    public Application(){
+        this(UUID.randomUUID());
+    }
+
+    public void setJobTitle(String mJobTitle) {
+        this.mJobTitle = mJobTitle;
+    }
+
+    public void setCompanyContact(String mCompanyContact) {
+        this.mCompanyContact = mCompanyContact;
+    }
+
+    public void setDateDue(Date mDateDue) {
+        this.mDateDue = mDateDue;
+    }
+
+    public void setCompany(String mCompany) {
+        this.mCompany = mCompany;
+    }
+
+    public boolean hasCoverLetter() {
+        return mCoverLetter;
+    }
+
+    public void setCoverLetter(boolean mCoverLetter) {
+        this.mCoverLetter = mCoverLetter;
+    }
+
+    public boolean hasResume() {
+        return mResume;
+    }
+
+    public void setResume(boolean mResume) {
+        this.mResume = mResume;
+    }
+
+    public boolean isSubmitted() {
+        return mSubmitted;
+    }
+
+    public void setSubmitted(boolean mSubmitted) {
+        this.mSubmitted = mSubmitted;
     }
 
     public String getJobTitle(){

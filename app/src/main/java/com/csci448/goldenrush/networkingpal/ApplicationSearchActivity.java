@@ -12,22 +12,23 @@ import android.widget.ImageButton;
 
 import java.util.UUID;
 
+import android.support.design.widget.FloatingActionButton;
+
 /**
  * Created by Hayden on 2/28/17.
  */
 
-public class ApplicationSearchActivity extends FragmentActivity implements ApplicationListFragment.Callbacks{
+public class ApplicationSearchActivity extends FragmentActivity{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
-    private ImageButton mAddApplication;
+    private FloatingActionButton mAddApplication;
 
     public static final String EXTRA_APPLICATION_ID = "com.csci448.goldenrush.networkingpal.application_id";
 
 
 
-    public static Intent newIntent(Context packageContext, UUID applicationId){
+    public static Intent newIntent(Context packageContext){
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
-        intent.putExtra(EXTRA_APPLICATION_ID, applicationId);
         return intent;
     }
 
@@ -37,12 +38,12 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_search);
 
-
-        mAddApplication = (ImageButton) findViewById(R.id.add_newApp_Button);
+        mAddApplication = (FloatingActionButton) findViewById(R.id.fab_add_application);
 
         mAddApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "FAB add application");
                 Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
                 startActivity(intent);
             }
@@ -66,10 +67,4 @@ public class ApplicationSearchActivity extends FragmentActivity implements Appli
      * TODO make the apps a PagerView
      */
 
-    @Override
-    public void onAppSelected(Application application) {
-        Log.d(TAG, "onAppSelected()");
-        Intent intent = NewApplicationActivity.newIntent(this, application.getId());
-        startActivity(intent);
-    }
 }

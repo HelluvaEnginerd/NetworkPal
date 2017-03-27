@@ -2,12 +2,21 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
 import com.crashlytics.android.Crashlytics;
 
 import java.util.UUID;
@@ -29,6 +38,14 @@ public class WelcomeActivity extends AppCompatActivity{
     private Button  mContactsButton;
     private Button  mDiggernetButton;
 
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
+
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private String mActivityTitle;
+
+
     public static Intent newIntent(Context packageContext){
         Intent intent = new Intent(packageContext, WelcomeActivity.class);
         return intent ;
@@ -39,7 +56,25 @@ public class WelcomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_welcome);
+
+        /*
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(WelcomeActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+        //addDrawerItems();
+        */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mActivityTitle = getTitle().toString();
 
         mEventsButton = (Button) findViewById(R.id.events_button);
         mEventsButton.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +95,7 @@ public class WelcomeActivity extends AppCompatActivity{
                 /**
                  * goes to application list view
                  */
-                Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this, new UUID(1,1));
+                Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this);
                 startActivity(intent);
             }
         });
@@ -90,19 +125,83 @@ public class WelcomeActivity extends AppCompatActivity{
             }
         });
 
+        /**
+         * Load recent actions like so, pass to fragment or whatever
+         *
+        mFirstPlayer = getIntent().getIntExtra(EXTRA_FIRST_PLAYER, -1);
+        mNumPlayers = getIntent().getIntExtra(EXTRA_NUM_PLAYERS, -1);
+        mBB8Score = getIntent().getIntExtra(EXTRA_BB8_SCORE, 0);
+        mR2D2Score = getIntent().getIntExtra(EXTRA_R2D2_SCORE, 0);
+        mDrawScore = getIntent().getIntExtra(EXTRA_DRAW_SCORE, 0);
+        */
 
         /**
-         * Loads the recent activity recyclerview
+         * Loads the recent action recyclerview
          */
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_welcome_list_host);
 
         if (fragment == null){
-            fragment = new RecentActivityFragment();
+            fragment = new RecentActionFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_welcome_list_host, fragment)
                     .commit();
         }
     }
+
+/*
+    private void addDrawerItems() {
+        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+    }
+
+    private void setupDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.drawer_open, R.string.drawer_close) {
+
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle("Navigation!");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // Activate the navigation drawer toggle
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+*/
 
 }

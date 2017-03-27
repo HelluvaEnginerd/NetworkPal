@@ -3,8 +3,6 @@
     <!--
 Strings for welcome activity
 -->
-    <string name="drawer_open">YO</string>
-    <string name="drawer_close">BYE</string>
     <string name="recent_activity">Recent Activity</string>
     <string name="application_recent">Application</string>
     <string name="date">Date</string>
@@ -12,6 +10,8 @@ Strings for welcome activity
     <string name="applications_button">Applications</string>
     <string name="contacts_button">Contacts</string>
     <string name="diggernet_button">Diggernet</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <!--
 Strings for ApplicationSearchActivity
@@ -24,12 +24,12 @@ Strings for ApplicationSearchActivity
     <string-array name="sort_choice_array">
         <item>A</item>
         <item>Z</item>
-        <item>DateS</item>
-        <item>DateD</item>
+        <item>Date Submitted</item>
+        <item>Date Due</item>
     </string-array>
 
     <!--
-    Strings for new company layout
+    Strings for new Application layout
 -->
     <string name ="company_name">Company Name</string>
     <string name="job_title">Job Title</string>
@@ -40,6 +40,7 @@ Strings for ApplicationSearchActivity
     <string name="submitted">Submitted"</string>
     <string name="create_new">Create New</string>
     <string name="choose_existing">Choose Existing</string>
+    <string name="date_picker_title">Date Due:</string>
 
     <!--
     Strings for new contact layout
@@ -77,4 +78,9 @@ Strings for ApplicationSearchActivity
     <string name="password">Password</string>
     <string name="cancel">Cancel</string>
     <string name = "diggernet_activity">Diggernet</string>
+
+    <!--
+    Strings for new Company Layout
+    -->
+    <string name="address">Address</string>
 </resources>

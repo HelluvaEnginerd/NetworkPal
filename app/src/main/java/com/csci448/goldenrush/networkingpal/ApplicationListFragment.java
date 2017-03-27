@@ -28,22 +28,18 @@ public class ApplicationListFragment extends Fragment {
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
 
-    private Callbacks mCallbacks;
-
-    /**
-     * Required interface for hosting activities
-     */
-    public interface Callbacks {
-        void onAppSelected(Application application);
-    }
-
 
     private void updateUI(){
         ApplicationLab applicationLab = ApplicationLab.get(getActivity());
         List<Application> apps = applicationLab.getApps();
 
-        mAdapter = new ApplicationAdapter(apps);
-        mAppRecyclerView.setAdapter(mAdapter);
+        if(mAdapter==null){
+            mAdapter = new ApplicationAdapter(apps);
+            mAppRecyclerView.setAdapter(mAdapter);
+        } else{
+            mAdapter.setApplications(apps);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -94,6 +90,10 @@ public class ApplicationListFragment extends Fragment {
             Log.d(TAG, "getItemCount() = " + Integer.toString(mApps.size()));
             return mApps.size();
         }
+
+        public void setApplications(List<Application> apps){
+            mApps = apps;
+        }
     }
 
     private class ApplicationHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -108,7 +108,7 @@ public class ApplicationListFragment extends Fragment {
             Log.d(TAG, "bindCrime()");
             formatter = new SimpleDateFormat(pattern);
             mApp = app;
-            mTitleTextView.setText(mApp.getName() + " " + mApp.getJobTitle());
+            mTitleTextView.setText(mApp.getJobTitle());
             mDateTextView.setText(formatter.format(mApp.getDateDue()));
             mCompanyTextView.setText(mApp.getCompany());
             mContactTextView.setText(mApp.getCompanyContact());
@@ -128,9 +128,11 @@ public class ApplicationListFragment extends Fragment {
         public void onClick(View v) {
             Intent intent = NewApplicationActivity.newIntent(getActivity(), mApp.getId());
             startActivity(intent);
-
         }
+
     }
+
+
 
 }
 

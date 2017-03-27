@@ -9,7 +9,7 @@ import java.util.UUID;
  * Created by Hayden on 3/2/17.
  */
 
-public class RecentActivity{
+public class RecentActions {
     private String mCategory;
     private String mName;
     private Date mDate;
@@ -17,8 +17,7 @@ public class RecentActivity{
     private UUID mUUID;
     private Intent mIntent;
 
-
-    RecentActivity(String category, String name, Date date, String company, Intent intent){
+    RecentActions(String category, String name, Date date, String company, Intent intent){
         mUUID = UUID.randomUUID();
         mName = name;
         mCategory = category;

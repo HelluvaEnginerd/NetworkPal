@@ -69,11 +69,13 @@
         android:paddingLeft="20dp"
         android:paddingTop="10dp"/>
 
-    <EditText
-        android:id="@+id/date_due"
-        android:layout_width="310dp"
+    <Button
+        android:id="@+id/date_due_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+    />
 
     <LinearLayout
         android:layout_width="wrap_content"
