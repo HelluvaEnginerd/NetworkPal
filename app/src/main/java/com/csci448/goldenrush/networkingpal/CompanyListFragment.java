@@ -114,7 +114,7 @@ public class CompanyListFragment extends Fragment{
         private TextView mCompanyAddressView;
 
         public void bindCompany(Company company) {
-            Log.d(TAG, "bindContact()");
+            Log.d(TAG, "bindCompany()");
 
             mCompany = company;
             mCompanyNameView.setText(mCompany.getCompanyName());
@@ -135,7 +135,7 @@ public class CompanyListFragment extends Fragment{
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            Intent intent = NewCompanyActivity.newIntent(getActivity(), null);
+            Intent intent = NewCompanyActivity.newIntent(getActivity(), mCompany.getID());
             startActivity(intent);
         }
     }

@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.CompanyBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.CompanyCursorWrapper;
-import com.csci448.goldenrush.networkingpal.database.CompanyDbSchema;
 import com.csci448.goldenrush.networkingpal.database.CompanyDbSchema.CompanyTable;
 
 import java.util.ArrayList;
@@ -45,6 +44,7 @@ public class CompanyLab {
         ContentValues values = getContentValues(c);
         mDatabase.insert(CompanyTable.NAME, null, values);
     }
+
     public Company getCompany(UUID id){
         Log.d(TAG, "getCompany()");
         CompanyCursorWrapper cursor = queryCompanies(CompanyTable.Cols.UUID + " = ?", new String[] {id.toString()});
@@ -55,6 +55,18 @@ public class CompanyLab {
             cursor.moveToFirst();
             return cursor.getCompany();
             } finally {
+            cursor.close();
+        }
+    }
+
+    public Boolean doesCompanyExist(UUID uuid){
+        CompanyCursorWrapper cursor = queryCompanies(CompanyTable.Cols.UUID + " = ?", new String[] {uuid.toString()});
+
+        try {
+            if (cursor.getCount() == 0)
+                return false;
+            return true;
+        }finally {
             cursor.close();
         }
     }
