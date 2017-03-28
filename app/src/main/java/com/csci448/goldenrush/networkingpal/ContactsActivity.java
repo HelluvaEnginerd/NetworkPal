@@ -20,11 +20,13 @@ import android.view.View;
 public class ContactsActivity extends FragmentActivity{
 
     private static String TAG = "ContactsActivity";
+    private static final String  EXTRA_POSITION = "position";
     private FloatingActionButton mFABaddContact;
     private int mPosition;
 
-    public static Intent newIntent(Context packageContext) {
+    public static Intent newIntent(Context packageContext, int position) {
         Intent intent = new Intent(packageContext, ContactsActivity.class);
+        intent.putExtra(EXTRA_POSITION, position);
         return intent;
     }
 
@@ -33,7 +35,7 @@ public class ContactsActivity extends FragmentActivity{
         Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_search);
-        mPosition = 0;
+        mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
 
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -46,6 +48,7 @@ public class ContactsActivity extends FragmentActivity{
 
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.setCurrentItem(mPosition);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

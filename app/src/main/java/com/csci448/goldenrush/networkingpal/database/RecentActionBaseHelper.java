@@ -24,7 +24,6 @@ public class RecentActionBaseHelper extends SQLiteOpenHelper {
                 " _id integer primary key autoincrement, " +
                 RecentActionTable.Cols.CATEGORY + ", " +
                 RecentActionTable.Cols.DATE + ", " +
-                RecentActionTable.Cols.INTENT + ", " +
                 RecentActionTable.Cols.NAME + ", " +
                 RecentActionTable.Cols.COMPANY + ", " +
                 RecentActionTable.Cols.UUID + ")"

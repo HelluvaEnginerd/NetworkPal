@@ -75,7 +75,7 @@ public class NewContactActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 //THIS WILL NEED TO BE CHANGED
-                Intent intent = ContactsActivity.newIntent(NewContactActivity.this);
+                Intent intent = ContactsActivity.newIntent(NewContactActivity.this, 0);
                 startActivity(intent);
             }
         });

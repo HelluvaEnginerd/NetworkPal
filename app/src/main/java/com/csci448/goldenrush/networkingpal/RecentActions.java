@@ -15,7 +15,6 @@ public class RecentActions {
     private Date mDate;
     private String mCompany;
     private UUID mUUID;
-    private Intent mIntent;
 
     RecentActions(String category, String name, Date date, String company, Intent intent){
         mUUID = UUID.randomUUID();
@@ -23,7 +22,6 @@ public class RecentActions {
         mCategory = category;
         mDate = date;
         mCompany = company;
-        mIntent = intent;
     }
 
     public String getCategory() {
@@ -45,6 +43,4 @@ public class RecentActions {
     public UUID getUUID() {
         return mUUID;
     }
-
-    public Intent getIntent(){ return mIntent; }
 }

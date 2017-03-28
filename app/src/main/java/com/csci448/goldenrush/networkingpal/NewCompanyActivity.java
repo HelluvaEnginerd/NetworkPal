@@ -108,9 +108,10 @@ public class NewCompanyActivity extends AppCompatActivity{
             public void onClick(View v){
                 /**
                  * TODO figure out how to make this either go to contacts or back to new application/contact activity. Back to where it came from basically
+                 * Currently goes back to company recycler list in contacts activity
                  */
                 CompanyLab.get(getApplicationContext()).addCompany(mCompany);
-                Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this);
+                Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this, 1);
                 startActivity(intent);
             }
         });
