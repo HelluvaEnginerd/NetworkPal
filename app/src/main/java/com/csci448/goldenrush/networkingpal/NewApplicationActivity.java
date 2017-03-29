@@ -57,6 +57,7 @@ public class NewApplicationActivity extends AppCompatActivity{
     }
 
     private void setUp(){
+        Log.d(TAG, "setUp()");
         mCompanyNameEditText = (EditText) findViewById(R.id.company_name);
         mCompanyNameEditText.addTextChangedListener(new TextWatcher() {
             @Override

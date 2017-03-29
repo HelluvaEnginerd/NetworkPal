@@ -49,16 +49,8 @@ public class RecentActionLab {
         mRecentActivities.add(activity3);
 
         Intent intent4 = NewContactActivity.newIntent(context, null);
-        RecentActions activity4 = new RecentActions("Contact2", "Jane", date, "Schlumberger", intent4);
+        RecentActions activity4 = new RecentActions("Company", "Jane", date, "Schlumberger", intent4);
         mRecentActivities.add(activity4);
-
-        Intent intent5 = NewEventActivity.newIntent(context);
-        RecentActions activity5 = new RecentActions("Event2", "Dinner", date, "MillerCoors", intent5);
-        mRecentActivities.add(activity5);
-
-        Intent intent6 = NewApplicationActivity.newIntent(context, null);
-        RecentActions activity6 = new RecentActions("Application2", "Chemical Engineer", date, "Chevron", intent6);
-        mRecentActivities.add(activity6);
     }
 
     public RecentActions getRecentActivity(UUID id){

@@ -51,6 +51,7 @@ public class NewEventActivity extends AppCompatActivity {
     }
 
     private void setUpWidgets(){
+        Log.d(TAG, "setUpWidgets()");
         name = (EditText) findViewById(R.id.event_box);
         name.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -103,6 +104,7 @@ public class NewEventActivity extends AppCompatActivity {
 
     }
     public static Intent newIntent(Context packageContext){
+        Log.d(TAG, "newIntent()");
         Intent i = new Intent(packageContext, NewEventActivity.class);
         //TODO: Add any extras you may need when creating an event
 

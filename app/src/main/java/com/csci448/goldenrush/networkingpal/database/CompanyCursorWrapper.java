@@ -24,12 +24,12 @@ public class CompanyCursorWrapper extends CursorWrapper {
         String uuidString = getString(getColumnIndex(CompanyTable.Cols.UUID));
         String companyName = getString(getColumnIndex(CompanyTable.Cols.COMPANYNAME));
         String phoneNumber = getString(getColumnIndex(CompanyTable.Cols.NUMBER));
-
+        String address = getString(getColumnIndex(CompanyTable.Cols.ADDRESS));
 
         Company company = new Company(UUID.fromString(uuidString));
         company.setCompanyName(companyName);
         company.setPhoneNumber(phoneNumber);
-
+        company.setAddress(address);
 
         return company;
     }

@@ -20,11 +20,13 @@ import android.view.View;
 public class ContactsActivity extends FragmentActivity{
 
     private static String TAG = "ContactsActivity";
+    private static final String  EXTRA_POSITION = "position";
     private FloatingActionButton mFABaddContact;
     private int mPosition;
 
-    public static Intent newIntent(Context packageContext) {
+    public static Intent newIntent(Context packageContext, int position) {
         Intent intent = new Intent(packageContext, ContactsActivity.class);
+        intent.putExtra(EXTRA_POSITION, position);
         return intent;
     }
 
@@ -33,25 +35,10 @@ public class ContactsActivity extends FragmentActivity{
         Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_search);
-        mPosition = 0;
+        mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
 
 
-        /**
-         * TODO make FAB go to person or company contact depending on selected tab
-         */
-
-        mFABaddContact = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
-
-        mFABaddContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "FAB add application");
-                Intent intent = NewContactActivity.newIntent(ContactsActivity.this, null);
-                startActivity(intent);
-            }
-        });
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("People"));
         tabLayout.addTab(tabLayout.newTab().setText("Companies"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -61,15 +48,12 @@ public class ContactsActivity extends FragmentActivity{
 
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.setCurrentItem(mPosition);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 mPosition = tab.getPosition();
-                /**
-                 * position 0 is people
-                 * position 1 is companies
-                 */
             }
 
             @Override
@@ -80,6 +64,31 @@ public class ContactsActivity extends FragmentActivity{
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+        /**
+         * TODO make FAB go to person or company contact depending on selected tab
+         * I think I did it.
+         */
+        mFABaddContact = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
+        mFABaddContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "FAB add application");
+                /**
+                 * position 0 is people
+                 * position 1 is companies
+                 */
+                if (tabLayout.getSelectedTabPosition() == 0) {
+                    Log.d(TAG, "start newContactActivity");
+                    Intent intent = NewContactActivity.newIntent(ContactsActivity.this, null);
+                    startActivity(intent);
+                }else {
+                    Log.d(TAG, "Start newCompanyActivity");
+                    Intent intent = NewCompanyActivity.newIntent(ContactsActivity.this, null);
+                    startActivity(intent);
+                }
             }
         });
     }

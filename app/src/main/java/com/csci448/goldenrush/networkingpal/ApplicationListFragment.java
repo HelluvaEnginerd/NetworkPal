@@ -30,6 +30,7 @@ public class ApplicationListFragment extends Fragment {
 
 
     private void updateUI(){
+        Log.d(TAG, "updateUI()");
         ApplicationLab applicationLab = ApplicationLab.get(getActivity());
         List<Application> apps = applicationLab.getApps();
 
@@ -126,13 +127,10 @@ public class ApplicationListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+            Log.d(TAG, "onClickView");
             Intent intent = NewApplicationActivity.newIntent(getActivity(), mApp.getId());
             startActivity(intent);
         }
-
     }
-
-
-
 }
 

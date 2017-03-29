@@ -27,6 +27,7 @@ public class CompanyListFragment extends Fragment{
     private int mPosition;
 
     public static CompanyListFragment newInstance(int position) {
+        Log.d(TAG, "newInstance()");
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_POSITION, position);
 
@@ -39,7 +40,6 @@ public class CompanyListFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
-
     }
 
     @Override
@@ -62,6 +62,7 @@ public class CompanyListFragment extends Fragment{
     }
 
     private void updateUI(){
+        Log.d(TAG, "updateUI()");
         CompanyLab companyLab = CompanyLab.get(getActivity());
         List<Company> companies = companyLab.getCompanies();
 
@@ -113,7 +114,7 @@ public class CompanyListFragment extends Fragment{
         private TextView mCompanyAddressView;
 
         public void bindCompany(Company company) {
-            Log.d(TAG, "bindContact()");
+            Log.d(TAG, "bindCompany()");
 
             mCompany = company;
             mCompanyNameView.setText(mCompany.getCompanyName());
@@ -134,7 +135,7 @@ public class CompanyListFragment extends Fragment{
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            Intent intent = NewCompanyActivity.newIntent(getActivity(), null);
+            Intent intent = NewCompanyActivity.newIntent(getActivity(), mCompany.getID());
             startActivity(intent);
         }
     }

@@ -71,6 +71,7 @@ public class ContactListFragment extends Fragment {
     }
 
     private void updateUI(){
+        Log.d(TAG, "updateUI()");
         ContactLab contactLab = ContactLab.get(getActivity());
         List<Contact> contacts = contactLab.getContacts();
 

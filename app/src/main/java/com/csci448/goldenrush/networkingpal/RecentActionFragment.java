@@ -28,6 +28,7 @@ public class RecentActionFragment extends Fragment {
     private String pattern = "EEE, MMM d, yyyy";
 
     private void updateUI() {
+        Log.d(TAG, "updateUI()");
         RecentActionLab recentActionLab = RecentActionLab.get(getActivity());
         List<RecentActions> recentActivities = recentActionLab.getRecentActivities();
 
@@ -124,7 +125,26 @@ public class RecentActionFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            startActivity(mRecentActions.getIntent());
+            Intent intent;
+            String category = mRecentActions.getCategory();
+            switch (category) {
+                case "Contact":
+                    intent = NewContactActivity.newIntent(getActivity(), null);
+                    break;
+                case "Company":
+                    intent = NewCompanyActivity.newIntent(getActivity(), null);
+                    break;
+                case "Application":
+                    intent = NewApplicationActivity.newIntent(getActivity(), null);
+                    break;
+                case "Event":
+                    intent = NewEventActivity.newIntent(getActivity());
+                    break;
+                default:
+                    intent = WelcomeActivity.newIntent(getContext());
+                    break;
+            }
+            startActivity(intent);
         }
     }
 

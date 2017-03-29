@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import java.awt.font.TextAttribute;
 import java.util.UUID;
 
 /**
@@ -33,6 +31,7 @@ public class NewCompanyActivity extends AppCompatActivity{
 
 
     public static Intent newIntent(Context packageContext, UUID uuid){
+        Log.d(TAG, "newIntent()");
         Intent intent = new Intent(packageContext, NewCompanyActivity.class);
         intent.putExtra(EXTRA_UUID, uuid);
         return intent;
@@ -41,11 +40,14 @@ public class NewCompanyActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
         setContentView(R.layout.new_company_activity);
+        mCompany = new Company();
         setUp();
     }
 
     private void setUp(){
+        Log.d(TAG, "setup()");
 
         mCompanyEditText = (EditText) findViewById(R.id.company_name);
         mCompanyEditText.addTextChangedListener(new TextWatcher() {
@@ -56,7 +58,8 @@ public class NewCompanyActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCompany.setCompanyName(s.toString());
+                if (s != null)
+                    mCompany.setCompanyName(s.toString());
             }
 
             @Override
@@ -74,7 +77,8 @@ public class NewCompanyActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCompany.setAddress(s.toString());
+                if (s != null)
+                    mCompany.setAddress(s.toString());
             }
 
             @Override
@@ -92,7 +96,8 @@ public class NewCompanyActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCompany.setPhoneNumber(s.toString());
+                if (s != null)
+                    mCompany.setPhoneNumber(s.toString());
             }
 
             @Override
@@ -106,15 +111,45 @@ public class NewCompanyActivity extends AppCompatActivity{
         mDoneButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Log.d(TAG, "doneButton Clicked");
                 /**
                  * TODO figure out how to make this either go to contacts or back to new application/contact activity. Back to where it came from basically
+                 * Currently goes back to company recycler list in contacts activity
                  */
-                Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this);
+
+                /**
+                 * TODO doesCompanyExist doesnt work yet. Also recyclerview doesnt show first company?
+                 */
+                if (CompanyLab.get(getApplicationContext()).doesCompanyExist(mCompany.getID())) {
+                    Log.d(TAG, "updating Company");
+                    Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " added to database", Toast.LENGTH_SHORT);
+                    CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
+                } else {
+                    Log.d(TAG, "adding new company:  " + mCompany.getCompanyName());
+                    Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " updated in database", Toast.LENGTH_SHORT);
+                    CompanyLab.get(getApplicationContext()).addCompany(mCompany);
+                }
+                Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this, 1);
                 startActivity(intent);
             }
         });
+
+        UUID companyID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+        if (companyID != null){
+            CompanyLab companyLab = CompanyLab.get(NewCompanyActivity.this);
+            Company company = companyLab.getCompany(companyID);
+            mPhoneEditText.setText(company.getPhoneNumber());
+            mAddressEditText.setText(company.getAddress());
+            mCompanyEditText.setText(company.getCompanyName());
+        }
+
     }
 
-
+    @Override
+    public void  onPause(){
+        super.onPause();
+        Log.d(TAG, "onPause()");
+        CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
+    }
 
 }
