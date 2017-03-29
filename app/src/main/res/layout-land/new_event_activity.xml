@@ -44,14 +44,13 @@
                 android:text="@string/time_text"
                 android:padding="10dp"
                 android:layout_weight="1"/>
-            <EditText
+            <Button
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/time_box"
                 android:padding="10dp"
                 android:text="@string/enter_text"
-
-                android:inputType="text" />
+             />
 
         </LinearLayout>
 

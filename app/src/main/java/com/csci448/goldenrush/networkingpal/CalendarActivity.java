@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.ImageButton;
-
-import java.util.Date;
 
 /**
  * Created by Sarah on 2/28/2017.
@@ -35,6 +33,16 @@ public class CalendarActivity extends AppCompatActivity {
         if(savedInstanceState!=null)
         {
             calendarWidget.setDate(savedInstanceState.getLong(DATE));
+        }
+        //create the list of event fragments
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_events_container);
+
+        if (fragment == null){
+            fragment = new EventListFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_events_container, fragment)
+                    .commit();
         }
     }
 

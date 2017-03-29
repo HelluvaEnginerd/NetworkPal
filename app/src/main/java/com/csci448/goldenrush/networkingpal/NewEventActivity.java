@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,17 +19,19 @@ import android.widget.EditText;
 public class NewEventActivity extends AppCompatActivity {
     private static final String TAG = "NewEventActivity";
     //all widgets
-    EditText name;
-    EditText date;
-    EditText company;
-    EditText details;
-    Button create;
+    private EditText name;
+    private Button date;
+    private EditText company;
+    private EditText details;
+    private Button create;
+    private Event mEvent;
 
     //Keys for save instance state
     private static final String EVENT_NAME = "EventNameString";
     private static final String DATE = "DateString";
     private static final String COMPANY_NAME = "CompanyString";
     private static final String DETAILS ="DetailsString";
+    private static final String DIALOG_DATE = "DialogDate";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -56,11 +59,20 @@ public class NewEventActivity extends AppCompatActivity {
             }
         });
 
-        date= (EditText) findViewById(R.id.time_box);
+        date= (Button) findViewById(R.id.time_box);
+        date.setText("test");
         date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                date.setText(R.string.empty_text);
+                /*
+                try to do the same date picker
+                FragmentManager manager = getFragmentManager();
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mApp.getDateDue());
+                //NO CLUE WHAT TO DO HERE SINCE THIS IS AN ACTIVITY - THIS IS THE PROBLEM WITH THE DATE
+                //dialog.setTargetFragment(ApplicationSearchActivity.this, REQUEST_DATE);
+                dialog.show(manager, DIALOG_DATE);
+                //date.setText(R.string.empty_text);
+                */
             }
         });
 
