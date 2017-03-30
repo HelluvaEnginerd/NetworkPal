@@ -10,9 +10,11 @@ public class Event {
     //instance variables
     private UUID mId;
     private String mEventName;
+    private String mEventDetails;
 
     public Event(){
         mId =UUID.randomUUID();
+        mEventDetails= "test";
     }
 
     public UUID getId() {
@@ -25,5 +27,13 @@ public class Event {
 
     public void setEventName(String mEventName) {
         this.mEventName = mEventName;
+    }
+
+    public String getmEventDetails() {
+        return mEventDetails;
+    }
+
+    public void setmEventDetails(String mEventDetails) {
+        this.mEventDetails = mEventDetails;
     }
 }

@@ -36,7 +36,7 @@ public class RecentActionLab {
 
         Date date = new Date();
 
-        Intent intent1 = NewEventActivity.newIntent(context);
+        Intent intent1 = NewEventActivity.newIntent(context,null); //todo:need to change
         RecentActions activity1 = new RecentActions("Event", "Interview", date, "Lockheed", intent1);
         mRecentActivities.add(activity1);
 

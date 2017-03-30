@@ -17,12 +17,12 @@
         tools:text="Event Name"/>
 
     <TextView
-        android:id="@+id/list_item_event_date"
+        android:id="@+id/list_item_event_company"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_event_name"
         android:padding="4dp"
-        tools:text="Event Company"/>
+        android:text="Event Company"/>
 
     <TextView
         android:id="@+id/list_item_event_time"
@@ -31,6 +31,6 @@
         android:layout_below="@+id/list_item_event_name"
         android:layout_toRightOf="@+id/list_item_event_name"
         android:padding="4dp"
-        tools:text="Time"/>
+        android:text="Time"/>
 
 </RelativeLayout>
