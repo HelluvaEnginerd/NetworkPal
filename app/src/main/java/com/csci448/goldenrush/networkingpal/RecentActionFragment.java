@@ -138,7 +138,7 @@ public class RecentActionFragment extends Fragment {
                     intent = NewApplicationActivity.newIntent(getActivity(), null);
                     break;
                 case "Event":
-                    intent = NewEventActivity.newIntent(getActivity());
+                    intent = NewEventActivity.newIntent(getActivity(), null); //todo: need to change
                     break;
                 default:
                     intent = WelcomeActivity.newIntent(getContext());

@@ -57,10 +57,10 @@ Strings for ApplicationSearchActivity
     -->
     <string name="new_event_activity">New Event</string>
     <string name="event_title">Event Name: </string>
-    <string name="time_text">Date: </string>
-    <string name="company_text">Company: </string>
+    <string name="date_text">Date: </string>
+    <string name="time_text">Time: </string>
     <string name="details_text">Details: </string>
-    <string name="create_text">Create Event</string>
+    <string name="create_text">Okay</string>
     <string name="enter_text">Enter Text</string>
     <string name="empty_text"></string>
 
@@ -68,7 +68,8 @@ Strings for ApplicationSearchActivity
     Strings for Calendar Layout
     -->
     <string name="calendar_activity">Calendar</string>
-    <string name="new_event_button">New Event</string>
+    <string name="new_event_button">Event</string>
+    <string name="events_on_text">Events on: </string>
 
     <!--
     Strings for Diggerenet-->
