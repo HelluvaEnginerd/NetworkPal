@@ -30,7 +30,7 @@ public class RecentActionFragment extends Fragment {
     private void updateUI() {
         Log.d(TAG, "updateUI()");
         RecentActionLab recentActionLab = RecentActionLab.get(getActivity());
-        List<RecentActions> recentActivities = recentActionLab.getRecentActivities();
+        List<RecentAction> recentActivities = recentActionLab.getRecentActivities();
 
         mAdapter = new RecentActionFragment.RecentActivityAdapter(recentActivities);
         mRecentActivityRecyclerView.setAdapter(mAdapter);
@@ -66,9 +66,9 @@ public class RecentActionFragment extends Fragment {
 
     private class RecentActivityAdapter extends RecyclerView.Adapter<RecentActionFragment.RecentActivityHolder> {
         private static final String TAG = "RAF:RecentActAdapter";
-        private List<RecentActions> mRecentActivities;
+        private List<RecentAction> mRecentActivities;
 
-        public RecentActivityAdapter(List<RecentActions> recentActivities) {
+        public RecentActivityAdapter(List<RecentAction> recentActivities) {
             mRecentActivities = recentActivities;
         }
 
@@ -83,8 +83,8 @@ public class RecentActionFragment extends Fragment {
 
         @Override public void onBindViewHolder(RecentActionFragment.RecentActivityHolder holder, int position){
             Log.d(TAG, "onBindViewHolder()");
-            RecentActions recentActions = mRecentActivities.get(position);
-            holder.bindRecentActivity(recentActions);
+            RecentAction recentAction = mRecentActivities.get(position);
+            holder.bindRecentActivity(recentAction);
         }
 
         @Override
@@ -96,20 +96,20 @@ public class RecentActionFragment extends Fragment {
 
     private class RecentActivityHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private static final String TAG = "RAF:RecentActHolder";
-        private RecentActions mRecentActions;
+        private RecentAction mRecentAction;
         private TextView mCategoryTextView;
         private TextView mDateTextView;
         private TextView mCompanyTextView;
         private TextView mNameTextView;
 
-        public void bindRecentActivity(RecentActions recentActions) {
+        public void bindRecentActivity(RecentAction recentAction) {
             Log.d(TAG, "bindRecentActivity()");
             formatter = new SimpleDateFormat(pattern);
-            mRecentActions = recentActions;
-            mNameTextView.setText(mRecentActions.getName());
-            mDateTextView.setText(formatter.format(mRecentActions.getDate()));
-            mCompanyTextView.setText(mRecentActions.getCompany());
-            mCategoryTextView.setText(mRecentActions.getCategory());
+            mRecentAction = recentAction;
+            mNameTextView.setText(mRecentAction.getName());
+            mDateTextView.setText(formatter.format(mRecentAction.getDate()));
+            mCompanyTextView.setText(mRecentAction.getCompany());
+            mCategoryTextView.setText(mRecentAction.getCategory());
         }
 
         public RecentActivityHolder(View itemView) {
@@ -126,7 +126,7 @@ public class RecentActionFragment extends Fragment {
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
             Intent intent;
-            String category = mRecentActions.getCategory();
+            String category = mRecentAction.getCategory();
             switch (category) {
                 case "Contact":
                     intent = NewContactActivity.newIntent(getActivity(), null);

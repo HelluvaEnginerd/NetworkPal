@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -128,6 +129,8 @@ public class NewCompanyActivity extends AppCompatActivity{
                     Log.d(TAG, "adding new company:  " + mCompany.getCompanyName());
                     Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " updated in database", Toast.LENGTH_SHORT);
                     CompanyLab.get(getApplicationContext()).addCompany(mCompany);
+                    RecentAction action = new RecentAction("Company", "FILL", new Date(), mCompany.getCompanyName());
+                    RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
                 }
                 Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this, 1);
                 startActivity(intent);

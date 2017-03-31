@@ -1,7 +1,13 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.csci448.goldenrush.networkingpal.database.RecentActionBaseHelper;
+import com.csci448.goldenrush.networkingpal.database.RecentActionDbSchema;
+import com.csci448.goldenrush.networkingpal.database.RecentActionDbSchema.RecentActionTable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +22,13 @@ public class RecentActionLab {
     private static String TAG = "RecentActionLab";
 
     private static RecentActionLab sRecentActionLab;
-    private List<RecentActions> mRecentActivities;
-
+    private  static Context mContext;
+    private static SQLiteDatabase mDatabase;
 
 
     public static RecentActionLab get(Context context){
+        mContext = context.getApplicationContext();
+        mDatabase = new RecentActionBaseHelper(mContext).getWritableDatabase();
         if (sRecentActionLab == null){
             sRecentActionLab = new RecentActionLab(context);
         }
@@ -28,42 +36,58 @@ public class RecentActionLab {
     }
 
     private RecentActionLab(Context context){
-        mRecentActivities = new ArrayList<>();
         /**
          * TODO remove fake activities
          * TODO UUIDs calced off of 'EVENT'? change first inputvar
          */
 
         Date date = new Date();
-
-        Intent intent1 = NewEventActivity.newIntent(context);
-        RecentActions activity1 = new RecentActions("Event", "Interview", date, "Lockheed", intent1);
+    /*
+        RecentAction activity1 = new RecentAction("Event", "Interview", date, "Lockheed");
         mRecentActivities.add(activity1);
 
-        Intent intent2 = NewContactActivity.newIntent(context, null);
-        RecentActions activity2 = new RecentActions("Contact", "Steve", date, "NASA", intent2);
+        RecentAction activity2 = new RecentAction("Contact", "Steve", date, "NASA");
         mRecentActivities.add(activity2);
 
-        Intent intent3 = NewApplicationActivity.newIntent(context, null);
-        RecentActions activity3 = new RecentActions("Application", "Process Engineer", date, "SpaceX", intent3);
+        RecentAction activity3 = new RecentAction("Application", "Process Engineer", date, "SpaceX");
         mRecentActivities.add(activity3);
 
-        Intent intent4 = NewContactActivity.newIntent(context, null);
-        RecentActions activity4 = new RecentActions("Company", "Jane", date, "Schlumberger", intent4);
+        RecentAction activity4 = new RecentAction("Company", "Jane", date, "Schlumberger");
         mRecentActivities.add(activity4);
+        */
     }
 
-    public RecentActions getRecentActivity(UUID id){
-        for (RecentActions recentActions : mRecentActivities){
-            if (recentActions.getUUID().equals(id)){
-                return recentActions;
-            }
-        }
+    public void addRecentActivity(RecentAction recentAction){
+        ContentValues values = getContentValues(recentAction);
+
+        mDatabase.insert(RecentActionTable.NAME, null, values);
+    }
+
+    public List<RecentAction> getRecentActivities() {
+        return new ArrayList<>();
+    }
+
+    public RecentAction getRecentAction(UUID uuid){
         return null;
     }
 
-    public List<RecentActions> getRecentActivities() {
-        return mRecentActivities;
+    public void updateRecentAction(RecentAction recentAction){
+        String uuidString = recentAction.getUUID().toString();
+        ContentValues values = getContentValues(recentAction);
+
+        mDatabase.update(RecentActionTable.NAME, values, RecentActionTable.Cols.UUID + " = ?", new String[] {uuidString});
+    }
+
+    private static ContentValues getContentValues(RecentAction recentAction){
+        ContentValues values = new ContentValues();
+
+        values.put(RecentActionTable.Cols.UUID, recentAction.getUUID().toString());
+        values.put(RecentActionTable.Cols.CATEGORY, recentAction.getCategory());
+        values.put(RecentActionTable.Cols.COMPANY, recentAction.getCompany());
+        values.put(RecentActionTable.Cols.DATE, recentAction.getDate().toString());
+        values.put(RecentActionTable.Cols.NAME, recentAction.getName());
+
+        return values;
     }
 
 }

@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -74,6 +75,8 @@ public class NewContactActivity extends AppCompatActivity{
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                RecentAction action = new RecentAction("Contact", "Contact Name", new Date(), "Contact company name");
+                RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
                 //THIS WILL NEED TO BE CHANGED
                 Intent intent = ContactsActivity.newIntent(NewContactActivity.this, 0);
                 startActivity(intent);

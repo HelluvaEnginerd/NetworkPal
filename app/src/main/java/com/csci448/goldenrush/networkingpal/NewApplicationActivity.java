@@ -154,6 +154,12 @@ public class NewApplicationActivity extends AppCompatActivity{
                 /**
                  * goes to application list view
                  */
+                /**
+                 * Adds this recent activity to the list for the welcome activity
+                 */
+                RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), mApp.getCompany());
+                RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
+
                 ApplicationLab.get(getApplicationContext()).addApplication(mApp);
                 Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
                 startActivity(intent);

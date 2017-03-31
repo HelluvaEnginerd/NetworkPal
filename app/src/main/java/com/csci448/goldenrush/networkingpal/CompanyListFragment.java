@@ -106,6 +106,7 @@ public class CompanyListFragment extends Fragment{
 
         public void setCompanies(List<Company> companies) {mCompanies = companies;}
     }
+
     private class CompaniesHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private static final String TAG = "CLF:CompaniesHolder";
         private Company mCompany;
