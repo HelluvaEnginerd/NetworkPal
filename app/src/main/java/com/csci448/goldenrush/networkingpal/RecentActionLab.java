@@ -2,11 +2,9 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.csci448.goldenrush.networkingpal.database.RecentActionBaseHelper;
-import com.csci448.goldenrush.networkingpal.database.RecentActionDbSchema;
 import com.csci448.goldenrush.networkingpal.database.RecentActionDbSchema.RecentActionTable;
 
 import java.util.ArrayList;

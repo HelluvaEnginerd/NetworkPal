@@ -12,7 +12,7 @@ import static com.csci448.goldenrush.networkingpal.database.CompanyDbSchema.*;
 
 public class CompanyBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "companybase.db";
+    private static final String DATABASE_NAME = "companies";
 
     public CompanyBaseHelper(Context context){
         super(context, DATABASE_NAME, null, VERSION);
