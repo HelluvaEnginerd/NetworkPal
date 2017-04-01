@@ -28,7 +28,6 @@ public class ApplicationListFragment extends Fragment {
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
 
-
     private void updateUI(){
         Log.d(TAG, "updateUI()");
         ApplicationLab applicationLab = ApplicationLab.get(getActivity());
@@ -82,8 +81,8 @@ public class ApplicationListFragment extends Fragment {
 
         @Override public void onBindViewHolder(ApplicationHolder holder, int position){
             Log.d(TAG, "onBindViewHolder()");
-            Application crime = mApps.get(position);
-            holder.bindCrime(crime);
+            Application application = mApps.get(position);
+            holder.bindApp(application);
         }
 
         @Override
@@ -105,8 +104,8 @@ public class ApplicationListFragment extends Fragment {
         private TextView mCompanyTextView;
         private TextView mContactTextView;
 
-        public void bindCrime(Application app) {
-            Log.d(TAG, "bindCrime()");
+        public void bindApp(Application app) {
+            Log.d(TAG, "bindApp()");
             formatter = new SimpleDateFormat(pattern);
             mApp = app;
             mTitleTextView.setText(mApp.getJobTitle());

@@ -41,6 +41,7 @@ Strings for ApplicationSearchActivity
     <string name="create_new">Create New</string>
     <string name="choose_existing">Choose Existing</string>
     <string name="date_picker_title">Date Due:</string>
+    <string name="company_picker_title">Company:</string>
 
     <!--
     Strings for new contact layout

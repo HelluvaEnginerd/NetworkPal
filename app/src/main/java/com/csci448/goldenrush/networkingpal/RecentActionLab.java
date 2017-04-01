@@ -19,9 +19,6 @@ import java.util.UUID;
  * Created by Hayden on 3/2/17.
  */
 
-/**
- * TODO finish making RecentActionLab work with DB
- */
 public class RecentActionLab {
     private static String TAG = "RecentActionLab";
 

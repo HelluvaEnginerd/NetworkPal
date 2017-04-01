@@ -13,6 +13,13 @@ public class Company {
     private String mPhoneNumber;
     private String mAddress;
 
+    public Company(String companyName, String phoneNumber, String address){
+        mID = UUID.randomUUID();
+        mCompanyName = companyName;
+        mPhoneNumber = phoneNumber;
+        mAddress = address;
+    }
+
     public Company(UUID uuid){
         mID = uuid;
     }

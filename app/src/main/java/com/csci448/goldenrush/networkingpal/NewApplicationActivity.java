@@ -1,11 +1,13 @@
 package com.csci448.goldenrush.networkingpal;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,12 +30,13 @@ import java.util.UUID;
  * Created by ddunmire on 2/27/2017.
  */
 
-public class NewApplicationActivity extends AppCompatActivity{
+public class NewApplicationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private static String TAG = "NewApplicationActivity";
     private static final String EXTRA_UUID = "uuid";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_CONTACT = 1;
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_COMPANY = "DialogCompany";
 
     private EditText mCompanyNameEditText;
     private EditText mJobTitleEditText;
@@ -67,7 +71,7 @@ public class NewApplicationActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.equals(""))
+                if (!s.toString().trim().equals(""))
                     mApp.setCompany(s.toString());
             }
 
@@ -85,7 +89,7 @@ public class NewApplicationActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.equals(""))
+                if (!s.toString().trim().equals(""))
                     mApp.setJobTitle(s.toString());
             }
 
@@ -101,6 +105,9 @@ public class NewApplicationActivity extends AppCompatActivity{
             public void onClick(View v){
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mApp.getDateDue());
+                /**
+                 * TODO make choosing date work with activity
+                 */
                 //NO CLUE WHAT TO DO HERE SINCE THIS IS AN ACTIVITY - THIS IS THE PROBLEM WITH THE DATE
                 //dialog.setTargetFragment(ApplicationSearchActivity.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
@@ -125,7 +132,12 @@ public class NewApplicationActivity extends AppCompatActivity{
         mChooseExistingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivityForResult(pickContact, REQUEST_CONTACT);
+                FragmentManager manager = getFragmentManager();
+                CompanyPickerFragment dialog = CompanyPickerFragment.newInstance();
+                /**
+                 * TODO make choosing company work with activity
+                 */
+                dialog.show(manager, DIALOG_COMPANY);
             }
         });
 
@@ -215,6 +227,12 @@ public class NewApplicationActivity extends AppCompatActivity{
             mApp.setDateDue(date);
             mDateDue.setText(mApp.getDateDue().toString());
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day){
+        Log.d(TAG, "Date picked");
+        mDateDue.setText(Integer.toString(month) + "/" + Integer.toString(day) + Integer.toString(year));
     }
 }
 
