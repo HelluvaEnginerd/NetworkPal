@@ -30,7 +30,7 @@ import java.util.UUID;
  * Created by ddunmire on 2/27/2017.
  */
 
-public class NewApplicationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class NewApplicationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, CompanyPickerFragment.Callbacks{
     private static String TAG = "NewApplicationActivity";
     private static final String EXTRA_UUID = "uuid";
     private static final int REQUEST_DATE = 0;
@@ -233,6 +233,12 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     public void onDateSet(DatePicker view, int year, int month, int day){
         Log.d(TAG, "Date picked");
         mDateDue.setText(Integer.toString(month) + "/" + Integer.toString(day) + Integer.toString(year));
+    }
+
+    @Override
+    public void onCompanySelected(Company company){
+        mApp.setCompany(company.getCompanyName());
+        mChooseExistingButton.setText(company.getCompanyName());
     }
 }
 

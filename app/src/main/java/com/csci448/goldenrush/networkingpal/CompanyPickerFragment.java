@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +25,25 @@ public class CompanyPickerFragment extends DialogFragment {
 
     private RecyclerView mRecyclerView;
     private CompaniesAdapter mCompaniesAdapter;
+    private Callbacks mCallbacks;
+
+    public interface Callbacks {
+        void onCompanySelected(Company company);
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        Log.d(TAG, "onAttach()");
+        super.onAttach(activity);
+        mCallbacks = (Callbacks) activity;
+    }
+
+    @Override
+    public void onDetach(){
+        Log.d(TAG, "onDetach()");
+        super.onDetach();
+        mCallbacks = null;
+    }
 
     public static CompanyPickerFragment newInstance(){
         Log.d(TAG, "newInstance()");
@@ -126,9 +144,8 @@ public class CompanyPickerFragment extends DialogFragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            /**
-             * TODO use callback to go back to activity w/info
-             */
+            mCallbacks.onCompanySelected(mCompany);
+            dismiss();
         }
     }
 }
