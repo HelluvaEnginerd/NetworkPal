@@ -86,6 +86,7 @@ public class RecentAction {
         /**
          * TODO parse string date for date
          */
+        mDate = new Date();
     }
 
     public void setCompany(String company) {

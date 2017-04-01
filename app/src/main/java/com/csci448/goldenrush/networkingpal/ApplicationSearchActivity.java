@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,7 +19,7 @@ import android.support.design.widget.FloatingActionButton;
  * Created by Hayden on 2/28/17.
  */
 
-public class ApplicationSearchActivity extends FragmentActivity{
+public class ApplicationSearchActivity extends AppCompatActivity{
 
     private static String TAG = ApplicationSearchActivity.class.getSimpleName();
     private FloatingActionButton mAddApplication;

@@ -67,7 +67,8 @@ public class NewApplicationActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mApp.setCompany(s.toString());
+                if (!s.equals(""))
+                    mApp.setCompany(s.toString());
             }
 
             @Override
@@ -84,7 +85,8 @@ public class NewApplicationActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mApp.setJobTitle(s.toString());
+                if (!s.equals(""))
+                    mApp.setJobTitle(s.toString());
             }
 
             @Override
@@ -114,6 +116,10 @@ public class NewApplicationActivity extends AppCompatActivity{
             }
         });
 
+        /**
+         * TODO link choose existing company to company DB
+         * TODO switch view from choose company to company name if company is picked
+         */
         final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         mChooseExistingButton = (Button) findViewById(R.id.choose_existing_button);
         mChooseExistingButton.setOnClickListener(new View.OnClickListener(){

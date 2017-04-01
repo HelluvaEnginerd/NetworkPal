@@ -24,6 +24,7 @@ public class NewCompanyActivity extends AppCompatActivity{
     private static final String EXTRA_UUID = "uuid";
 
     private Company mCompany;
+    private RecentAction mRecentAction;
 
     private EditText mCompanyEditText;
     private EditText mPhoneEditText;
@@ -119,18 +120,18 @@ public class NewCompanyActivity extends AppCompatActivity{
                  */
 
                 /**
-                 * TODO doesCompanyExist doesnt work yet. Also recyclerview doesnt show first company?
+                 * TODO make doesCompanyExist work.
                  */
                 if (CompanyLab.get(getApplicationContext()).doesCompanyExist(mCompany.getID())) {
                     Log.d(TAG, "updating Company");
-                    Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " added to database", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " updated in database", Toast.LENGTH_SHORT).show();
                     CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
                 } else {
                     Log.d(TAG, "adding new company:  " + mCompany.getCompanyName());
-                    Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " updated in database", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " added to database", Toast.LENGTH_SHORT).show();
                     CompanyLab.get(getApplicationContext()).addCompany(mCompany);
-                    RecentAction action = new RecentAction("Company", "FILL", new Date(), mCompany.getCompanyName());
-                    RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
+                    mRecentAction = new RecentAction("Company", "FILL", new Date(), mCompany.getCompanyName());
+                    RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
                 }
                 Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this, 1);
                 startActivity(intent);
@@ -153,6 +154,7 @@ public class NewCompanyActivity extends AppCompatActivity{
         super.onPause();
         Log.d(TAG, "onPause()");
         CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
+        RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
     }
 
 }

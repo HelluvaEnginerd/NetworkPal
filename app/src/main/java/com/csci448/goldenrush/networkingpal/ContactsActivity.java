@@ -8,16 +8,20 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 /**
  * Created by Nick on 3/2/17.
  */
 
-public class ContactsActivity extends FragmentActivity{
+public class ContactsActivity extends AppCompatActivity{
 
     private static String TAG = "ContactsActivity";
     private static final String  EXTRA_POSITION = "position";
@@ -36,7 +40,6 @@ public class ContactsActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_search);
         mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
-
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("People"));
@@ -67,10 +70,6 @@ public class ContactsActivity extends FragmentActivity{
             }
         });
 
-        /**
-         * TODO make FAB go to person or company contact depending on selected tab
-         * I think I did it.
-         */
         mFABaddContact = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
         mFABaddContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +90,17 @@ public class ContactsActivity extends FragmentActivity{
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

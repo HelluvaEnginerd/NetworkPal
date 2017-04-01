@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.csci448.goldenrush.networkingpal.database.RecentActionDbSchema;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,6 +25,8 @@ import java.util.UUID;
 public class NewContactActivity extends AppCompatActivity{
     private static String TAG = "NewContactActivity";
     private static final String EXTRA_UUID = "uuid";
+
+    private RecentAction mRecentAction;
 
     private TextView mContactNameTextview;
     private TextView mCompanyNameTextview;
@@ -75,13 +79,26 @@ public class NewContactActivity extends AppCompatActivity{
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                RecentAction action = new RecentAction("Contact", "Contact Name", new Date(), "Contact company name");
-                RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
+                mRecentAction = new RecentAction("Contact", "Contact Name", new Date(), "Contact company name");
+                RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
                 //THIS WILL NEED TO BE CHANGED
                 Intent intent = ContactsActivity.newIntent(NewContactActivity.this, 0);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        Log.d(TAG, "onPause()");
+        /**
+         * TODO add once Contact DB is complete
+         * ContactLab.get(getApplicationContext())
+         */
+
+        RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
     }
 
     @Override

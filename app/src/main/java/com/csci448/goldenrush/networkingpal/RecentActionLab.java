@@ -2,9 +2,12 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.RecentActionBaseHelper;
+import com.csci448.goldenrush.networkingpal.database.RecentActionCursorWrapper;
 import com.csci448.goldenrush.networkingpal.database.RecentActionDbSchema.RecentActionTable;
 
 import java.util.ArrayList;
@@ -16,6 +19,9 @@ import java.util.UUID;
  * Created by Hayden on 3/2/17.
  */
 
+/**
+ * TODO finish making RecentActionLab work with DB
+ */
 public class RecentActionLab {
     private static String TAG = "RecentActionLab";
 
@@ -34,28 +40,9 @@ public class RecentActionLab {
     }
 
     private RecentActionLab(Context context){
-        /**
-         * TODO remove fake activities
-         * TODO UUIDs calced off of 'EVENT'? change first inputvar
-         */
-
-        Date date = new Date();
-        /*
-        RecentAction activity1 = new RecentAction("Event", "Interview", date, "Lockheed");
-
-        Intent intent1 = NewEventActivity.newIntent(context,null); //todo:need to change
-        RecentActions activity1 = new RecentActions("Event", "Interview", date, "Lockheed", intent1);
-        mRecentActivities.add(activity1);
-
-        RecentAction activity2 = new RecentAction("Contact", "Steve", date, "NASA");
-        mRecentActivities.add(activity2);
-
-        RecentAction activity3 = new RecentAction("Application", "Process Engineer", date, "SpaceX");
-        mRecentActivities.add(activity3);
-
-        RecentAction activity4 = new RecentAction("Company", "Jane", date, "Schlumberger");
-        mRecentActivities.add(activity4);
-        */
+        Log.d(TAG, "RecentActionLab()");
+        mContext = context.getApplicationContext();
+        mDatabase = new RecentActionBaseHelper(mContext).getWritableDatabase();
     }
 
     public void addRecentActivity(RecentAction recentAction){
@@ -64,12 +51,34 @@ public class RecentActionLab {
         mDatabase.insert(RecentActionTable.NAME, null, values);
     }
 
-    public List<RecentAction> getRecentActivities() {
-        return new ArrayList<>();
+    public List<RecentAction> getRecentActions() {
+        List<RecentAction> recentActions = new ArrayList<>();
+
+        RecentActionCursorWrapper cursor  = queryRecentActions(null,null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                recentActions.add(cursor.getRecentAction());
+                cursor.moveToNext();
+            }
+        }finally {
+            cursor.close();
+        }
+        return recentActions;
     }
 
     public RecentAction getRecentAction(UUID uuid){
-        return null;
+        RecentActionCursorWrapper cursor = queryRecentActions(RecentActionTable.Cols.UUID + " = ?", new String[] {uuid.toString()});
+
+        try {
+            if (cursor.getCount() == 0)
+                return  null;
+            cursor.moveToFirst();
+            return cursor.getRecentAction();
+        } finally {
+            cursor.close();
+        }
     }
 
     public void updateRecentAction(RecentAction recentAction){
@@ -89,6 +98,19 @@ public class RecentActionLab {
         values.put(RecentActionTable.Cols.NAME, recentAction.getName());
 
         return values;
+    }
+
+    private RecentActionCursorWrapper queryRecentActions(String whereClause, String[] whereArgs){
+        Cursor cursor = mDatabase.query(
+                RecentActionTable.NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+                );
+        return new RecentActionCursorWrapper(cursor);
     }
 
 }

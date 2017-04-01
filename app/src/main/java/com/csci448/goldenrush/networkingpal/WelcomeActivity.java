@@ -57,9 +57,6 @@ public class WelcomeActivity extends AppCompatActivity{
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_welcome);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
@@ -91,10 +88,6 @@ public class WelcomeActivity extends AppCompatActivity{
         mContactsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
-                 * go to contacts view,
-                 * TODO decide if its companies or people shown first
-                 */
                 Intent intent = ContactsActivity.newIntent(WelcomeActivity.this, 0);
                 startActivity(intent);
             }

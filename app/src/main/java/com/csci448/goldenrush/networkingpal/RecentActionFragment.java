@@ -30,10 +30,15 @@ public class RecentActionFragment extends Fragment {
     private void updateUI() {
         Log.d(TAG, "updateUI()");
         RecentActionLab recentActionLab = RecentActionLab.get(getActivity());
-        List<RecentAction> recentActivities = recentActionLab.getRecentActivities();
+        List<RecentAction> recentActivities = recentActionLab.getRecentActions();
 
-        mAdapter = new RecentActionFragment.RecentActivityAdapter(recentActivities);
-        mRecentActivityRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new RecentActionFragment.RecentActivityAdapter(recentActivities);
+            mRecentActivityRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.setRecentActivities(recentActivities);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -92,6 +97,10 @@ public class RecentActionFragment extends Fragment {
             Log.d(TAG, "getItemCount() = " + Integer.toString(mRecentActivities.size()));
             return mRecentActivities.size();
         }
+
+        public void setRecentActivities(List<RecentAction> recentActions){
+            mRecentActivities = recentActions;
+        }
     }
 
     private class RecentActivityHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -129,13 +138,13 @@ public class RecentActionFragment extends Fragment {
             String category = mRecentAction.getCategory();
             switch (category) {
                 case "Contact":
-                    intent = NewContactActivity.newIntent(getActivity(), null);
+                    intent = NewContactActivity.newIntent(getActivity(), mRecentAction.getUUID());
                     break;
                 case "Company":
-                    intent = NewCompanyActivity.newIntent(getActivity(), null);
+                    intent = NewCompanyActivity.newIntent(getActivity(), mRecentAction.getUUID());
                     break;
                 case "Application":
-                    intent = NewApplicationActivity.newIntent(getActivity(), null);
+                    intent = NewApplicationActivity.newIntent(getActivity(), mRecentAction.getUUID());
                     break;
                 case "Event":
                     intent = NewEventActivity.newIntent(getActivity(), null); //todo: need to change

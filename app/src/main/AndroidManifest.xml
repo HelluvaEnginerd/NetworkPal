@@ -23,18 +23,26 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ApplicationSearchActivity"></activity>
-        <activity android:name=".NewApplicationActivity"></activity>
-        <activity android:name=".NewContactActivity"></activity>
-        <activity android:name=".ContactsActivity"></activity>
-        <activity android:name=".NewCompanyActivity"></activity>
+        <activity android:name=".ApplicationSearchActivity"
+                  android:label="Applications"
+                  android:parentActivityName=".WelcomeActivity"></activity>
+        <activity android:name=".NewApplicationActivity"
+                  android:label="New Application"></activity>
+        <activity android:name=".NewContactActivity"
+                  android:label="New Contact"></activity>
+        <activity android:name=".ContactsActivity"
+                  android:label="Contacts"
+                  android:parentActivityName=".WelcomeActivity"></activity>
+        <activity android:name=".NewCompanyActivity"
+                  android:label="New Company"></activity>
         <activity android:name=".DiggernetActivity"
-            android:label="@string/diggernet_activity"></activity>
-
+                  android:label="@string/diggernet_activity"
+                  android:parentActivityName=".WelcomeActivity"></activity>
         <activity android:name=".NewEventActivity"
             android:label="@string/new_event_activity"></activity>
         <activity android:name=".CalendarActivity"
-            android:label="@string/calendar_activity"></activity>
+                  android:label="@string/calendar_activity"
+                  android:parentActivityName=".WelcomeActivity"></activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="7f4afeebf514035f01c27ddf18ad8bfe27a05491" />

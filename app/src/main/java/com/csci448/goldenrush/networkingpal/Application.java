@@ -24,11 +24,11 @@ public class Application {
         mResume = false;
         mCoverLetter = false;
         mSubmitted = false;
-        mCompany = "TEST";
-        mJobTitle = "TEST";
-        mCompanyContact = "TEST";
+        mCompany = "BLANK";
+        mJobTitle = "BLANK";
+        mCompanyContact = "BLANK";
         mDateDue = new Date();
-        mCompany = "TEST";
+        mCompany = "BLANK";
     }
 
     public Application(){
