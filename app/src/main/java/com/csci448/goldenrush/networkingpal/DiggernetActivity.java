@@ -93,7 +93,7 @@ public class DiggernetActivity extends AppCompatActivity{
     }
 
     private void addDrawerItems() {
-        String[] activityArray = { getResources().getString(R.string.welcome), getResources().getString(R.string.calendar), getResources().getString(R.string.contacts), getResources().getString(R.string.applications) };
+        String[] activityArray = { getResources().getString(R.string.welcome), getResources().getString(R.string.applications), getResources().getString(R.string.calendar), getResources().getString(R.string.contacts)};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, activityArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -105,16 +105,16 @@ public class DiggernetActivity extends AppCompatActivity{
                         Intent intent = WelcomeActivity.newIntent(getApplicationContext());
                         startActivity(intent);
                         break;
-                    case 1: Toast.makeText(getApplicationContext(), "Calendar", Toast.LENGTH_SHORT).show();
-                        Intent intent1 = CalendarActivity.newIntent(getApplicationContext());
+                    case 1: Toast.makeText(getApplicationContext(), "Applications", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = ApplicationSearchActivity.newIntent(getApplicationContext());
                         startActivity(intent1);
                         break;
-                    case 2: Toast.makeText(getApplicationContext(), "Contacts", Toast.LENGTH_SHORT).show();
-                        Intent intent2 = ContactsActivity.newIntent(getApplicationContext(), 0);
+                    case 2: Toast.makeText(getApplicationContext(), "Calendar", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = CalendarActivity.newIntent(getApplicationContext());
                         startActivity(intent2);
                         break;
-                    case 3: Toast.makeText(getApplicationContext(), "Applications", Toast.LENGTH_SHORT).show();
-                        Intent intent3 = ApplicationSearchActivity.newIntent(getApplicationContext());
+                    case 3: Toast.makeText(getApplicationContext(), "Contacts", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = ContactsActivity.newIntent(getApplicationContext(), 0);
                         startActivity(intent3);
                         break;
                     default: Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
