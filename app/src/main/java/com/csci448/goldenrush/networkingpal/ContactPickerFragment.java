@@ -153,6 +153,7 @@ public class ContactPickerFragment extends DialogFragment {
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
             mContactCallbacks.onContactSelected(mContact);
+            dismiss();
         }
     }
 
