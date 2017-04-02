@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+hamburger menu created heavily using:
+http://blog.teamtreehouse.com/add-navigation-drawer-android
+-->
 <android.support.v4.widget.DrawerLayout
     android:id="@+id/welcome_drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,36 +19,33 @@
             android:id="@+id/button_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
-                android:id="@+id/events_button"
-                android:layout_width="125sp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/events_button"
+                android:id="@+id/new_event_button"
+                android:layout_width="wrap_content"
+                android:layout_height="55sp"
+                android:text="@string/new_event"
+                android:layout_toRightOf="@+id/new_contact_button"
             />
             <Button
-                android:id="@+id/apps_button"
-                android:layout_width="125sp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/events_button"
-                android:layout_centerHorizontal="true"
-                android:text="@string/applications_button"
+                android:id="@+id/new_contact_button"
+                android:layout_width="100sp"
+                android:layout_height="55sp"
+                android:text="@string/new_contact"
+                android:layout_toRightOf="@+id/new_app_button"
             />
             <Button
-                android:id="@+id/contacts_button"
-                android:layout_width="125sp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/apps_button"
-                android:layout_centerHorizontal="true"
-                android:text="@string/contacts_button"
+                android:id="@+id/new_company_button"
+                android:layout_width="105sp"
+                android:layout_height="55sp"
+                android:text="@string/new_company"
+                android:layout_toRightOf="@+id/new_event_button"
             />
             <Button
-                android:id="@+id/diggernet_button"
-                android:layout_width="125sp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/contacts_button"
-                android:layout_centerHorizontal="true"
-                android:text="@string/diggernet_button"
+                android:id="@+id/new_app_button"
+                android:layout_width="90sp"
+                android:layout_height="55sp"
+                android:text="@string/new_application"
             />
         </RelativeLayout>
         <TextView

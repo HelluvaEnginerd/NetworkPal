@@ -20,8 +20,6 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 
-import java.util.UUID;
-
 import io.fabric.sdk.android.Fabric;
 
 public class WelcomeActivity extends AppCompatActivity{
@@ -34,10 +32,10 @@ public class WelcomeActivity extends AppCompatActivity{
 
     private static String TAG = WelcomeActivity.class.getSimpleName();
 
-    private Button  mEventsButton;
-    private Button  mApplicationsButton;
-    private Button  mContactsButton;
-    private Button  mDiggernetButton;
+    private Button mNewEventButton;
+    private Button mNewApplicationButton;
+    private Button mNewContactButton;
+    private Button mDiggernetButton;
 
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
@@ -68,47 +66,47 @@ public class WelcomeActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        mEventsButton = (Button) findViewById(R.id.events_button);
-        mEventsButton.setOnClickListener(new View.OnClickListener() {
+        mNewEventButton = (Button) findViewById(R.id.new_event_button);
+        mNewEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
                  * goes to events
                  */
-                Intent i = CalendarActivity.newIntent(WelcomeActivity.this);
+                Intent i = NewEventActivity.newIntent(WelcomeActivity.this, null);
                 startActivity(i);
             }
         });
 
-        mApplicationsButton = (Button) findViewById(R.id.apps_button);
-        mApplicationsButton.setOnClickListener(new View.OnClickListener() {
+        mNewApplicationButton = (Button) findViewById(R.id.new_app_button);
+        mNewApplicationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
                  * goes to application list view
                  */
-                Intent intent = ApplicationSearchActivity.newIntent(WelcomeActivity.this);
+                Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null);
                 startActivity(intent);
             }
         });
 
-        mContactsButton = (Button) findViewById(R.id.contacts_button);
-        mContactsButton.setOnClickListener(new View.OnClickListener() {
+        mNewContactButton = (Button) findViewById(R.id.new_contact_button);
+        mNewContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ContactsActivity.newIntent(WelcomeActivity.this, 0);
+                Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null);
                 startActivity(intent);
             }
         });
 
-        mDiggernetButton = (Button) findViewById(R.id.diggernet_button);
+        mDiggernetButton = (Button) findViewById(R.id.new_company_button);
         mDiggernetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
                  * goes to diggernet page
                  */
-                Intent i = DiggernetActivity.newIntent(WelcomeActivity.this);
+                Intent i = NewCompanyActivity.newIntent(WelcomeActivity.this, null);
                 startActivity(i);
             }
         });
@@ -128,14 +126,34 @@ public class WelcomeActivity extends AppCompatActivity{
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Android", "iOS", "Windows", "OS X", "Linux" };
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        String[] activityArray = { getResources().getString(R.string.applications), getResources().getString(R.string.calendar), getResources().getString(R.string.contacts), getResources().getString(R.string.diggernet) };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, activityArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(WelcomeActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                switch (position){
+                    case 0: Toast.makeText(getApplicationContext(), "Applications", Toast.LENGTH_SHORT).show();
+                        Intent intent = ApplicationSearchActivity.newIntent(getApplicationContext());
+                        startActivity(intent);
+                        break;
+                    case 1: Toast.makeText(getApplicationContext(), "Calendar", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = CalendarActivity.newIntent(getApplicationContext());
+                        startActivity(intent1);
+                        break;
+                    case 2: Toast.makeText(getApplicationContext(), "Contacts", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = ContactsActivity.newIntent(getApplicationContext(), 0);
+                        startActivity(intent2);
+                        break;
+                    case 3: Toast.makeText(getApplicationContext(), "Diggernet", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = DiggernetActivity.newIntent(getApplicationContext());
+                        startActivity(intent3);
+                        break;
+                    default: Toast.makeText(getApplicationContext(), "Other", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
             }
         });
     }
@@ -168,6 +186,11 @@ public class WelcomeActivity extends AppCompatActivity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(), "Currently no settings :)", Toast.LENGTH_SHORT).show();
+            return true;
+        }
 
         // Activate the navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
