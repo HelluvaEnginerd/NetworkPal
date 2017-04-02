@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,19 +17,15 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.UUID;
 
 /**
  * Created by ddunmire on 2/27/2017.
  */
 
-public class NewApplicationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, CompanyPickerFragment.Callbacks{
+public class NewApplicationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, CompanyPickerFragment.CompanyCallbacks {
     private static String TAG = "NewApplicationActivity";
     private static final String EXTRA_UUID = "uuid";
     private static final int REQUEST_DATE = 0;
@@ -123,20 +118,13 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             }
         });
 
-        /**
-         * TODO link choose existing company to company DB
-         * TODO switch view from choose company to company name if company is picked
-         */
         final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         mChooseExistingButton = (Button) findViewById(R.id.choose_existing_button);
         mChooseExistingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 FragmentManager manager = getFragmentManager();
-                CompanyPickerFragment dialog = CompanyPickerFragment.newInstance();
-                /**
-                 * TODO make choosing company work with activity
-                 */
+                ContactPickerFragment dialog = ContactPickerFragment.newInstance();
                 dialog.show(manager, DIALOG_COMPANY);
             }
         });
@@ -239,6 +227,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     public void onCompanySelected(Company company){
         mApp.setCompany(company.getCompanyName());
         mChooseExistingButton.setText(company.getCompanyName());
+        mCompanyNameEditText.setText(company.getCompanyName());
     }
 }
 

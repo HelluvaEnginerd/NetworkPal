@@ -59,24 +59,6 @@ public class CompanyLab {
         }
     }
 
-    public Boolean doesCompanyExist(UUID uuid){
-        /**
-         * TODO fix searching for company, use database.query?
-         */
-        CompanyCursorWrapper cursor = queryCompanies(CompanyTable.Cols.UUID + " = ?", new String[] {uuid.toString()});
-
-        try {
-            if (cursor.getCount() == 0) {
-                Log.d(TAG, "doesCompanyExist: false");
-                return false;
-            }
-            Log.d(TAG, "doesCompanyExist: true");
-            return true;
-        }finally {
-            cursor.close();
-        }
-    }
-
     public List<Company> getCompanies() {
         Log.d(TAG, "getCompanies()");
         List<Company> companies = new ArrayList<>();

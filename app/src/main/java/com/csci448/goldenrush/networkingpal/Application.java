@@ -8,8 +8,6 @@ import java.util.UUID;
  */
 
 public class Application {
-    private static String TAG = "Application";
-    public static String EMPTY_FIELD = "BLANK";
     private String mJobTitle;
     private String mCompanyContact;
     private Date mDateDue;
@@ -25,11 +23,7 @@ public class Application {
         mResume = false;
         mCoverLetter = false;
         mSubmitted = false;
-        mCompany = EMPTY_FIELD;
-        mJobTitle = EMPTY_FIELD;
-        mCompanyContact = EMPTY_FIELD;
         mDateDue = new Date();
-        mCompany = EMPTY_FIELD;
     }
 
     public Application(){

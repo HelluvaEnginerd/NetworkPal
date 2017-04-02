@@ -65,7 +65,6 @@ public class NewCompanyActivity extends AppCompatActivity{
                     mCompany.setCompanyName(s.toString());
                     keepCompany = true;
                 }else {
-                    mCompany.setAddress(Company.EMPTY_FIELD);
                     keepCompany = false;
                 }
             }
@@ -89,7 +88,6 @@ public class NewCompanyActivity extends AppCompatActivity{
                     mCompany.setAddress(s.toString());
                     keepCompany = true;
                 } else {
-                    mCompany.setAddress(Company.EMPTY_FIELD);
                     keepCompany = false;
                 }
             }
@@ -113,7 +111,6 @@ public class NewCompanyActivity extends AppCompatActivity{
                     mCompany.setPhoneNumber(s.toString());
                     keepCompany = true;
                 } else {
-                    mCompany.setPhoneNumber(Company.EMPTY_FIELD);
                     keepCompany = false;
                 }
 

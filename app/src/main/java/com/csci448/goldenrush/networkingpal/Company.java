@@ -1,5 +1,7 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.util.Log;
+
 import java.util.UUID;
 
 /**
@@ -8,7 +10,6 @@ import java.util.UUID;
 
 public class Company {
     private static String TAG = "Company";
-    public static String EMPTY_FIELD = "BLANK";
     private String mCompanyName;
     private UUID mID;
     private String mPhoneNumber;
@@ -23,9 +24,7 @@ public class Company {
 
     public Company(UUID uuid){
         mID = uuid;
-        mCompanyName = EMPTY_FIELD;
-        mPhoneNumber = EMPTY_FIELD;
-        mAddress = EMPTY_FIELD;
+        Log.d(TAG, "new Company UUID: " + uuid.toString());
     }
 
     public Company(){this(UUID.randomUUID());}

@@ -7,7 +7,6 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +24,9 @@ public class CompanyPickerFragment extends DialogFragment {
 
     private RecyclerView mRecyclerView;
     private CompaniesAdapter mCompaniesAdapter;
-    private Callbacks mCallbacks;
+    private CompanyCallbacks mCompanyCallbacks;
 
-    public interface Callbacks {
+    public interface CompanyCallbacks {
         void onCompanySelected(Company company);
     }
 
@@ -35,14 +34,14 @@ public class CompanyPickerFragment extends DialogFragment {
     public void onAttach(Activity activity){
         Log.d(TAG, "onAttach()");
         super.onAttach(activity);
-        mCallbacks = (Callbacks) activity;
+        mCompanyCallbacks = (CompanyCallbacks) activity;
     }
 
     @Override
     public void onDetach(){
         Log.d(TAG, "onDetach()");
         super.onDetach();
-        mCallbacks = null;
+        mCompanyCallbacks = null;
     }
 
     public static CompanyPickerFragment newInstance(){
@@ -144,7 +143,7 @@ public class CompanyPickerFragment extends DialogFragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            mCallbacks.onCompanySelected(mCompany);
+            mCompanyCallbacks.onCompanySelected(mCompany);
             dismiss();
         }
     }
