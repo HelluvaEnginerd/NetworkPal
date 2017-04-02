@@ -14,6 +14,7 @@ public class Contact {
     private String mPhone;
     private String mTitle;
     private UUID mUUID;
+    private long mPHOTOID;
 
     public Contact(String contactName, String companyName, String email, String phone, String title){
         mCompanyName = companyName;
@@ -25,6 +26,12 @@ public class Contact {
 
     public Contact(UUID id){
         mUUID = id;
+        mContactName = "John Doe";
+        mCompanyName = "Some Company";
+        mEmail = "jdoe@example.com";
+        mPhone = "555-555-5555";
+        mTitle = "Some Title";
+        mPHOTOID = Long.MIN_VALUE;
     }
 
     public Contact(){
@@ -69,6 +76,14 @@ public class Contact {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public long getPHOTOID() {
+        return mPHOTOID;
+    }
+
+    public void setPHOTOID(long id) {
+        mPHOTOID = id;
     }
 
     public UUID getUUID() {
