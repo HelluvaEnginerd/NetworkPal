@@ -178,7 +178,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
                 RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), mApp.getCompany());
                 RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
 
-                ApplicationLab.get(getApplicationContext()).addApplication(mApp);
+                ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
                 Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
                 startActivity(intent);
             }

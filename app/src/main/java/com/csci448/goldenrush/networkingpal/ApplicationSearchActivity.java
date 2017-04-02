@@ -49,7 +49,10 @@ public class ApplicationSearchActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FAB add application");
-                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, null);
+
+                Application mApp = new Application();
+                ApplicationLab.get(getApplicationContext()).addApplication(mApp);
+                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, mApp.getId());
                 startActivity(intent);
             }
         });

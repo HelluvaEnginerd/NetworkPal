@@ -7,6 +7,7 @@ import java.util.UUID;
  */
 
 public class Event {
+    private static String EMPTY_FIELD = "BLANK";
     //instance variables
     private UUID mId;
     private String mEventName;
@@ -14,7 +15,8 @@ public class Event {
 
     public Event(){
         mId =UUID.randomUUID();
-        mEventDetails= "test";
+        mEventDetails= EMPTY_FIELD;
+        mEventName = EMPTY_FIELD;
     }
 
     public UUID getId() {

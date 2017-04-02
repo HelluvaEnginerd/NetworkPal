@@ -25,6 +25,7 @@ public class NewCompanyActivity extends AppCompatActivity{
 
     private Company mCompany;
     private RecentAction mRecentAction;
+    private boolean keepCompany = false;
 
     private EditText mCompanyEditText;
     private EditText mPhoneEditText;
@@ -60,8 +61,13 @@ public class NewCompanyActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s != null)
+                if (s != null) {
                     mCompany.setCompanyName(s.toString());
+                    keepCompany = true;
+                }else {
+                    mCompany.setAddress(Company.EMPTY_FIELD);
+                    keepCompany = false;
+                }
             }
 
             @Override
@@ -79,8 +85,13 @@ public class NewCompanyActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s != null)
+                if (s != null) {
                     mCompany.setAddress(s.toString());
+                    keepCompany = true;
+                } else {
+                    mCompany.setAddress(Company.EMPTY_FIELD);
+                    keepCompany = false;
+                }
             }
 
             @Override
@@ -98,8 +109,14 @@ public class NewCompanyActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s != null)
+                if (s != null) {
                     mCompany.setPhoneNumber(s.toString());
+                    keepCompany = true;
+                } else {
+                    mCompany.setPhoneNumber(Company.EMPTY_FIELD);
+                    keepCompany = false;
+                }
+
             }
 
             @Override
@@ -119,19 +136,18 @@ public class NewCompanyActivity extends AppCompatActivity{
                  * Currently goes back to company recycler list in contacts activity
                  */
 
-                /**
-                 * TODO make doesCompanyExist work.
-                 */
-                if (CompanyLab.get(getApplicationContext()).doesCompanyExist(mCompany.getID())) {
+                if (keepCompany) {
                     Log.d(TAG, "updating Company");
                     Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " updated in database", Toast.LENGTH_SHORT).show();
                     CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
-                } else {
-                    Log.d(TAG, "adding new company:  " + mCompany.getCompanyName());
-                    Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " added to database", Toast.LENGTH_SHORT).show();
-                    CompanyLab.get(getApplicationContext()).addCompany(mCompany);
                     mRecentAction = new RecentAction("Company", "FILL", new Date(), mCompany.getCompanyName());
                     RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
+                } else {
+                    Log.d(TAG, "Empty Company - discard");
+                    Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
+                    /**
+                     * TODO remove empty companies (EMPTY_FIELD for everything but UUID).
+                     */
                 }
                 Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this, 1);
                 startActivity(intent);
