@@ -56,6 +56,7 @@ public class WelcomeActivity extends AppCompatActivity{
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_welcome_drawer);
 
+        //******* Drawer things *******
         mDrawerList = (ListView)findViewById(R.id.welcome_navList);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.welcome_drawer_layout);
         mActivityTitle = getTitle().toString();
@@ -65,6 +66,7 @@ public class WelcomeActivity extends AppCompatActivity{
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        //******* Drawer things *******
 
         mNewEventButton = (Button) findViewById(R.id.new_event_button);
         mNewEventButton.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +152,7 @@ public class WelcomeActivity extends AppCompatActivity{
                         Intent intent3 = DiggernetActivity.newIntent(getApplicationContext());
                         startActivity(intent3);
                         break;
-                    default: Toast.makeText(getApplicationContext(), "Other", Toast.LENGTH_SHORT).show();
+                    default: Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
