@@ -1,6 +1,7 @@
 package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class ContactLab {
     private static ContactLab sContactLab;
     private List<Contact> mContacts;
     private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     public static ContactLab get(Context context){
         Log.d(TAG, "get()");
