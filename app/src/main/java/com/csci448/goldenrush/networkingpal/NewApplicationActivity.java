@@ -25,7 +25,8 @@ import java.util.UUID;
  * Created by ddunmire on 2/27/2017.
  */
 
-public class NewApplicationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, CompanyPickerFragment.CompanyCallbacks, ContactPickerFragment.ContactCallbacks {
+public class NewApplicationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, CompanyPickerFragment.CompanyCallbacks,
+        ContactPickerFragment.ContactCallbacks, DatePickerFragment.DateCallbacks {
     private static String TAG = "NewApplicationActivity";
     private static final String EXTRA_UUID = "uuid";
     private static final int REQUEST_DATE = 0;
@@ -230,6 +231,12 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     public void onContactSelected(Contact contact){
         mApp.setCompanyContact(contact.getContactName());
         mChooseExistingButton.setText(contact.getContactName());
+    }
+
+    @Override
+    public void onDateSelected(Date date){
+        //mApp.setDateDue(date);
+        mDateDue.setText(date.toString());
     }
 }
 

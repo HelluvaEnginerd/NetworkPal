@@ -29,6 +29,7 @@ public class RecentActionBaseHelper extends SQLiteOpenHelper {
                 RecentActionTable.Cols.UUID + ")"
         );
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
 
