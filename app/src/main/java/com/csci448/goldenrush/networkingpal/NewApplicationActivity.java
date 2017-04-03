@@ -32,11 +32,13 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     private static final int REQUEST_CONTACT = 1;
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_COMPANY = "DialogCompany";
+    private static final String DIALOG_CONTACT = "DialogContact";
 
-    private EditText mCompanyNameEditText;
     private EditText mJobTitleEditText;
-    private Button mCreateNewButton;
-    private Button mChooseExistingButton;
+    private Button mCreateNewContactButton;
+    private Button mChooseExistingContactButton;
+    private Button mCreateNewCompanyButton;
+    private Button mChooseExistingCompanyButton;
     private Button mDateDue;
     private CheckBox mCoverLetterCheckBox;
     private CheckBox mResumeCheckBox;
@@ -53,24 +55,6 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     private void setUp(){
         Log.d(TAG, "setUp()");
-        mCompanyNameEditText = (EditText) findViewById(R.id.company_name);
-        mCompanyNameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().trim().equals(""))
-                    mApp.setCompany(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
         mJobTitleEditText = (EditText) findViewById(R.id.job_title);
         mJobTitleEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -105,8 +89,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             }
         });
 
-        mCreateNewButton = (Button) findViewById(R.id.create_new_button);
-        mCreateNewButton.setOnClickListener(new View.OnClickListener(){
+        mCreateNewContactButton = (Button) findViewById(R.id.create_new_button);
+        mCreateNewContactButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = NewContactActivity.newIntent(NewApplicationActivity.this, null);
@@ -115,12 +99,31 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         });
 
         final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        mChooseExistingButton = (Button) findViewById(R.id.choose_existing_button);
-        mChooseExistingButton.setOnClickListener(new View.OnClickListener(){
+        mChooseExistingContactButton = (Button) findViewById(R.id.choose_existing_button);
+        mChooseExistingContactButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 FragmentManager manager = getFragmentManager();
                 ContactPickerFragment dialog = ContactPickerFragment.newInstance();
+                dialog.show(manager, DIALOG_CONTACT);
+            }
+        });
+
+        mCreateNewCompanyButton = (Button) findViewById(R.id.create_new_company_button);
+        mCreateNewCompanyButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = NewCompanyActivity.newIntent(NewApplicationActivity.this, null);
+                startActivity(intent);
+            }
+        });
+
+        mChooseExistingCompanyButton = (Button) findViewById(R.id.choose_existing_company_button);
+        mChooseExistingCompanyButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                FragmentManager manager = getFragmentManager();
+                CompanyPickerFragment dialog = CompanyPickerFragment.newInstance();
                 dialog.show(manager, DIALOG_COMPANY);
             }
         });
@@ -173,7 +176,6 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         if (appId != null){
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
             Application app = appLab.getApplication(appId);
-            mCompanyNameEditText.setText(app.getCompany());
             mJobTitleEditText.setText(app.getJobTitle());
             mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
             mResumeCheckBox.setChecked(app.hasResume());
@@ -221,15 +223,14 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     @Override
     public void onCompanySelected(Company company){
-        /**
-         * Implement with new layout
-         */
+        mApp.setCompany(company.getCompanyName());
+        mChooseExistingCompanyButton.setText(company.getCompanyName());
     }
 
     @Override
     public void onContactSelected(Contact contact){
         mApp.setCompanyContact(contact.getContactName());
-        mChooseExistingButton.setText(contact.getContactName());
+        mChooseExistingContactButton.setText(contact.getContactName());
     }
 }
 
