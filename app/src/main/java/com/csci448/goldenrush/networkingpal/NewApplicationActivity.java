@@ -45,10 +45,6 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     private Application mApp;
 
-    /**
-     * TODO when making edits to an application, edit the DB don't create a new entry
-     */
-
     public static Intent newIntent(Context packageContext, UUID id){
         Intent intent = new Intent(packageContext, NewApplicationActivity.class);
         intent.putExtra(EXTRA_UUID, id);
