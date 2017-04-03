@@ -136,12 +136,13 @@ public class RecentActionFragment extends Fragment {
             Log.d(TAG, "onClick()");
             Intent intent;
             String category = mRecentAction.getCategory();
+            Intent i = WelcomeActivity.newIntent(getContext());
             switch (category) {
                 case "Contact":
-                    intent = NewContactActivity.newIntent(getActivity(), mRecentAction.getUUID());
+                    intent = NewContactActivity.newIntent(getActivity(), mRecentAction.getUUID(), i);
                     break;
                 case "Company":
-                    intent = NewCompanyActivity.newIntent(getActivity(), mRecentAction.getUUID());
+                    intent = NewCompanyActivity.newIntent(getActivity(), mRecentAction.getUUID(), i);
                     break;
                 case "Application":
                     intent = NewApplicationActivity.newIntent(getActivity(), mRecentAction.getUUID());

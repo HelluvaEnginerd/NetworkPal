@@ -42,9 +42,11 @@ public class NewContactActivity extends AppCompatActivity{
     private ImageButton mBusinessCardButton;
     private ImageView mBusinessCardPhoto;
     private Button mDone;
+    private static Intent mLastIntent;
 
-    public static Intent newIntent(Context packageContext, UUID uuid){
+    public static Intent newIntent(Context packageContext, UUID uuid, Intent i){
         Log.d(TAG, "newIntent()");
+        mLastIntent = i;
         Intent intent = new Intent(packageContext, NewContactActivity.class);
         intent.putExtra(EXTRA_UUID, uuid);
         return intent;
@@ -82,8 +84,7 @@ public class NewContactActivity extends AppCompatActivity{
                 mRecentAction = new RecentAction("Contact", "Contact Name", new Date(), "Contact company name");
                 RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
                 //THIS WILL NEED TO BE CHANGED
-                Intent intent = ContactsActivity.newIntent(NewContactActivity.this, 0);
-                startActivity(intent);
+                startActivity(mLastIntent);
             }
         });
     }

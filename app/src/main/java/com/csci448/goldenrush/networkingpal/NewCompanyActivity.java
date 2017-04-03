@@ -31,10 +31,12 @@ public class NewCompanyActivity extends AppCompatActivity{
     private EditText mPhoneEditText;
     private EditText mAddressEditText;
     private Button mDoneButton;
+    private static Intent mLastIntent;
 
 
-    public static Intent newIntent(Context packageContext, UUID uuid){
+    public static Intent newIntent(Context packageContext, UUID uuid, Intent i){
         Log.d(TAG, "newIntent()");
+        mLastIntent = i;
         Intent intent = new Intent(packageContext, NewCompanyActivity.class);
         intent.putExtra(EXTRA_UUID, uuid);
         return intent;
@@ -146,8 +148,7 @@ public class NewCompanyActivity extends AppCompatActivity{
                      * TODO remove empty companies (EMPTY_FIELD for everything but UUID).
                      */
                 }
-                Intent intent = ContactsActivity.newIntent(NewCompanyActivity.this, 1);
-                startActivity(intent);
+                startActivity(mLastIntent);
             }
         });
 

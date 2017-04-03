@@ -94,7 +94,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         mCreateNewContactButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = NewContactActivity.newIntent(NewApplicationActivity.this, null);
+                Intent i = NewApplicationActivity.newIntent(NewApplicationActivity.this, null);
+                Intent intent = NewContactActivity.newIntent(NewApplicationActivity.this, null, i);
                 startActivity(intent);
             }
         });
@@ -114,7 +115,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         mCreateNewCompanyButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = NewCompanyActivity.newIntent(NewApplicationActivity.this, null);
+                Intent i = NewApplicationActivity.newIntent(NewApplicationActivity.this, null);
+                Intent intent = NewCompanyActivity.newIntent(NewApplicationActivity.this, null, i);
                 startActivity(intent);
             }
         });

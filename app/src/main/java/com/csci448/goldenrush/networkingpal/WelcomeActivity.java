@@ -96,7 +96,8 @@ public class WelcomeActivity extends AppCompatActivity{
         mNewContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null);
+                Intent i = WelcomeActivity.newIntent(WelcomeActivity.this);
+                Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null, i);
                 startActivity(intent);
             }
         });
@@ -108,7 +109,8 @@ public class WelcomeActivity extends AppCompatActivity{
                 /**
                  * goes to diggernet page
                  */
-                Intent i = NewCompanyActivity.newIntent(WelcomeActivity.this, null);
+                Intent ii = WelcomeActivity.newIntent(WelcomeActivity.this);
+                Intent i = NewCompanyActivity.newIntent(WelcomeActivity.this, null, ii);
                 startActivity(i);
             }
         });

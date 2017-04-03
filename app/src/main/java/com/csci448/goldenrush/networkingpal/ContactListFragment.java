@@ -154,7 +154,8 @@ public class ContactListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            Intent intent = NewContactActivity.newIntent(getActivity(), mContact.getUUID());
+            Intent i = ContactsActivity.newIntent(getActivity(), 1);
+            Intent intent = NewContactActivity.newIntent(getActivity(), mContact.getUUID(), i);
             startActivity(intent);
         }
     }
