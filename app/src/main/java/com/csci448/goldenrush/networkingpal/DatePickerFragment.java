@@ -28,6 +28,25 @@ public class DatePickerFragment extends DialogFragment {
     public static final String EXTRA_DATE="com.csci448.goldenrush.networkingpal.date";
 
     private DatePicker mDatePicker;
+    private DateCallbacks mDateCallbacks;
+
+    public interface DateCallbacks {
+        void onDateSelected(Date date);
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        Log.d(TAG, "onAttach()");
+        super.onAttach(activity);
+        mDateCallbacks = (DateCallbacks) activity;
+    }
+
+    @Override
+    public void onDetach(){
+        Log.d(TAG, "onDetach()");
+        super.onDetach();
+        mDateCallbacks = null;
+    }
 
     public static DatePickerFragment newInstance(Date date){
         Log.d(TAG, "newInstance()");
@@ -65,7 +84,9 @@ public class DatePickerFragment extends DialogFragment {
                         int month = mDatePicker.getMonth();
                         int day = mDatePicker.getDayOfMonth();
                         Date date = new GregorianCalendar(year, month, day).getTime();
-                        sendResult(Activity.RESULT_OK, date);
+                        //sendResult(Activity.RESULT_OK, date);
+                        mDateCallbacks.onDateSelected(date);
+                        dismiss();
                     }
                 })
                 .create();
@@ -73,6 +94,10 @@ public class DatePickerFragment extends DialogFragment {
 
     private void sendResult(int resultCode, Date date){
         Log.d(TAG, "sendResult");
+        mDateCallbacks.onDateSelected(date);
+        dismiss();
+
+        /*
         if(getTargetFragment() == null){
             return;
         }
@@ -80,5 +105,6 @@ public class DatePickerFragment extends DialogFragment {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_DATE,date);
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
+        */
     }
 }

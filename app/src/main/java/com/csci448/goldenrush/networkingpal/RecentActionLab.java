@@ -11,7 +11,6 @@ import com.csci448.goldenrush.networkingpal.database.RecentActionCursorWrapper;
 import com.csci448.goldenrush.networkingpal.database.RecentActionDbSchema.RecentActionTable;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

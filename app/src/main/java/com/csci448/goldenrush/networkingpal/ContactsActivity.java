@@ -153,7 +153,6 @@ public class ContactsActivity extends AppCompatActivity{
                     default: Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                         break;
                 }
-
             }
         });
     }
@@ -186,10 +185,6 @@ public class ContactsActivity extends AppCompatActivity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        if (id == android.R.id.home){
-            NavUtils.navigateUpFromSameTask(this);
-        }
 
         if (id == R.id.action_settings) {
             Toast.makeText(getApplicationContext(), "Currently no settings :)", Toast.LENGTH_SHORT).show();
