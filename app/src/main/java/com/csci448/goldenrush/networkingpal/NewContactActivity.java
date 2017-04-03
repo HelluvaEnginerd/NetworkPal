@@ -97,8 +97,8 @@ public class NewContactActivity extends AppCompatActivity{
          * TODO add once Contact DB is complete
          * ContactLab.get(getApplicationContext())
          */
-
-        RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
+        //if (keepContact)
+            RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
     }
 
     @Override
