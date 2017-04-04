@@ -71,6 +71,7 @@ public class ApplicationLab {
         String uuidString = a.getId().toString();
         Log.d(TAG, "UUID = " + a.getId().toString());
         ContentValues values = getContentValues(a);
+        Log.d(TAG, "job title: " + a.getJobTitle());
 
         mDatabase.update(ApplicationTable.NAME, values, ApplicationTable.Cols.UUID + " = ?", new String[] {uuidString});
     }
