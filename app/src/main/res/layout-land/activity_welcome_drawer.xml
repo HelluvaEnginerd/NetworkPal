@@ -50,6 +50,14 @@ http://blog.teamtreehouse.com/add-navigation-drawer-android
                 android:text="@string/new_application"
             />
         </RelativeLayout>
+            <ImageView
+                android:layout_marginTop="50sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/work_in_progress"
+            />
+
+        <!--
         <TextView
             android:id="@+id/recent_activity_text_view"
             android:layout_below="@+id/button_layout"
@@ -69,7 +77,7 @@ http://blog.teamtreehouse.com/add-navigation-drawer-android
             android:layout_height="match_parent"
         >
         </FrameLayout>
-
+        -->
     </RelativeLayout>
 
     <!-- portion for the hamburger menu_main-->

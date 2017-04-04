@@ -11,7 +11,7 @@ public class Application {
     private String mJobTitle;
     private String mCompanyContact;
     private Date mDateDue;
-    private UUID mCompanyUUID;
+    private String mCompanyName;
     private UUID mID;
     private boolean mCoverLetter;
     private boolean mResume;
@@ -42,8 +42,8 @@ public class Application {
         this.mDateDue = mDateDue;
     }
 
-    public void setCompanyUUID(UUID companyUUID) {
-        this.mCompanyUUID = companyUUID;
+    public void setCompanyName(String companyName) {
+        this.mCompanyName = companyName;
     }
 
     public boolean hasCoverLetter() {
@@ -82,7 +82,7 @@ public class Application {
         return mDateDue;
     }
 
-    public UUID getCompanyUUID() {return mCompanyUUID;}
+    public String  getCompanyName() {return mCompanyName;}
 
     public UUID getId(){return mID;}
 }

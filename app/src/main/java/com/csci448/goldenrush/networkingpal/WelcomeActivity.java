@@ -117,7 +117,7 @@ public class WelcomeActivity extends AppCompatActivity{
 
         /**
          * Loads the recent action recyclerview
-         */
+
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_welcome_list_host);
 
@@ -127,6 +127,7 @@ public class WelcomeActivity extends AppCompatActivity{
                     .add(R.id.fragment_welcome_list_host, fragment)
                     .commit();
         }
+         */
     }
 
     private void addDrawerItems() {

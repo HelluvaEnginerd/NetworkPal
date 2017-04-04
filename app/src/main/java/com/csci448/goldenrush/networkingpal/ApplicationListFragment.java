@@ -110,7 +110,7 @@ public class ApplicationListFragment extends Fragment {
             mApp = app;
             mTitleTextView.setText(mApp.getJobTitle());
             mDateTextView.setText(formatter.format(mApp.getDateDue()));
-            mCompanyTextView.setText(CompanyLab.get(getContext()).getCompany(mApp.getCompanyUUID()).getCompanyName());
+            mCompanyTextView.setText(mApp.getCompanyName());
             mContactTextView.setText(mApp.getCompanyContact());
         }
 
