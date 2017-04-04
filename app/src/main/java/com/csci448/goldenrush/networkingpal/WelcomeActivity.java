@@ -98,6 +98,8 @@ public class WelcomeActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent i = WelcomeActivity.newIntent(WelcomeActivity.this);
                 Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null, i);
+                Contact mContact = new Contact();
+                ContactLab.get(getApplicationContext()).addContact(mContact);
                 startActivity(intent);
             }
         });
