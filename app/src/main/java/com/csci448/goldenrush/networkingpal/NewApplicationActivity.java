@@ -165,7 +165,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
                 /**
                  * Adds this recent activity to the list for the welcome activity
                  */
-                RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), mApp.getCompany());
+                RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), CompanyLab.get(getApplicationContext()).getCompany(mApp.getCompanyUUID()).getCompanyName());
                 RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
 
                 ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
@@ -196,6 +196,12 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_application_activity);
         setUp();
+        if (savedInstanceState != null){
+            String companyUUIDString = savedInstanceState.getString(NewCompanyActivity.EXTRA_COMPANY);
+            Company company = CompanyLab.get(getApplicationContext()).getCompany(UUID.fromString(companyUUIDString));
+            mApp.setCompanyUUID(company.getID());
+            mChooseExistingCompanyButton.setText(company.getCompanyName());
+        }
     }
 
     @Override public void onPause(){
@@ -227,7 +233,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     @Override
     public void onCompanySelected(Company company){
-        mApp.setCompany(company.getCompanyName());
+        mApp.setCompanyUUID(company.getID());
         mChooseExistingCompanyButton.setText(company.getCompanyName());
         mCreateNewCompanyButton.setVisibility(View.GONE);
     }
@@ -241,7 +247,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     @Override
     public void onDateSelected(Date date){
-        //mApp.setDateDue(date);
+        mApp.setDateDue(date);
         mDateDue.setText(date.toString());
     }
 }

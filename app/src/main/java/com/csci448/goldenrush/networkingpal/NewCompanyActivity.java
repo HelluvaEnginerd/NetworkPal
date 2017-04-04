@@ -22,6 +22,7 @@ import java.util.UUID;
 public class NewCompanyActivity extends AppCompatActivity{
     private static String TAG = "NewCompanyActivity";
     private static final String EXTRA_UUID = "uuid";
+    public static final String EXTRA_COMPANY = "com.csci448.goldenrush.networkingpal.newcompanyactivity.company";
 
     private Company mCompany;
     private RecentAction mRecentAction;
@@ -140,15 +141,14 @@ public class NewCompanyActivity extends AppCompatActivity{
                 } else {
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
-                    /**
-                     * TODO remove empty companies (EMPTY_FIELD for everything but UUID).
-                     */
                 }
                 if(mLastIntent!=null)
                     startActivity(mLastIntent);
                 else{
                     Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this);
                 }
+                mLastIntent.putExtra(EXTRA_COMPANY, mCompany.getID());
+                startActivity(mLastIntent);
             }
         });
 
