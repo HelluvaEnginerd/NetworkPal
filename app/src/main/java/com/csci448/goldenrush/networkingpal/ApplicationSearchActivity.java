@@ -87,36 +87,8 @@ public class ApplicationSearchActivity extends AppCompatActivity{
         /**
          * TODO wire up spinner
          * TODO wire up search field
-
-
-        mSearchView = (SearchView) findViewById(R.id.search_view);
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-
-                query = query.toString().toLowerCase();
-
-                final List<Application> filteredList = new ArrayList<>();
-                List<Application> list = ApplicationLab.get(getApplicationContext()).getApps();
-
-                for (int i = 0; i < list.size(); i++) {
-
-                    final String text = list.get(i).getJobTitle().toLowerCase();
-                    if (text.contains(query)) {
-                        filteredList.add(list.get(i));
-                    }
-                }
-
-
-                return false;
-            }
-        });
          */
+
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_app_search_list_host);
 

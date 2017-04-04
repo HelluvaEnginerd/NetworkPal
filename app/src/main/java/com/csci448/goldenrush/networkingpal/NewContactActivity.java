@@ -81,8 +81,13 @@ public class NewContactActivity extends AppCompatActivity{
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
+                /*
                 mRecentAction = new RecentAction("Contact", "Contact Name", new Date(), "Contact company name");
                 RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
+                */
+
+                //THIS WILL NEED TO BE CHANGED
 
                 startActivity(mLastIntent);
             }

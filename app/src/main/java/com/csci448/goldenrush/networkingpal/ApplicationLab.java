@@ -99,7 +99,7 @@ public class ApplicationLab {
         values.put(ApplicationTable.Cols.TITLE, application.getJobTitle());
         values.put(ApplicationTable.Cols.CONTACT, application.getCompanyContact());
         values.put(ApplicationTable.Cols.DATE, application.getDateDue().getTime());
-        values.put(ApplicationTable.Cols.COMPANYUUID, application.getCompanyUUID().toString());
+        values.put(ApplicationTable.Cols.COMPANYNAME, application.getCompanyName());
         values.put(ApplicationTable.Cols.UUID, application.getId().toString());
         values.put(ApplicationTable.Cols.COVER, application.hasCoverLetter());
         values.put(ApplicationTable.Cols.RESUME, application.hasResume());

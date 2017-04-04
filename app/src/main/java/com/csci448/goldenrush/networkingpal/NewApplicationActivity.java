@@ -165,8 +165,11 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
                 /**
                  * Adds this recent activity to the list for the welcome activity
                  */
+
+                /*
                 RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), CompanyLab.get(getApplicationContext()).getCompany(mApp.getCompanyUUID()).getCompanyName());
                 RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
+                */
 
                 ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
                 Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
@@ -176,13 +179,19 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
 
         UUID appId = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
-        if (appId != null){
+        if (appId != null && appId.toString() != "new"){
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
             Application app = appLab.getApplication(appId);
+
+            mApp.setJobTitle(app.getJobTitle());
+            mJobTitleEditText.setText(app.getJobTitle());
+            mApp.setCoverLetter(app.hasCoverLetter());
             if(app.getJobTitle()!=null)
                 mJobTitleEditText.setText(app.getJobTitle());
             mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
+            mApp.setResume(app.hasResume());
             mResumeCheckBox.setChecked(app.hasResume());
+            mApp.setSubmitted(app.isSubmitted());
             mSubmittedCheckBox.setChecked(app.isSubmitted());
         }
 
@@ -199,7 +208,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         if (savedInstanceState != null){
             String companyUUIDString = savedInstanceState.getString(NewCompanyActivity.EXTRA_COMPANY);
             Company company = CompanyLab.get(getApplicationContext()).getCompany(UUID.fromString(companyUUIDString));
-            mApp.setCompanyUUID(company.getID());
+            mApp.setCompanyName(company.getCompanyName());
             mChooseExistingCompanyButton.setText(company.getCompanyName());
         }
     }
@@ -233,7 +242,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     @Override
     public void onCompanySelected(Company company){
-        mApp.setCompanyUUID(company.getID());
+        Log.d(TAG, "CompanyUUID: " + company.getID().toString());
+        mApp.setCompanyName(company.getCompanyName());
         mChooseExistingCompanyButton.setText(company.getCompanyName());
         mCreateNewCompanyButton.setVisibility(View.GONE);
     }
