@@ -52,4 +52,8 @@ public class Company {
     public void setAddress(String address) {
         mAddress = address;
     }
+
+    public void setID(UUID ID) {
+        mID = ID;
+    }
 }
