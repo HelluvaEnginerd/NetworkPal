@@ -177,7 +177,7 @@ public class NewCompanyActivity extends AppCompatActivity{
         Log.d(TAG, "onPause()");
         if (keepCompany) {
             CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
-            RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
+            //RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
         }
     }
 
