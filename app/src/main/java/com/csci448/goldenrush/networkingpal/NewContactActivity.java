@@ -88,6 +88,7 @@ public class NewContactActivity extends AppCompatActivity{
                 */
 
                 //THIS WILL NEED TO BE CHANGED
+
                 startActivity(mLastIntent);
             }
         });

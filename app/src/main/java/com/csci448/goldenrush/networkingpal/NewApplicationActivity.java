@@ -186,6 +186,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             mApp.setJobTitle(app.getJobTitle());
             mJobTitleEditText.setText(app.getJobTitle());
             mApp.setCoverLetter(app.hasCoverLetter());
+            if(app.getJobTitle()!=null)
+                mJobTitleEditText.setText(app.getJobTitle());
             mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
             mApp.setResume(app.hasResume());
             mResumeCheckBox.setChecked(app.hasResume());
@@ -243,12 +245,14 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         Log.d(TAG, "CompanyUUID: " + company.getID().toString());
         mApp.setCompanyName(company.getCompanyName());
         mChooseExistingCompanyButton.setText(company.getCompanyName());
+        mCreateNewCompanyButton.setVisibility(View.GONE);
     }
 
     @Override
     public void onContactSelected(Contact contact){
         mApp.setCompanyContact(contact.getContactName());
         mChooseExistingContactButton.setText(contact.getContactName());
+        mCreateNewContactButton.setVisibility(View.GONE);
     }
 
     @Override
