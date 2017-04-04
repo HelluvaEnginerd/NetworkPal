@@ -179,7 +179,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         if (appId != null){
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
             Application app = appLab.getApplication(appId);
-            mJobTitleEditText.setText(app.getJobTitle());
+            if(app.getJobTitle()!=null)
+                mJobTitleEditText.setText(app.getJobTitle());
             mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
             mResumeCheckBox.setChecked(app.hasResume());
             mSubmittedCheckBox.setChecked(app.isSubmitted());
@@ -228,12 +229,14 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     public void onCompanySelected(Company company){
         mApp.setCompany(company.getCompanyName());
         mChooseExistingCompanyButton.setText(company.getCompanyName());
+        mCreateNewCompanyButton.setVisibility(View.GONE);
     }
 
     @Override
     public void onContactSelected(Contact contact){
         mApp.setCompanyContact(contact.getContactName());
         mChooseExistingContactButton.setText(contact.getContactName());
+        mCreateNewContactButton.setVisibility(View.GONE);
     }
 
     @Override

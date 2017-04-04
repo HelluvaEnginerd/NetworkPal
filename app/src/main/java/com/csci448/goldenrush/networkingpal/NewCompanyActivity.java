@@ -130,10 +130,6 @@ public class NewCompanyActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 Log.d(TAG, "doneButton Clicked");
-                /**
-                 * TODO figure out how to make this either go to contacts or back to new application/contact activity. Back to where it came from basically
-                 * Currently goes back to company recycler list in contacts activity
-                 */
 
                 if (keepCompany) {
                     Log.d(TAG, "updating Company");
@@ -148,7 +144,11 @@ public class NewCompanyActivity extends AppCompatActivity{
                      * TODO remove empty companies (EMPTY_FIELD for everything but UUID).
                      */
                 }
-                startActivity(mLastIntent);
+                if(mLastIntent!=null)
+                    startActivity(mLastIntent);
+                else{
+                    Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this);
+                }
             }
         });
 
@@ -156,9 +156,13 @@ public class NewCompanyActivity extends AppCompatActivity{
         if (companyID != null){
             CompanyLab companyLab = CompanyLab.get(NewCompanyActivity.this);
             Company company = companyLab.getCompany(companyID);
-            mPhoneEditText.setText(company.getPhoneNumber());
-            mAddressEditText.setText(company.getAddress());
-            mCompanyEditText.setText(company.getCompanyName());
+            if(company == null){
+                Log.d(TAG, "company is null");
+            } else {
+                mPhoneEditText.setText(company.getPhoneNumber());
+                mAddressEditText.setText(company.getAddress());
+                mCompanyEditText.setText(company.getCompanyName());
+            }
         }
 
     }
