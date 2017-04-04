@@ -90,4 +90,8 @@ public class Contact {
     public UUID getUUID() {
         return mUUID;
     }
+
+    public void setUUID(UUID UUID) {
+        mUUID = UUID;
+    }
 }

@@ -117,8 +117,9 @@ public class ContactsActivity extends AppCompatActivity{
                 Intent i = ContactsActivity.newIntent(ContactsActivity.this, 0);
                 if (tabLayout.getSelectedTabPosition() == 0) {
                     Log.d(TAG, "start newContactActivity");
-                    //ContactLab.get(getApplicationContext()).addContact(new Contact());
-                    Intent intent = NewContactActivity.newIntent(ContactsActivity.this, null, i);
+                    Contact newContact = new Contact();
+                    ContactLab.get(getApplicationContext()).addContact(newContact);
+                    Intent intent = NewContactActivity.newIntent(ContactsActivity.this, newContact.getUUID(), i);
                     startActivity(intent);
                 }else {
                     Log.d(TAG, "Start newCompanyActivity");

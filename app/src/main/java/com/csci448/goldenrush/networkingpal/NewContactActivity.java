@@ -220,6 +220,20 @@ public class NewContactActivity extends AppCompatActivity{
                 startActivity(mLastIntent);
             }
         });
+/*
+        UUID contactID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+        if (contactID != null){
+            ContactLab contactLab = ContactLab.get(NewContactActivity.this);
+            Contact contact = contactLab.getContact(contactID);
+            mContact.setUUID(contact.getUUID());
+            mPhoneEditText.setText(contact.getPhone());
+            mEmailEditText.setText(contact.getEmail());
+            mTitleEditText.setText(contact.getTitle());
+            mCompanyNameEditText.setText(contact.getCompanyName());
+            mContactNameEditText.setText(contact.getContactName());
+            }
+        }
+*/
     }
 
     @Override

@@ -45,6 +45,7 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper{
         lockheedValues.put(ApplicationTable.Cols.TITLE, lockheedApplication.getJobTitle());
         lockheedValues.put(ApplicationTable.Cols.COMPANYNAME, lockheedApplication.getCompanyName());
         lockheedValues.put(ApplicationTable.Cols.CONTACT, lockheedApplication.getCompanyContact());
+        lockheedValues.put(ApplicationTable.Cols.UUID, lockheedApplication.getId().toString());
         db.insert(ApplicationTable.NAME, null, lockheedValues);
 
         Application googleApplication = new Application("Slave", "Google", "Mark");
@@ -52,6 +53,7 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper{
         googleValues.put(ApplicationTable.Cols.TITLE, googleApplication.getJobTitle());
         googleValues.put(ApplicationTable.Cols.COMPANYNAME, googleApplication.getCompanyName());
         googleValues.put(ApplicationTable.Cols.CONTACT, googleApplication.getCompanyContact());
+        googleValues.put(ApplicationTable.Cols.UUID, googleApplication.getId().toString());
         db.insert(ApplicationTable.NAME, null, googleValues);
 
         Application appleApplication = new Application("Salesperson", "Apple", "Tony");
@@ -59,6 +61,7 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper{
         appleValues.put(ApplicationTable.Cols.TITLE, appleApplication.getJobTitle());
         appleValues.put(ApplicationTable.Cols.COMPANYNAME, appleApplication.getCompanyName());
         appleValues.put(ApplicationTable.Cols.CONTACT, appleApplication.getCompanyContact());
+        appleValues.put(ApplicationTable.Cols.UUID, appleApplication.getId().toString());
         db.insert(ApplicationTable.NAME, null, appleValues);
     }
     @Override

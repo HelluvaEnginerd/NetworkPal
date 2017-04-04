@@ -34,6 +34,7 @@ public class Application {
     }
 
     public Application(String jobTitle, String companyName, String companyContact){
+        mID = UUID.randomUUID();
         mJobTitle = jobTitle;
         mCompanyName = companyName;
         mCompanyContact = companyContact;

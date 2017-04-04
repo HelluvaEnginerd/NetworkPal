@@ -87,6 +87,7 @@ public class WelcomeActivity extends AppCompatActivity{
                 /**
                  * goes to application list view
                  */
+
                 Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null);
                 startActivity(intent);
             }
