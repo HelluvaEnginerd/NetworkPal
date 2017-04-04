@@ -17,6 +17,7 @@ public class Contact {
     private long mPHOTOID;
 
     public Contact(String contactName, String companyName, String email, String phone, String title){
+        mUUID = UUID.randomUUID();
         mCompanyName = companyName;
         mContactName = contactName;
         mEmail = email;

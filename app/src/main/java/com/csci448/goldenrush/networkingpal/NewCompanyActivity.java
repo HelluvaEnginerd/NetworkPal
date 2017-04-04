@@ -163,6 +163,7 @@ public class NewCompanyActivity extends AppCompatActivity{
             if(company == null){
                 Log.d(TAG, "company is null");
             } else {
+                mCompany.setID(companyID);
                 mPhoneEditText.setText(company.getPhoneNumber());
                 mAddressEditText.setText(company.getAddress());
                 mCompanyEditText.setText(company.getCompanyName());
@@ -177,7 +178,7 @@ public class NewCompanyActivity extends AppCompatActivity{
         Log.d(TAG, "onPause()");
         if (keepCompany) {
             CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
-            RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
+            //RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
         }
     }
 

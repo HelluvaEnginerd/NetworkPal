@@ -33,6 +33,18 @@ public class Application {
         this(UUID.randomUUID());
     }
 
+    public Application(String jobTitle, String companyName, String companyContact){
+        mJobTitle = jobTitle;
+        mCompanyName = companyName;
+        mCompanyContact = companyContact;
+        mID = UUID.randomUUID();
+        mDateDue = new Date();
+        mResume = false;
+        mCoverLetter = false;
+        mSubmitted = false;
+        mDateDue = new Date();
+    }
+
     public void setJobTitle(String jobTitle) {
         Log.d(TAG, "setJobTitle(" + jobTitle + ")");
         this.mJobTitle = jobTitle;
