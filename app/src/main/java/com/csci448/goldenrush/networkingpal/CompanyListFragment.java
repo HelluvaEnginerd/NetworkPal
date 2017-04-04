@@ -136,7 +136,11 @@ public class CompanyListFragment extends Fragment{
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick()");
-            Intent intent = NewCompanyActivity.newIntent(getActivity(), mCompany.getID());
+            /**\
+             * Should go to company tab not contact...
+             */
+            Intent i = ContactsActivity.newIntent(getActivity(), 1);
+            Intent intent = NewCompanyActivity.newIntent(getActivity(), mCompany.getID(), i);
             startActivity(intent);
         }
     }
