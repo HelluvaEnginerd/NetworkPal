@@ -165,9 +165,12 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
                 /**
                  * Adds this recent activity to the list for the welcome activity
                  */
-                RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), mApp.getCompany());
-                RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
 
+                /*
+                RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), CompanyLab.get(getApplicationContext()).getCompany(mApp.getCompanyUUID()).getCompanyName());
+                RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
+                */
+                Log.d(TAG, "Done Button");
                 ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
                 Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
                 startActivity(intent);
@@ -177,11 +180,22 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
         UUID appId = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
         if (appId != null){
+            Log.d(TAG, "loading app");
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
             Application app = appLab.getApplication(appId);
+            
+            mApp.setID(appId);
+            mApp.setJobTitle(app.getJobTitle());
             mJobTitleEditText.setText(app.getJobTitle());
+            mApp.setCoverLetter(app.hasCoverLetter());
+            if (app.getCompanyName()!= null)
+                mChooseExistingCompanyButton.setText(app.getCompanyName());
+            if(app.getJobTitle()!=null)
+                mJobTitleEditText.setText(app.getJobTitle());
             mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
+            mApp.setResume(app.hasResume());
             mResumeCheckBox.setChecked(app.hasResume());
+            mApp.setSubmitted(app.isSubmitted());
             mSubmittedCheckBox.setChecked(app.isSubmitted());
         }
 
@@ -195,6 +209,12 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_application_activity);
         setUp();
+        if (savedInstanceState != null){
+            String companyUUIDString = savedInstanceState.getString(NewCompanyActivity.EXTRA_COMPANY);
+            Company company = CompanyLab.get(getApplicationContext()).getCompany(UUID.fromString(companyUUIDString));
+            mApp.setCompanyName(company.getCompanyName());
+            mChooseExistingCompanyButton.setText(company.getCompanyName());
+        }
     }
 
     @Override public void onPause(){
@@ -226,19 +246,22 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     @Override
     public void onCompanySelected(Company company){
-        mApp.setCompany(company.getCompanyName());
+        Log.d(TAG, "CompanyUUID: " + company.getID().toString());
+        mApp.setCompanyName(company.getCompanyName());
         mChooseExistingCompanyButton.setText(company.getCompanyName());
+        mCreateNewCompanyButton.setVisibility(View.GONE);
     }
 
     @Override
     public void onContactSelected(Contact contact){
         mApp.setCompanyContact(contact.getContactName());
         mChooseExistingContactButton.setText(contact.getContactName());
+        mCreateNewContactButton.setVisibility(View.GONE);
     }
 
     @Override
     public void onDateSelected(Date date){
-        //mApp.setDateDue(date);
+        mApp.setDateDue(date);
         mDateDue.setText(date.toString());
     }
 }

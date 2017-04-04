@@ -122,9 +122,6 @@ public class NewEventActivity extends AppCompatActivity {
             }
         });
         //Todo: Add all listeners
-        /**
-         * TODO add Recent activity to okay button
-         */
 
     }
     public static Intent newIntent(Context packageContext, UUID eventId){

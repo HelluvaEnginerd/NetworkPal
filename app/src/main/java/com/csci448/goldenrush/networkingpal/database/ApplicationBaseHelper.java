@@ -27,7 +27,7 @@ public class ApplicationBaseHelper extends SQLiteOpenHelper{
                 ApplicationTable.Cols.TITLE + ", " +
                 ApplicationTable.Cols.CONTACT + ", " +
                 ApplicationTable.Cols.DATE + ", " +
-                ApplicationTable.Cols.COMPANY + ", " +
+                ApplicationTable.Cols.COMPANYNAME + ", " +
                 ApplicationTable.Cols.UUID + ", " +
                 ApplicationTable.Cols.COVER + ", " +
                 ApplicationTable.Cols.RESUME + ", " +

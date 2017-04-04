@@ -22,6 +22,7 @@ import java.util.UUID;
 public class NewCompanyActivity extends AppCompatActivity{
     private static String TAG = "NewCompanyActivity";
     private static final String EXTRA_UUID = "uuid";
+    public static final String EXTRA_COMPANY = "com.csci448.goldenrush.networkingpal.newcompanyactivity.company";
 
     private Company mCompany;
     private RecentAction mRecentAction;
@@ -130,24 +131,27 @@ public class NewCompanyActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 Log.d(TAG, "doneButton Clicked");
-                /**
-                 * TODO figure out how to make this either go to contacts or back to new application/contact activity. Back to where it came from basically
-                 * Currently goes back to company recycler list in contacts activity
-                 */
 
                 if (keepCompany) {
                     Log.d(TAG, "updating Company");
                     Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " updated in database", Toast.LENGTH_SHORT).show();
                     CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
+
+                    /*
                     mRecentAction = new RecentAction("Company", "FILL", new Date(), mCompany.getCompanyName());
                     RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
+                    */
+
                 } else {
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
-                    /**
-                     * TODO remove empty companies (EMPTY_FIELD for everything but UUID).
-                     */
                 }
+                if(mLastIntent!=null)
+                    startActivity(mLastIntent);
+                else{
+                    Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this);
+                }
+                mLastIntent.putExtra(EXTRA_COMPANY, mCompany.getID());
                 startActivity(mLastIntent);
             }
         });
@@ -156,9 +160,13 @@ public class NewCompanyActivity extends AppCompatActivity{
         if (companyID != null){
             CompanyLab companyLab = CompanyLab.get(NewCompanyActivity.this);
             Company company = companyLab.getCompany(companyID);
-            mPhoneEditText.setText(company.getPhoneNumber());
-            mAddressEditText.setText(company.getAddress());
-            mCompanyEditText.setText(company.getCompanyName());
+            if(company == null){
+                Log.d(TAG, "company is null");
+            } else {
+                mPhoneEditText.setText(company.getPhoneNumber());
+                mAddressEditText.setText(company.getAddress());
+                mCompanyEditText.setText(company.getCompanyName());
+            }
         }
 
     }
@@ -169,7 +177,7 @@ public class NewCompanyActivity extends AppCompatActivity{
         Log.d(TAG, "onPause()");
         if (keepCompany) {
             CompanyLab.get(getApplicationContext()).updateCompany(mCompany);
-            RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
+            //RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
         }
     }
 

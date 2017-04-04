@@ -1,5 +1,7 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.util.Log;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,10 +10,11 @@ import java.util.UUID;
  */
 
 public class Application {
+    private static final String TAG = "Application";
     private String mJobTitle;
     private String mCompanyContact;
     private Date mDateDue;
-    private String mCompany;
+    private String mCompanyName;
     private UUID mID;
     private boolean mCoverLetter;
     private boolean mResume;
@@ -30,8 +33,9 @@ public class Application {
         this(UUID.randomUUID());
     }
 
-    public void setJobTitle(String mJobTitle) {
-        this.mJobTitle = mJobTitle;
+    public void setJobTitle(String jobTitle) {
+        Log.d(TAG, "setJobTitle(" + jobTitle + ")");
+        this.mJobTitle = jobTitle;
     }
 
     public void setCompanyContact(String mCompanyContact) {
@@ -42,8 +46,8 @@ public class Application {
         this.mDateDue = mDateDue;
     }
 
-    public void setCompany(String mCompany) {
-        this.mCompany = mCompany;
+    public void setCompanyName(String companyName) {
+        this.mCompanyName = companyName;
     }
 
     public boolean hasCoverLetter() {
@@ -82,7 +86,11 @@ public class Application {
         return mDateDue;
     }
 
-    public String getCompany() {return mCompany;}
+    public String  getCompanyName() {return mCompanyName;}
 
     public UUID getId(){return mID;}
+
+    public void setID(UUID ID) {
+        mID = ID;
+    }
 }

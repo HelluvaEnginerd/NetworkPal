@@ -71,6 +71,7 @@ public class ApplicationLab {
         String uuidString = a.getId().toString();
         Log.d(TAG, "UUID = " + a.getId().toString());
         ContentValues values = getContentValues(a);
+        Log.d(TAG, "job title: " + a.getJobTitle());
 
         mDatabase.update(ApplicationTable.NAME, values, ApplicationTable.Cols.UUID + " = ?", new String[] {uuidString});
     }
@@ -99,7 +100,7 @@ public class ApplicationLab {
         values.put(ApplicationTable.Cols.TITLE, application.getJobTitle());
         values.put(ApplicationTable.Cols.CONTACT, application.getCompanyContact());
         values.put(ApplicationTable.Cols.DATE, application.getDateDue().getTime());
-        values.put(ApplicationTable.Cols.COMPANY, application.getCompany());
+        values.put(ApplicationTable.Cols.COMPANYNAME, application.getCompanyName());
         values.put(ApplicationTable.Cols.UUID, application.getId().toString());
         values.put(ApplicationTable.Cols.COVER, application.hasCoverLetter());
         values.put(ApplicationTable.Cols.RESUME, application.hasResume());

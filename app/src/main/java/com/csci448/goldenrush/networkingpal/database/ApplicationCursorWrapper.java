@@ -22,7 +22,7 @@ public class ApplicationCursorWrapper extends CursorWrapper {
     public Application getApplication(){
         String uuidString = getString(getColumnIndex(ApplicationTable.Cols.UUID));
         String title = getString(getColumnIndex(ApplicationTable.Cols.TITLE));
-        String company = getString(getColumnIndex(ApplicationTable.Cols.COMPANY));
+        String companyName = getString(getColumnIndex(ApplicationTable.Cols.COMPANYNAME));
         String contact = getString(getColumnIndex(ApplicationTable.Cols.CONTACT));
         long date = getLong(getColumnIndex(ApplicationTable.Cols.DATE));
         int cover = getInt(getColumnIndex(ApplicationTable.Cols.COVER));
@@ -31,7 +31,7 @@ public class ApplicationCursorWrapper extends CursorWrapper {
 
         Application application = new Application(UUID.fromString(uuidString));
         application.setJobTitle(title);
-        application.setCompany(company);
+        application.setCompanyName(companyName);
         application.setCompanyContact(contact);
         application.setDateDue(new Date(date));
         application.setCoverLetter(cover!=0);
