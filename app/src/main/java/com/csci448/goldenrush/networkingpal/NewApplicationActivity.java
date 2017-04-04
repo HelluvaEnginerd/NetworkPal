@@ -170,7 +170,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
                 RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), CompanyLab.get(getApplicationContext()).getCompany(mApp.getCompanyUUID()).getCompanyName());
                 RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
                 */
-
+                Log.d(TAG, "Done Button");
                 ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
                 Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
                 startActivity(intent);
@@ -179,13 +179,17 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
 
         UUID appId = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
-        if (appId != null && appId.toString() != "new"){
+        if (appId != null){
+            Log.d(TAG, "loading app");
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
             Application app = appLab.getApplication(appId);
-
+            
+            mApp.setID(appId);
             mApp.setJobTitle(app.getJobTitle());
             mJobTitleEditText.setText(app.getJobTitle());
             mApp.setCoverLetter(app.hasCoverLetter());
+            if (app.getCompanyName()!= null)
+                mChooseExistingCompanyButton.setText(app.getCompanyName());
             if(app.getJobTitle()!=null)
                 mJobTitleEditText.setText(app.getJobTitle());
             mCoverLetterCheckBox.setChecked(app.hasCoverLetter());

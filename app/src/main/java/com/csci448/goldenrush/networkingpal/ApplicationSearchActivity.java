@@ -46,8 +46,6 @@ public class ApplicationSearchActivity extends AppCompatActivity{
 
     public static final String EXTRA_APPLICATION_ID = "com.csci448.goldenrush.networkingpal.application_id";
 
-
-
     public static Intent newIntent(Context packageContext){
         Log.d(TAG, "newIntent()");
         Intent intent = new Intent(packageContext, ApplicationSearchActivity.class);
