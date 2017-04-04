@@ -77,12 +77,13 @@ public class RecentActionLab {
         }
     }
 
-    public void updateRecentAction(RecentAction recentAction){
+    /**public void updateRecentAction(RecentAction recentAction){
         String uuidString = recentAction.getUUID().toString();
         ContentValues values = getContentValues(recentAction);
 
         mDatabase.update(RecentActionTable.NAME, values, RecentActionTable.Cols.UUID + " = ?", new String[] {uuidString});
     }
+     */
 
     private static ContentValues getContentValues(RecentAction recentAction){
         ContentValues values = new ContentValues();
