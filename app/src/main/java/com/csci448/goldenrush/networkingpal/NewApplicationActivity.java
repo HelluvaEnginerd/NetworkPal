@@ -183,7 +183,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             Log.d(TAG, "loading app");
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
             Application app = appLab.getApplication(appId);
-            
+
             mApp.setID(appId);
             mApp.setJobTitle(app.getJobTitle());
             mJobTitleEditText.setText(app.getJobTitle());
