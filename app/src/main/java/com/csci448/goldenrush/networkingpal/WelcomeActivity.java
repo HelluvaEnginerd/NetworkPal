@@ -75,7 +75,9 @@ public class WelcomeActivity extends AppCompatActivity{
                 /**
                  * goes to events
                  */
-                Intent i = NewEventActivity.newIntent(WelcomeActivity.this, null);
+                Event event = new Event();
+                EventLab.get(getApplicationContext()).addEvent(event);
+                Intent i = NewEventActivity.newIntent(WelcomeActivity.this, event.getId());
                 startActivity(i);
             }
         });

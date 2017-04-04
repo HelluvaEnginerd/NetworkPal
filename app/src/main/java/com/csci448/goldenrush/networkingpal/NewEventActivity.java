@@ -22,7 +22,7 @@ public class NewEventActivity extends AppCompatActivity {
     //all widgets
     private EditText name;
     private Button date;
-    private EditText company;
+    private EditText time;
     private EditText details;
     private Button create;
     private Event mEvent;
@@ -30,9 +30,9 @@ public class NewEventActivity extends AppCompatActivity {
     //Keys for save instance state
     private static final String EVENT_NAME = "EventNameString";
     private static final String DATE = "DateString";
-    private static final String COMPANY_NAME = "CompanyString";
+    private static final String TIME = "TimeString";
     private static final String DETAILS ="DetailsString";
-    private static final String DIALOG_DATE = "DialogDate";
+
 
     //keys for adding extras to intent
     public static final String EXTRA_EVENT_ID = "EventUUID";
@@ -52,6 +52,7 @@ public class NewEventActivity extends AppCompatActivity {
             mEvent = eventLab.getEvent(eventId);
             //set all text things here
             name.setText(mEvent.getEventName());
+            time.setText(mEvent.getmTime());
             details.setText(mEvent.getmEventDetails());
         }
 
@@ -62,7 +63,7 @@ public class NewEventActivity extends AppCompatActivity {
         {
             name.setText(savedInstanceState.getString(EVENT_NAME));
             date.setText(savedInstanceState.getString(DATE));
-            company.setText(savedInstanceState.getString(COMPANY_NAME));
+            time.setText(savedInstanceState.getString(TIME));
             details.setText(savedInstanceState.getString(DETAILS));
         }
     }
@@ -73,7 +74,7 @@ public class NewEventActivity extends AppCompatActivity {
         name.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                name.setText(R.string.empty_text);
+                //name.setText(R.string.empty_text);
             }
         });
 
@@ -94,18 +95,18 @@ public class NewEventActivity extends AppCompatActivity {
             }
         });
 
-        company = (EditText) findViewById(R.id.time_box);
-        company.setOnClickListener(new View.OnClickListener(){
+        time = (EditText) findViewById(R.id.time_box);
+        time.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                company.setText(R.string.empty_text);
+                time.setText(R.string.empty_text);
             }
         });
         details = (EditText) findViewById(R.id.details_box);
         details.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                details.setText(R.string.empty_text);
+                //details.setText(R.string.empty_text);
             }
         });
 
@@ -114,6 +115,9 @@ public class NewEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //TODO: make the activity
+                mEvent.setEventName(name.getText().toString());
+                mEvent.setmEventDetails(details.getText().toString());
+                mEvent.setmTime(time.getText().toString());
                 finish(); //exit out of activity
             }
         });
@@ -134,7 +138,13 @@ public class NewEventActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString(EVENT_NAME, name.getText().toString());
         savedInstanceState.putString(DATE, date.getText().toString());
-        savedInstanceState.putString(COMPANY_NAME, company.getText().toString());
+        savedInstanceState.putString(TIME, time.getText().toString());
         savedInstanceState.putString(DETAILS, details.getText().toString());
+    }
+
+    @Override public void onPause(){
+        Log.d(TAG, "onPause() called");
+        super.onPause();
+        EventLab.get(getApplicationContext()).updateEvent(mEvent);
     }
 }

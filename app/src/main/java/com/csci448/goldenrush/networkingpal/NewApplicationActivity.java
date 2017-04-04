@@ -187,11 +187,21 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             mApp.setID(appId);
             mApp.setJobTitle(app.getJobTitle());
             mJobTitleEditText.setText(app.getJobTitle());
+            mApp.setCompanyName(app.getCompanyName());
+            mApp.setCompanyContact(app.getCompanyContact());
             mApp.setCoverLetter(app.hasCoverLetter());
-            if (app.getCompanyName()!= null)
+            if(app.getCompanyName()!=null)
                 mChooseExistingCompanyButton.setText(app.getCompanyName());
-            if(app.getJobTitle()!=null)
-                mJobTitleEditText.setText(app.getJobTitle());
+            else
+                mChooseExistingCompanyButton.setText("Choose Existing");
+            if(app.getCompanyName()!=null)
+                mCreateNewCompanyButton.setVisibility(View.GONE);
+            if(app.getCompanyContact()!=null)
+                mChooseExistingContactButton.setText(app.getCompanyContact());
+            else
+                mChooseExistingContactButton.setText("Choose Existing");
+            if(app.getCompanyContact()!=null)
+                mCreateNewContactButton.setVisibility(View.GONE);
             mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
             mApp.setResume(app.hasResume());
             mResumeCheckBox.setChecked(app.hasResume());

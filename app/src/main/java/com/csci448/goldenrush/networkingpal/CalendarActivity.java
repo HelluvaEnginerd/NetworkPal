@@ -93,7 +93,9 @@ public class CalendarActivity extends AppCompatActivity {
         newEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = NewEventActivity.newIntent(CalendarActivity.this, null);
+                Event event = new Event();
+                EventLab.get(getApplicationContext()).addEvent(event);
+                Intent i = NewEventActivity.newIntent(CalendarActivity.this, event.getId());
                 startActivity(i);
 
             }

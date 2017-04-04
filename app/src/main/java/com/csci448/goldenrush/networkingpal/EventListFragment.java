@@ -55,6 +55,7 @@ public class EventListFragment extends Fragment {
             mEventRecyclerView.setAdapter(mAdapter);
         }
         else{
+            mAdapter.setEvents(events);
             mAdapter.notifyDataSetChanged();
         }
 
@@ -121,6 +122,10 @@ public class EventListFragment extends Fragment {
         @Override
         public int getItemCount(){
             return mEvents.size();
+        }
+
+        public void setEvents(List<Event> events){
+            mEvents= events;
         }
     }
 }

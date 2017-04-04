@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -11,9 +12,23 @@ public class Event {
     private UUID mId;
     private String mEventName;
     private String mEventDetails;
+    private Date mEventDate;
+    private String mTime;
 
     public Event(){
+        this(UUID.randomUUID());
+        //mId =UUID.randomUUID();
+        //mEventName="Event #";
+        //mTime = "12:00 pm";
+        //mEventDate = new Date(2000,3,23);
+    }
+
+    public Event(UUID id){
         mId =UUID.randomUUID();
+        mEventName="Event #";
+        mTime = "12:00 pm";
+        mEventDate = new Date(2000,3,23);
+        mEventDetails = "Enter Details";
     }
 
     public UUID getId() {
@@ -34,5 +49,21 @@ public class Event {
 
     public void setmEventDetails(String mEventDetails) {
         this.mEventDetails = mEventDetails;
+    }
+
+    public String getmTime() {
+        return mTime;
+    }
+
+    public void setmTime(String mTime) {
+        this.mTime = mTime;
+    }
+
+    public Date getmEventDate() {
+        return mEventDate;
+    }
+
+    public void setmEventDate(Date mEventDate) {
+        this.mEventDate = mEventDate;
     }
 }
