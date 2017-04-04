@@ -103,6 +103,8 @@ public class ContactsActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FAB add application");
+                Contact mContact = new Contact();
+                ContactLab.get(getApplicationContext()).addContact(mContact);
                 /**
                  * position 0 is people
                  * position 1 is companies
