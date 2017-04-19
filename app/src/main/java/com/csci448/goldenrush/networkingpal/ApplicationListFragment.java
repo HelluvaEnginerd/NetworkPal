@@ -127,7 +127,8 @@ public class ApplicationListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClickView");
-            Intent intent = NewApplicationActivity.newIntent(getActivity(), mApp.getId());
+            Intent i = ApplicationSearchActivity.newIntent(getContext());
+            Intent intent = NewApplicationActivity.newIntent(getActivity(), mApp.getId(), i);
             startActivity(intent);
         }
     }

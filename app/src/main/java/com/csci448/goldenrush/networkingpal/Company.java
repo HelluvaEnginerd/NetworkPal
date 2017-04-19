@@ -15,6 +15,16 @@ public class Company {
     private String mPhoneNumber;
     private String mAddress;
 
+    public String getContact() {
+        return mContact;
+    }
+
+    public void setContact(String contact) {
+        this.mContact = contact;
+    }
+
+    private String mContact;
+
     public Company(String companyName, String phoneNumber, String address){
         mID = UUID.randomUUID();
         mCompanyName = companyName;

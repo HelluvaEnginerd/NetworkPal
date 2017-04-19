@@ -32,12 +32,27 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"/>
 
-        <EditText
-            android:id="@+id/company_name"
+        <LinearLayout
+            android:id="@+id/button_linear_layout_company2"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingLeft="10dp"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/choose_existing_company_button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/choose_existing"/>
+
+            <Button
+                android:id="@+id/create_new_company_button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/create_new"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/email_textview"

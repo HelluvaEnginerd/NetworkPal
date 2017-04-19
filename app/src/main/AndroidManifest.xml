@@ -24,21 +24,29 @@
             </intent-filter>
         </activity>
         <activity android:name=".ApplicationSearchActivity"
-                  android:label="Applications"></activity>
+                  android:label="Applications"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".NewApplicationActivity"
-                  android:label="New Application"></activity>
+                  android:label="New Application"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".NewContactActivity"
-                  android:label="New Contact"></activity>
+                  android:label="New Contact"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".ContactsActivity"
-                  android:label="Contacts"></activity>
+                  android:label="Contacts"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".NewCompanyActivity"
-                  android:label="New Company"></activity>
+                  android:label="New Company"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".DiggernetActivity"
-                  android:label="@string/diggernet_activity"></activity>
+                  android:label="@string/diggernet_activity"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".NewEventActivity"
-            android:label="@string/new_event_activity"></activity>
+            android:label="@string/new_event_activity"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".CalendarActivity"
-                  android:label="@string/calendar_activity"></activity>
+                  android:label="@string/calendar_activity"
+            android:screenOrientation="portrait"></activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="7f4afeebf514035f01c27ddf18ad8bfe27a05491" />

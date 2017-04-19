@@ -77,7 +77,8 @@ public class WelcomeActivity extends AppCompatActivity{
                  */
                 Event event = new Event();
                 EventLab.get(getApplicationContext()).addEvent(event);
-                Intent i = NewEventActivity.newIntent(WelcomeActivity.this, event.getId());
+                Intent last = WelcomeActivity.newIntent(WelcomeActivity.this);
+                Intent i = NewEventActivity.newIntent(WelcomeActivity.this, event.getId(), last);
                 startActivity(i);
             }
         });
@@ -89,8 +90,8 @@ public class WelcomeActivity extends AppCompatActivity{
                 /**
                  * goes to application list view
                  */
-
-                Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null);
+                Intent i = WelcomeActivity.newIntent(WelcomeActivity.this);
+                Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null, i);
                 startActivity(intent);
             }
         });

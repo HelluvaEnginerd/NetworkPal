@@ -114,14 +114,16 @@ public class ContactsActivity extends AppCompatActivity{
                  * position 0 is people
                  * position 1 is companies
                  */
-                Intent i = ContactsActivity.newIntent(ContactsActivity.this, 0);
+
                 if (tabLayout.getSelectedTabPosition() == 0) {
+                    Intent i = ContactsActivity.newIntent(ContactsActivity.this, 0);
                     Log.d(TAG, "start newContactActivity");
                     Contact newContact = new Contact();
                     ContactLab.get(getApplicationContext()).addContact(newContact);
                     Intent intent = NewContactActivity.newIntent(ContactsActivity.this, newContact.getUUID(), i);
                     startActivity(intent);
                 }else {
+                    Intent i = ContactsActivity.newIntent(ContactsActivity.this, 1);
                     Log.d(TAG, "Start newCompanyActivity");
                     Company newCompany = new Company();
                     CompanyLab.get(getApplicationContext()).addCompany(newCompany);

@@ -95,7 +95,8 @@ public class CalendarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Event event = new Event();
                 EventLab.get(getApplicationContext()).addEvent(event);
-                Intent i = NewEventActivity.newIntent(CalendarActivity.this, event.getId());
+                Intent last = CalendarActivity.newIntent(CalendarActivity.this);
+                Intent i = NewEventActivity.newIntent(CalendarActivity.this, event.getId(), last);
                 startActivity(i);
 
             }

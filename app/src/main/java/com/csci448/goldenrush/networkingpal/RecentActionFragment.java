@@ -145,10 +145,10 @@ public class RecentActionFragment extends Fragment {
                     intent = NewCompanyActivity.newIntent(getActivity(), mRecentAction.getUUID(), i);
                     break;
                 case "Application":
-                    intent = NewApplicationActivity.newIntent(getActivity(), mRecentAction.getUUID());
+                    intent = NewApplicationActivity.newIntent(getActivity(), mRecentAction.getUUID(), i);
                     break;
                 case "Event":
-                    intent = NewEventActivity.newIntent(getActivity(), null); //todo: need to change
+                    intent = NewEventActivity.newIntent(getActivity(), null, i); //todo: need to change
                     break;
                 default:
                     intent = WelcomeActivity.newIntent(getContext());

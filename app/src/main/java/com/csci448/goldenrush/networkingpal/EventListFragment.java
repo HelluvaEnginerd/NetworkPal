@@ -91,7 +91,8 @@ public class EventListFragment extends Fragment {
         public void onClick(View v){
             //go to the event details
             Toast.makeText(getActivity(), mEvent.getEventName()+" clicked!", Toast.LENGTH_SHORT).show();
-            Intent i = NewEventActivity.newIntent(getActivity(), mEvent.getId());
+            Intent last = CalendarActivity.newIntent(getContext());
+            Intent i = NewEventActivity.newIntent(getActivity(), mEvent.getId(), last);
             startActivity(i);
         }
     }

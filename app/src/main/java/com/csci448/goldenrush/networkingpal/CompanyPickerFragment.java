@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Hayden on 4/1/17.
  */
 
-public class CompanyPickerFragment extends DialogFragment {
+public class CompanyPickerFragment extends DialogFragment{
     private static final String TAG = "CompanyPickerFragment";
 
     private RecyclerView mRecyclerView;

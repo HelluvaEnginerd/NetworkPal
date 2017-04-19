@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +22,12 @@ import java.util.UUID;
  * Created by ddunmire on 2/27/2017.
  */
 
-public class NewContactActivity extends AppCompatActivity{
+public class NewContactActivity extends AppCompatActivity implements CompanyPickerFragment.CompanyCallbacks{
     private static String TAG = "NewContactActivity";
     private static final String EXTRA_UUID = "uuid";
     public static final String EXTRA_CONTACT = "com.csci448.goldenrush.networkingpal.newcompanyactivity.contact";
+    private static final String DIALOG_COMPANY = "DialogCompany";
+
 
     private RecentAction mRecentAction;
     private boolean keepContact = false;
@@ -36,7 +39,8 @@ public class NewContactActivity extends AppCompatActivity{
     private TextView mTitleNameTextview;
     private TextView mBusinessCardTextview;
     private EditText mContactNameEditText;
-    private EditText mCompanyNameEditText;
+    private Button mChooseExisting;
+    private Button mCreateNew;
     private EditText mEmailEditText;
     private EditText mPhoneEditText;
     private EditText mTitleEditText;
@@ -45,6 +49,7 @@ public class NewContactActivity extends AppCompatActivity{
     private Button mDone;
     private Contact mContact;
     private static Intent mLastIntent;
+    private Button mBack;
 
     public static Intent newIntent(Context packageContext, UUID uuid, Intent i){
         Log.d(TAG, "newIntent()");
@@ -52,6 +57,14 @@ public class NewContactActivity extends AppCompatActivity{
         Intent intent = new Intent(packageContext, NewContactActivity.class);
         intent.putExtra(EXTRA_UUID, uuid);
         return intent;
+    }
+
+    @Override
+    public void onCompanySelected(Company company){
+        Log.d(TAG, "CompanyUUID: " + company.getID().toString());
+        mContact.setCompanyName(company.getCompanyName());
+        mChooseExisting.setText(company.getCompanyName());
+        mCreateNew.setVisibility(View.GONE);
     }
 
     private void setUp(){
@@ -63,26 +76,23 @@ public class NewContactActivity extends AppCompatActivity{
         mTitleNameTextview = (TextView) findViewById(R.id.title_textview);
         mBusinessCardTextview = (TextView) findViewById(R.id.business_card_textview);
 
-        mCompanyNameEditText = (EditText) findViewById(R.id.company_name);
-        mCompanyNameEditText.addTextChangedListener(new TextWatcher() {
+        mCreateNew = (Button) findViewById(R.id.create_new_company_button2);
+        mCreateNew.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void onClick(View v){
+                Intent i = NewContactActivity.newIntent(NewContactActivity.this, UUID.randomUUID(), null);
+                Intent intent = NewCompanyActivity.newIntent(NewContactActivity.this, null, i);
+                startActivity(intent);
             }
+        });
 
+        mChooseExisting = (Button) findViewById(R.id.choose_existing_company_button2);
+        mChooseExisting.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s != null) {
-                    mContact.setCompanyName(s.toString());
-                    keepContact = true;
-                }else {
-                    keepContact = false;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onClick(View v){
+                FragmentManager manager = getFragmentManager();
+                CompanyPickerFragment dialog = CompanyPickerFragment.newInstance();
+                dialog.show(manager, DIALOG_COMPANY);
             }
         });
         mContactNameEditText = (EditText) findViewById(R.id.contact_name);
@@ -187,7 +197,7 @@ public class NewContactActivity extends AppCompatActivity{
         mDone = (Button) findViewById(R.id.done_company_button);
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 /*
                 mRecentAction = new RecentAction("Contact", "Contact Name", new Date(), "Contact company name");
@@ -210,15 +220,27 @@ public class NewContactActivity extends AppCompatActivity{
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
-                if(mLastIntent!=null)
-                    startActivity(mLastIntent);
+                if (mLastIntent != null){
+                    mLastIntent.putExtra(EXTRA_CONTACT, mContact.getUUID());
+                startActivity(mLastIntent);
+                }
                 else{
                     Intent i = WelcomeActivity.newIntent(NewContactActivity.this);
                 }
-                mLastIntent.putExtra(EXTRA_CONTACT, mContact.getUUID());
 
+
+                //startActivity(mLastIntent);
+            }
+        });
+
+        mBack = (Button) findViewById(R.id.back_company_button);
+        mBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.d(TAG, "back button pressed");
                 startActivity(mLastIntent);
             }
+
         });
 /*
         UUID contactID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);

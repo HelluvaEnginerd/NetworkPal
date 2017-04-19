@@ -45,10 +45,13 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     private CheckBox mResumeCheckBox;
     private CheckBox mSubmittedCheckBox;
     private Button mDone;
+    private Button mBack;
+    private static Intent mLastIntent;
 
     private Application mApp;
 
-    public static Intent newIntent(Context packageContext, UUID id){
+    public static Intent newIntent(Context packageContext, UUID id, Intent i){
+        mLastIntent = i;
         Intent intent = new Intent(packageContext, NewApplicationActivity.class);
         intent.putExtra(EXTRA_UUID, id);
         return intent;
@@ -81,11 +84,6 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             public void onClick(View v){
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mApp.getDateDue());
-                /**
-                 * TODO make choosing date work with activity
-                 */
-                //NO CLUE WHAT TO DO HERE SINCE THIS IS AN ACTIVITY - THIS IS THE PROBLEM WITH THE DATE
-                //dialog.setTargetFragment(ApplicationSearchActivity.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
@@ -94,7 +92,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         mCreateNewContactButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent i = NewApplicationActivity.newIntent(NewApplicationActivity.this, null);
+                Intent i = NewApplicationActivity.newIntent(NewApplicationActivity.this, null, mLastIntent);
                 Intent intent = NewContactActivity.newIntent(NewApplicationActivity.this, null, i);
                 startActivity(intent);
             }
@@ -115,7 +113,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         mCreateNewCompanyButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent i = NewApplicationActivity.newIntent(NewApplicationActivity.this, null);
+                Intent i = NewApplicationActivity.newIntent(NewApplicationActivity.this, null, mLastIntent);
                 Intent intent = NewCompanyActivity.newIntent(NewApplicationActivity.this, null, i);
                 startActivity(intent);
             }
@@ -172,9 +170,18 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
                 */
                 Log.d(TAG, "Done Button");
                 ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
-                Intent intent = ApplicationSearchActivity.newIntent(NewApplicationActivity.this);
-                startActivity(intent);
+                startActivity(mLastIntent);
             }
+        });
+
+        mBack = (Button) findViewById(R.id.back_company_button);
+        mBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.d(TAG, "back button pressed");
+                startActivity(mLastIntent);
+            }
+
         });
 
 

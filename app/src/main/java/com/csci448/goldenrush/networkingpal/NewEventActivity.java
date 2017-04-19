@@ -26,6 +26,8 @@ public class NewEventActivity extends AppCompatActivity {
     private EditText details;
     private Button create;
     private Event mEvent;
+    private Button back;
+    private static Intent mLastIntent;
 
     //Keys for save instance state
     private static final String EVENT_NAME = "EventNameString";
@@ -110,7 +112,7 @@ public class NewEventActivity extends AppCompatActivity {
             }
         });
 
-        create = (Button) findViewById(R.id.create_button);
+        create = (Button) findViewById(R.id.done_company_button);
         create.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -118,13 +120,24 @@ public class NewEventActivity extends AppCompatActivity {
                 mEvent.setEventName(name.getText().toString());
                 mEvent.setmEventDetails(details.getText().toString());
                 mEvent.setmTime(time.getText().toString());
+                EventLab.get(getApplicationContext()).updateEvent(mEvent);
                 finish(); //exit out of activity
+            }
+        });
+
+        back = (Button) findViewById(R.id.back_company_button);
+        back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //TODO: make the activity
+                startActivity(mLastIntent);
             }
         });
         //Todo: Add all listeners
 
     }
-    public static Intent newIntent(Context packageContext, UUID eventId){
+    public static Intent newIntent(Context packageContext, UUID eventId, Intent in){
+        mLastIntent = in;
         Log.d(TAG, "newIntent()");
         Intent i = new Intent(packageContext, NewEventActivity.class);
         i.putExtra(EXTRA_EVENT_ID, eventId);
@@ -145,6 +158,6 @@ public class NewEventActivity extends AppCompatActivity {
     @Override public void onPause(){
         Log.d(TAG, "onPause() called");
         super.onPause();
-        EventLab.get(getApplicationContext()).updateEvent(mEvent);
+
     }
 }

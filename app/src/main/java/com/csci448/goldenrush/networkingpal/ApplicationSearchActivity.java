@@ -78,7 +78,8 @@ public class ApplicationSearchActivity extends AppCompatActivity{
 
                 Application mApp = new Application();
                 ApplicationLab.get(getApplicationContext()).addApplication(mApp);
-                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, mApp.getId());
+                Intent i = ApplicationSearchActivity.newIntent(ApplicationSearchActivity.this);
+                Intent intent = NewApplicationActivity.newIntent(ApplicationSearchActivity.this, mApp.getId(), i);
                 startActivity(intent);
             }
         });
