@@ -209,7 +209,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                 if (keepContact) {
                     Log.d(TAG, "updating Company");
                     Toast.makeText(getApplicationContext(), mContact.getContactName() + " updated in database", Toast.LENGTH_SHORT).show();
-                    ContactLab.get(getApplicationContext()).updateContact(mContact);
+                    ContactLab.get(getApplicationContext()).addContact(mContact);
 
                     /*
                     mRecentAction = new RecentAction("Company", "FILL", new Date(), mCompany.getCompanyName());

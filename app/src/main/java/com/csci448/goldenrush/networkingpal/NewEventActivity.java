@@ -120,7 +120,7 @@ public class NewEventActivity extends AppCompatActivity {
                 mEvent.setEventName(name.getText().toString());
                 mEvent.setmEventDetails(details.getText().toString());
                 mEvent.setmTime(time.getText().toString());
-                EventLab.get(getApplicationContext()).updateEvent(mEvent);
+                EventLab.get(getApplicationContext()).addEvent(mEvent);
                 finish(); //exit out of activity
             }
         });
@@ -129,7 +129,6 @@ public class NewEventActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //TODO: make the activity
                 startActivity(mLastIntent);
             }
         });

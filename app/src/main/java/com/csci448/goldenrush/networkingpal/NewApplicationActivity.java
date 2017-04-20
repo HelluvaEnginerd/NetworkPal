@@ -156,20 +156,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //ApplicationLab.addApplcation(mApp);
-                /**
-                 * goes to application list view
-                 */
-                /**
-                 * Adds this recent activity to the list for the welcome activity
-                 */
-
-                /*
-                RecentAction action = new RecentAction("Application", mApp.getJobTitle(), mApp.getDateDue(), CompanyLab.get(getApplicationContext()).getCompany(mApp.getCompanyUUID()).getCompanyName());
-                RecentActionLab.get(getApplicationContext()).addRecentActivity(action);
-                */
                 Log.d(TAG, "Done Button");
-                ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
+                ApplicationLab.get(getApplicationContext()).addApplication(mApp);
                 startActivity(mLastIntent);
             }
         });

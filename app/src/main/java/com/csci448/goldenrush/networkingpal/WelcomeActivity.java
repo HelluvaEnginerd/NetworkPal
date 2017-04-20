@@ -71,6 +71,8 @@ public class WelcomeActivity extends AppCompatActivity{
         getSupportActionBar().setHomeButtonEnabled(true);
         //******* Drawer things *******
 
+        mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
+
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Apps"));
         tabLayout.addTab(tabLayout.newTab().setText("Events"));
@@ -110,30 +112,22 @@ public class WelcomeActivity extends AppCompatActivity{
                 if (tabLayout.getSelectedTabPosition() == 0){
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 0);
                     Log.d(TAG, "start newApplicationActivity");
-                    Application application = new Application();
-                    ApplicationLab.get(getApplicationContext()).addApplication(application);
-                    Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, application.getId(), i);
+                    Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
                 } else if (tabLayout.getSelectedTabPosition() == 1){
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 1);
                     Log.d(TAG, "start newEventActivity");
-                    Event newEvent = new Event();
-                    EventLab.get(getApplicationContext()).addEvent(newEvent);
-                    Intent intent = NewEventActivity.newIntent(WelcomeActivity.this, newEvent.getId(), i);
+                    Intent intent = NewEventActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
                 } else if (tabLayout.getSelectedTabPosition() == 2) {
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 2);
                     Log.d(TAG, "start newContactActivity");
-                    Contact newContact = new Contact();
-                    ContactLab.get(getApplicationContext()).addContact(newContact);
-                    Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, newContact.getUUID(), i);
+                    Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
                 } else if (tabLayout.getSelectedTabPosition() == 3){
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 3);
                     Log.d(TAG, "Start newCompanyActivity");
-                    Company newCompany = new Company();
-                    CompanyLab.get(getApplicationContext()).addCompany(newCompany);
-                    Intent intent = NewCompanyActivity.newIntent(WelcomeActivity.this, newCompany.getID(), i);
+                    Intent intent = NewCompanyActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
                 }
             }
