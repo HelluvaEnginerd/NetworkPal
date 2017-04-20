@@ -1,5 +1,8 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -16,8 +21,11 @@ import java.util.UUID;
  * Activity created when creating a new event from the calendar
  */
 
-public class NewEventActivity extends AppCompatActivity {
+public class NewEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, DatePickerFragment.DateCallbacks {
     private static final String TAG = "NewEventActivity";
+
+    private static final String DIALOG_DATE = "DialogDate";
+    private static final int REQUEST_DATE = 0;
 
     //all widgets
     private EditText name;
@@ -45,21 +53,9 @@ public class NewEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_event_activity);
 
+        mEvent = new Event();
+
         setUpWidgets();
-
-        UUID eventId = (UUID) getIntent().getSerializableExtra(EXTRA_EVENT_ID);
-
-        if(eventId!=null){
-            EventLab eventLab = EventLab.get(NewEventActivity.this);
-            mEvent = eventLab.getEvent(eventId);
-            //set all text things here
-            name.setText(mEvent.getEventName());
-            time.setText(mEvent.getmTime());
-            details.setText(mEvent.getmEventDetails());
-        }
-
-
-
         //reload if there is a saved state
         if(savedInstanceState!=null)
         {
@@ -85,15 +81,9 @@ public class NewEventActivity extends AppCompatActivity {
         date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                /*
-                try to do the same date picker
                 FragmentManager manager = getFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mApp.getDateDue());
-                //NO CLUE WHAT TO DO HERE SINCE THIS IS AN ACTIVITY - THIS IS THE PROBLEM WITH THE DATE
-                //dialog.setTargetFragment(ApplicationSearchActivity.this, REQUEST_DATE);
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mEvent.getmEventDate());
                 dialog.show(manager, DIALOG_DATE);
-                //date.setText(R.string.empty_text);
-                */
             }
         });
 
@@ -112,6 +102,8 @@ public class NewEventActivity extends AppCompatActivity {
             }
         });
 
+        UUID eventId = (UUID) getIntent().getSerializableExtra(EXTRA_EVENT_ID);
+
         create = (Button) findViewById(R.id.done_company_button);
         create.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -129,10 +121,19 @@ public class NewEventActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent i = WelcomeActivity.newIntent(NewEventActivity.this, 1);
+                Intent i = WelcomeActivity.newIntent(NewEventActivity.this, 2);
                 startActivity(i);
             }
         });
+
+        if(eventId!=null){
+            EventLab eventLab = EventLab.get(NewEventActivity.this);
+            mEvent = eventLab.getEvent(eventId);
+            //set all text things here
+            name.setText(mEvent.getEventName());
+            time.setText(mEvent.getmTime());
+            details.setText(mEvent.getmEventDetails());
+        }
         //Todo: Add all listeners
 
     }
@@ -158,6 +159,33 @@ public class NewEventActivity extends AppCompatActivity {
     @Override public void onPause(){
         Log.d(TAG, "onPause() called");
         super.onPause();
+        EventLab.get(this).updateEvent(mEvent);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode != Activity.RESULT_OK){
+            return;
+        }
+
+        if(requestCode == REQUEST_DATE){
+            Date d = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            Log.d("arg", d.toString());
+            mEvent.setmEventDate(d);
+            date.setText(mEvent.getmEventDate().toString());
+        }
+    }
+
+    @Override
+    public void onDateSelected(Date d){
+        mEvent.setmEventDate(d);
+        date.setText(d.toString());
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day){
+        Log.d(TAG, "Date picked");
+        date.setText(Integer.toString(month) + "/" + Integer.toString(day) + Integer.toString(year));
     }
 }

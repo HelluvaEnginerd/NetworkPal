@@ -102,4 +102,8 @@ public class Contact {
     public void setUUID(UUID UUID) {
         mUUID = UUID;
     }
+
+    public String getPhotoFilename(){
+        return "IMG_" + getUUID().toString() + ".jpg";
+    }
 }
