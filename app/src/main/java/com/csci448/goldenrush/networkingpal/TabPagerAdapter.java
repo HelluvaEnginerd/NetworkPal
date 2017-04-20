@@ -22,9 +22,15 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter{
 
         switch (position) {
             case 0:
+                ApplicationListFragment applicationsTab = new ApplicationListFragment();
+                return  applicationsTab;
+            case 1:
+                EventListFragment eventsTab = new EventListFragment();
+                return  eventsTab;
+            case 2:
                 ContactListFragment contactsTab = new ContactListFragment();
                 return contactsTab;
-            case 1:
+            case 3:
                 CompanyListFragment companiesTab = new CompanyListFragment();
                 return companiesTab;
             default:

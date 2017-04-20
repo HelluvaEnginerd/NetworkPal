@@ -180,7 +180,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
                 if(mLastIntent!=null)
                     startActivity(mLastIntent);
                 else{
-                    Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this);
+                    Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 0);
                 }
                 mLastIntent.putExtra(EXTRA_COMPANY, mCompany.getID());
                 startActivity(mLastIntent);

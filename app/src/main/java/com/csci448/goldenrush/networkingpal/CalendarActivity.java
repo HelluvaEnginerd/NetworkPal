@@ -146,7 +146,7 @@ public class CalendarActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0: Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
-                        Intent intent = WelcomeActivity.newIntent(getApplicationContext());
+                        Intent intent = WelcomeActivity.newIntent(getApplicationContext(), 0);
                         startActivity(intent);
                         break;
                     case 1: Toast.makeText(getApplicationContext(), "Applications", Toast.LENGTH_SHORT).show();

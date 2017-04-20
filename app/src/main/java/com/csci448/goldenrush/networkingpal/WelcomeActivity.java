@@ -3,12 +3,17 @@ package com.csci448.goldenrush.networkingpal;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,23 +36,21 @@ public class WelcomeActivity extends AppCompatActivity{
      */
 
     private static String TAG = WelcomeActivity.class.getSimpleName();
-
-    private Button mNewEventButton;
-    private Button mNewApplicationButton;
-    private Button mNewContactButton;
-    private Button mDiggernetButton;
+    private int mPosition;
+    private static final String  EXTRA_POSITION = "position";
 
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
-
+    private FloatingActionButton mFABAddThing;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private String mActivityTitle;
 
 
-    public static Intent newIntent(Context packageContext){
+    public static Intent newIntent(Context packageContext, int position) {
         Intent intent = new Intent(packageContext, WelcomeActivity.class);
-        return intent ;
+        intent.putExtra(EXTRA_POSITION, position);
+        return intent;
     }
 
     @Override
@@ -68,72 +71,73 @@ public class WelcomeActivity extends AppCompatActivity{
         getSupportActionBar().setHomeButtonEnabled(true);
         //******* Drawer things *******
 
-        mNewEventButton = (Button) findViewById(R.id.new_event_button);
-        mNewEventButton.setOnClickListener(new View.OnClickListener() {
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Apps"));
+        tabLayout.addTab(tabLayout.newTab().setText("Events"));
+        tabLayout.addTab(tabLayout.newTab().setText("People"));
+        tabLayout.addTab(tabLayout.newTab().setText("Companies"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.setCurrentItem(mPosition);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-                /**
-                 * goes to events
-                 */
-                Event event = new Event();
-                EventLab.get(getApplicationContext()).addEvent(event);
-                Intent last = WelcomeActivity.newIntent(WelcomeActivity.this);
-                Intent i = NewEventActivity.newIntent(WelcomeActivity.this, event.getId(), last);
-                startActivity(i);
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                mPosition = tab.getPosition();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
 
-        mNewApplicationButton = (Button) findViewById(R.id.new_app_button);
-        mNewApplicationButton.setOnClickListener(new View.OnClickListener() {
+        mFABAddThing = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
+        mFABAddThing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
-                 * goes to application list view
-                 */
-                Intent i = WelcomeActivity.newIntent(WelcomeActivity.this);
-                Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null, i);
-                startActivity(intent);
+                Log.d(TAG, "FAB add thing");
+                if (tabLayout.getSelectedTabPosition() == 0){
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 0);
+                    Log.d(TAG, "start newApplicationActivity");
+                    Application application = new Application();
+                    ApplicationLab.get(getApplicationContext()).addApplication(application);
+                    Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, application.getId(), i);
+                    startActivity(intent);
+                } else if (tabLayout.getSelectedTabPosition() == 1){
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 1);
+                    Log.d(TAG, "start newEventActivity");
+                    Event newEvent = new Event();
+                    EventLab.get(getApplicationContext()).addEvent(newEvent);
+                    Intent intent = NewEventActivity.newIntent(WelcomeActivity.this, newEvent.getId(), i);
+                    startActivity(intent);
+                } else if (tabLayout.getSelectedTabPosition() == 2) {
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 2);
+                    Log.d(TAG, "start newContactActivity");
+                    Contact newContact = new Contact();
+                    ContactLab.get(getApplicationContext()).addContact(newContact);
+                    Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, newContact.getUUID(), i);
+                    startActivity(intent);
+                } else if (tabLayout.getSelectedTabPosition() == 3){
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 3);
+                    Log.d(TAG, "Start newCompanyActivity");
+                    Company newCompany = new Company();
+                    CompanyLab.get(getApplicationContext()).addCompany(newCompany);
+                    Intent intent = NewCompanyActivity.newIntent(WelcomeActivity.this, newCompany.getID(), i);
+                    startActivity(intent);
+                }
             }
         });
-
-        mNewContactButton = (Button) findViewById(R.id.new_contact_button);
-        mNewContactButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = WelcomeActivity.newIntent(WelcomeActivity.this);
-                Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null, i);
-                Contact mContact = new Contact();
-                ContactLab.get(getApplicationContext()).addContact(mContact);
-                startActivity(intent);
-            }
-        });
-
-        mDiggernetButton = (Button) findViewById(R.id.new_company_button);
-        mDiggernetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /**
-                 * goes to diggernet page
-                 */
-                Intent ii = WelcomeActivity.newIntent(WelcomeActivity.this);
-                Intent i = NewCompanyActivity.newIntent(WelcomeActivity.this, null, ii);
-                startActivity(i);
-            }
-        });
-
-        /**
-         * Loads the recent action recyclerview
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_welcome_list_host);
-
-        if (fragment == null){
-            fragment = new RecentActionFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_welcome_list_host, fragment)
-                    .commit();
-        }
-         */
     }
 
     private void addDrawerItems() {

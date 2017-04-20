@@ -225,7 +225,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                 startActivity(mLastIntent);
                 }
                 else{
-                    Intent i = WelcomeActivity.newIntent(NewContactActivity.this);
+                    Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 0);
                 }
 
 

@@ -60,7 +60,7 @@ public class ContactsActivity extends AppCompatActivity{
         mDrawerLayout = (DrawerLayout)findViewById(R.id.welcome_drawer_layout);
         mActivityTitle = getTitle().toString();
 
-        addDrawerItems();
+        //addDrawerItems();
         setupDrawer();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -103,7 +103,7 @@ public class ContactsActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FAB add application");
-                if(mPosition==0) {
+                if(mPosition == 0) {
                     Contact mContact = new Contact();
                     ContactLab.get(getApplicationContext()).addContact(mContact);
                 } else{
@@ -135,7 +135,7 @@ public class ContactsActivity extends AppCompatActivity{
     }
 
 
-
+/*
     private void addDrawerItems() {
         String[] activityArray = { getResources().getString(R.string.welcome), getResources().getString(R.string.applications), getResources().getString(R.string.calendar), getResources().getString(R.string.diggernet) };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, activityArray);
@@ -167,6 +167,7 @@ public class ContactsActivity extends AppCompatActivity{
             }
         });
     }
+    */
 
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {

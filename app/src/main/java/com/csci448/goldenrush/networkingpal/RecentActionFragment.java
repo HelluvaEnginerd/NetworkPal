@@ -136,7 +136,7 @@ public class RecentActionFragment extends Fragment {
             Log.d(TAG, "onClick()");
             Intent intent;
             String category = mRecentAction.getCategory();
-            Intent i = WelcomeActivity.newIntent(getContext());
+            Intent i = WelcomeActivity.newIntent(getContext(), 0);
             switch (category) {
                 case "Contact":
                     intent = NewContactActivity.newIntent(getActivity(), mRecentAction.getUUID(), i);
@@ -151,7 +151,7 @@ public class RecentActionFragment extends Fragment {
                     intent = NewEventActivity.newIntent(getActivity(), null, i); //todo: need to change
                     break;
                 default:
-                    intent = WelcomeActivity.newIntent(getContext());
+                    intent = WelcomeActivity.newIntent(getContext(), 0);
                     break;
             }
             startActivity(intent);
