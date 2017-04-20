@@ -95,6 +95,7 @@ public class WelcomeActivity extends AppCompatActivity{
                         mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
                         break;
                     case 2:
+
                         mToolbar.setTitle("Events stats go here");
                         break;
                     case 3:
