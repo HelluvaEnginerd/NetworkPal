@@ -83,18 +83,21 @@ public class WelcomeActivity extends AppCompatActivity{
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 mPosition = tab.getPosition();
+                /**
+                 * TODO fill switch statement below w/stats
+                 */
                 switch (mPosition) {
                     case 0:
                         mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
                         break;
                     case 1:
-                        mToolbar.setTitle("Events");
+                        mToolbar.setTitle("Events stats go here");
                         break;
                     case 2:
-                        mToolbar.setTitle("People");
+                        mToolbar.setTitle("People stats go here");
                         break;
                     case 3:
-                        mToolbar.setTitle("Companies");
+                        mToolbar.setTitle("Companies stats go here");
                         break;
                     default:
                         mToolbar.setTitle("How did this happen?");
