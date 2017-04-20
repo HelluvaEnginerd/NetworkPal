@@ -35,6 +35,14 @@ public class Contact {
         mPHOTOID = Long.MIN_VALUE;
     }
 
+    public String getFirstName(){
+        if(mContactName.contains(" ")){
+            String firstName= mContactName.substring(0, mContactName.indexOf(" "));
+            return firstName;
+        }
+        return mContactName;
+    }
+
     public Contact(){
         this(UUID.randomUUID());
     }

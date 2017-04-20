@@ -5,12 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.csci448.goldenrush.networkingpal.database.ContactBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.ContactCursorWrapper;
 import com.csci448.goldenrush.networkingpal.database.ContactDbSchema.ContactTable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,15 +41,6 @@ public class ContactLab {
         Log.d(TAG, "ContactLab()");
         mContext = context.getApplicationContext();
         mContacts = new ArrayList<>();
-        // Legacy
-//        for(int i = 0; i < 20; i++) {
-//            Contact contact = new Contact("Contact " + String.valueOf(i),
-//                    "Company " + String.valueOf(i),
-//                    "contact" + String.valueOf(i) + "@mail.com",
-//                    "867-5309",
-//                    "Title " + String.valueOf(i));
-//            mContacts.add(contact);
-//        }
         mDatabase = new ContactBaseHelper(mContext).getWritableDatabase();
     }
 
@@ -98,6 +92,19 @@ public class ContactLab {
         } finally {
             cursor.close();
         }
+        /**
+         * Trying to sort by the first name every time the contacts are gotten.
+         * We'll see how it goes
+         * Doesnt work
+         */
+        Collections.sort(contacts, new Comparator<Contact>() {
+            @Override
+            public int compare(Contact contact2, Contact contact1)
+            {
+                Log.d(TAG, "sorted Contacts");
+                return  contact1.getFirstName().compareTo(contact2.getFirstName());
+            }
+        });
 
         return contacts;
     }

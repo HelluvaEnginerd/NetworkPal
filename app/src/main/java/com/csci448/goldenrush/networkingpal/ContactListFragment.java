@@ -84,8 +84,6 @@ public class ContactListFragment extends Fragment {
         }
     }
 
-
-
     private class ContactsAdapter extends RecyclerView.Adapter<ContactListFragment.ContactsHolder> {
         private static final String TAG = "CLF:ContactsAdapter";
         private List<Contact> mContacts;

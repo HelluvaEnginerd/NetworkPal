@@ -23,6 +23,14 @@ public class Event {
         //mEventDate = new Date(2000,3,23);
     }
 
+    public Event(String eventName, String eventDetails, String time, Date eventDate){
+        mId = UUID.randomUUID();
+        mEventName = eventName;
+        mEventDetails = eventDetails;
+        mTime = time;
+        mEventDate = eventDate;
+    }
+
     public Event(UUID id){
         mId =UUID.randomUUID();
         mEventName="Event #";
