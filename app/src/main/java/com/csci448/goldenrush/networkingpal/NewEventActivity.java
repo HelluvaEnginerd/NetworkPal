@@ -129,7 +129,8 @@ public class NewEventActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(mLastIntent);
+                Intent i = WelcomeActivity.newIntent(NewEventActivity.this, 1);
+                startActivity(i);
             }
         });
         //Todo: Add all listeners

@@ -157,8 +157,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "Done Button");
-                ApplicationLab.get(getApplicationContext()).addApplication(mApp);
-                startActivity(mLastIntent);
+                Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 0);
+                startActivity(i);
             }
         });
 
@@ -167,7 +167,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                startActivity(mLastIntent);
+                Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 0);
+                startActivity(i);
             }
 
         });

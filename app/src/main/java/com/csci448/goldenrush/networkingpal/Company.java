@@ -14,6 +14,7 @@ public class Company {
     private UUID mID;
     private String mPhoneNumber;
     private String mAddress;
+    private String mContact;
 
     public String getContact() {
         return mContact;
@@ -23,7 +24,7 @@ public class Company {
         this.mContact = contact;
     }
 
-    private String mContact;
+
 
     public Company(String companyName, String phoneNumber, String address){
         mID = UUID.randomUUID();

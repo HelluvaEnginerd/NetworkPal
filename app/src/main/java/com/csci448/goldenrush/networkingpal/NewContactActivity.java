@@ -67,6 +67,16 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         mCreateNew.setVisibility(View.GONE);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
+        setContentView(R.layout.new_contact_activity);
+        mContact = new Contact();
+        setUp();
+
+    }
+
     private void setUp(){
         Log.d(TAG, "setUp()");
         mContactNameTextview = (TextView) findViewById(R.id.contact_name_textview);
@@ -194,6 +204,8 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             }
         });
 
+        final UUID contactID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+
         mDone = (Button) findViewById(R.id.done_company_button);
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -206,7 +218,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
 
                 Log.d(TAG, "doneButton Clicked");
 
-                if (keepContact) {
+                if (keepContact && contactID == null) {
                     Log.d(TAG, "updating Company");
                     Toast.makeText(getApplicationContext(), mContact.getContactName() + " updated in database", Toast.LENGTH_SHORT).show();
                     ContactLab.get(getApplicationContext()).addContact(mContact);
@@ -220,16 +232,8 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
-                if (mLastIntent != null){
-                    mLastIntent.putExtra(EXTRA_CONTACT, mContact.getUUID());
-                startActivity(mLastIntent);
-                }
-                else{
-                    Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 0);
-                }
-
-
-                //startActivity(mLastIntent);
+                Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 2);
+                startActivity(i);
             }
         });
 
@@ -238,12 +242,13 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                startActivity(mLastIntent);
+                Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 2);
+                startActivity(i);
             }
 
         });
-/*
-        UUID contactID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+
+
         if (contactID != null){
             ContactLab contactLab = ContactLab.get(NewContactActivity.this);
             Contact contact = contactLab.getContact(contactID);
@@ -251,11 +256,11 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             mPhoneEditText.setText(contact.getPhone());
             mEmailEditText.setText(contact.getEmail());
             mTitleEditText.setText(contact.getTitle());
-            mCompanyNameEditText.setText(contact.getCompanyName());
+            mChooseExisting.setText(contact.getCompanyName());
+            mCreateNew.setVisibility(View.GONE);
             mContactNameEditText.setText(contact.getContactName());
             }
-        }
-*/
+
     }
 
     @Override
@@ -263,6 +268,8 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         super.onPause();
 
         Log.d(TAG, "onPause()");
+        if (keepContact)
+            ContactLab.get(getApplicationContext()).updateContact(mContact);
         /**
          * TODO add once Contact DB is complete
          * ContactLab.get(getApplicationContext())
@@ -271,13 +278,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             //RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate()");
-        setContentView(R.layout.new_contact_activity);
-        setUp();
-        mContact = new Contact();
-    }
+
 }
 

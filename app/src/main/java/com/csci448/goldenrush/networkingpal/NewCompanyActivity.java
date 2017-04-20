@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -49,6 +50,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
 
     @Override
     public void onContactSelected(Contact contact){
+        Log.d(TAG, "contact selected: " + contact.getContactName());
         mCompany.setContact(contact.getContactName());
         mChooseExisting.setText(contact.getContactName());
         mCreateNew.setVisibility(View.GONE);
@@ -111,7 +113,6 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
 
             }
         });
-
         mCreateNew = (Button) findViewById(R.id.create_new_company_button3);
         mCreateNew.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -127,7 +128,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             @Override
             public void onClick(View v){
                 FragmentManager manager = getFragmentManager();
-                CompanyPickerFragment dialog = CompanyPickerFragment.newInstance();
+                ContactPickerFragment dialog = ContactPickerFragment.newInstance();
                 dialog.show(manager, DIALOG_CONTACT);
             }
         });
@@ -156,29 +157,32 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             }
         });
 
+        final UUID companyID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
 
         mDoneButton = (Button) findViewById(R.id.done_company_button);
         mDoneButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Log.d(TAG, "doneButton Clicked");
+                Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 3);
 
-                if (keepCompany) {
+                if (keepCompany && companyID == null) {
                     Log.d(TAG, "updating Company");
                     Toast.makeText(getApplicationContext(), mCompany.getCompanyName() + " updated in database", Toast.LENGTH_SHORT).show();
                     CompanyLab.get(getApplicationContext()).addCompany(mCompany);
 
                 } else {
                     Log.d(TAG, "Empty Company - discard");
-                    Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
+                /**
                 if(mLastIntent!=null)
-                    startActivity(mLastIntent);
+                    startActivity(i);
                 else{
                     Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 0);
-                }
-                mLastIntent.putExtra(EXTRA_COMPANY, mCompany.getID());
-                startActivity(mLastIntent);
+                }*/
+                i.putExtra(EXTRA_COMPANY, mCompany.getID());
+                startActivity(i);
             }
         });
 
@@ -187,13 +191,13 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-
-                startActivity(mLastIntent);
+                Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 3);
+                startActivity(i);
             }
 
         });
 
-        UUID companyID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+
         if (companyID != null){
             CompanyLab companyLab = CompanyLab.get(NewCompanyActivity.this);
             Company company = companyLab.getCompany(companyID);
@@ -204,6 +208,8 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
                 mPhoneEditText.setText(company.getPhoneNumber());
                 mAddressEditText.setText(company.getAddress());
                 mCompanyEditText.setText(company.getCompanyName());
+                mChooseExisting.setText(company.getContact());
+                mCreateNew.setVisibility(View.GONE);
             }
         }
 
