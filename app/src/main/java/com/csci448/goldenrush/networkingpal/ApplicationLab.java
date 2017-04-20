@@ -36,6 +36,10 @@ public class ApplicationLab {
         return sAppLab;
     }
 
+    public int getNumberApps(){
+        return getApps().size();
+    }
+
     private ApplicationLab(Context context){
         Log.d(TAG, "ApplicationLab()");
         mContext = context.getApplicationContext();

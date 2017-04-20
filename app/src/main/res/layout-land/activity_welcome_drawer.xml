@@ -3,100 +3,85 @@
 hamburger menu created heavily using:
 http://blog.teamtreehouse.com/add-navigation-drawer-android
 -->
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/welcome_drawer_layout"
+<!--always seen layout-->
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <!--always seen layout-->
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:id="@+id/button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-        <RelativeLayout
-            android:id="@+id/button_layout"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/contacts_spinner"
+            android:layout_width="175sp"
+            android:layout_height="50sp"
+            android:layout_below="@id/contacts_header"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:entries="@array/sort_choice_array"
+            android:textAlignment="center">
+        </Spinner>
+
+        <SearchView
+            android:id="@+id/contacts_search_view"
+            android:layout_width="175sp"
+            android:layout_height="50sp"
+            android:layout_below="@+id/contacts_header"
+            android:layout_toRightOf="@+id/contacts_spinner"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:queryHint="@string/search_hint">
+        </SearchView>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-        >
+            android:layout_below="@id/contacts_search_view"
+            android:background="?attr/colorPrimary"
+            android:elevation="6dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
 
-            <Spinner
-                android:id="@+id/contacts_spinner"
-                android:layout_width="175sp"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:background="?attr/colorPrimary"
+            android:elevation="6dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/tab_layout"/>
+
+        <FrameLayout
+            android:layout_below="@+id/tab_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_add_contacts"
+                android:layout_width="50sp"
                 android:layout_height="50sp"
-                android:layout_below="@id/contacts_header"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:entries="@array/sort_choice_array"
-                android:textAlignment="center">
-            </Spinner>
+                android:layout_gravity="bottom|right"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_action_add"/>
 
-            <SearchView
-                android:id="@+id/contacts_search_view"
-                android:layout_width="175sp"
-                android:layout_height="50sp"
-                android:layout_below="@+id/contacts_header"
-                android:layout_toRightOf="@+id/contacts_spinner"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:queryHint="@string/search_hint">
-            </SearchView>
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/contacts_search_view"
-                android:background="?attr/colorPrimary"
-                android:elevation="6dp"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            />
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/toolbar"
-                android:background="?attr/colorPrimary"
-                android:elevation="6dp"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@id/tab_layout"/>
-
-            <FrameLayout
-                android:layout_below="@+id/tab_layout"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab_add_contacts"
-                    android:layout_width="50sp"
-                    android:layout_height="50sp"
-                    android:layout_gravity="bottom|right"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/ic_action_add"/>
-
-            </FrameLayout>
+        </FrameLayout>
     </RelativeLayout>
-    </RelativeLayout>
-
-    <!-- portion for the hamburger menu_main-->
-    <ListView
-        android:id="@+id/welcome_navList"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="left|start"
-        android:background="#ffeeeeee"/>
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>

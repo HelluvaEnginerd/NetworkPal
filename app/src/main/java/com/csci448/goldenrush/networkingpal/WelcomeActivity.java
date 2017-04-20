@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +46,7 @@ public class WelcomeActivity extends AppCompatActivity{
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private String mActivityTitle;
+    private Toolbar mToolbar;
 
 
     public static Intent newIntent(Context packageContext, int position) {
@@ -58,20 +60,10 @@ public class WelcomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_welcome_drawer);
-
-        //******* Drawer things *******
-        mDrawerList = (ListView)findViewById(R.id.welcome_navList);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.welcome_drawer_layout);
-        mActivityTitle = getTitle().toString();
-
-        addDrawerItems();
-        setupDrawer();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        //******* Drawer things *******
-
         mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Apps"));
@@ -91,6 +83,22 @@ public class WelcomeActivity extends AppCompatActivity{
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 mPosition = tab.getPosition();
+                switch (mPosition) {
+                    case 0:
+                        mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
+                        break;
+                    case 1:
+                        mToolbar.setTitle("Events");
+                        break;
+                    case 2:
+                        mToolbar.setTitle("People");
+                        break;
+                    case 3:
+                        mToolbar.setTitle("Companies");
+                        break;
+                    default:
+                        mToolbar.setTitle("How did this happen?");
+                }
             }
 
             @Override
@@ -134,61 +142,6 @@ public class WelcomeActivity extends AppCompatActivity{
         });
     }
 
-    private void addDrawerItems() {
-        String[] activityArray = { getResources().getString(R.string.applications), getResources().getString(R.string.calendar), getResources().getString(R.string.contacts), getResources().getString(R.string.diggernet) };
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, activityArray);
-        mDrawerList.setAdapter(mAdapter);
-
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0: Toast.makeText(getApplicationContext(), "Applications", Toast.LENGTH_SHORT).show();
-                        Intent intent = ApplicationSearchActivity.newIntent(getApplicationContext());
-                        startActivity(intent);
-                        break;
-                    case 1: Toast.makeText(getApplicationContext(), "Calendar", Toast.LENGTH_SHORT).show();
-                        Intent intent1 = CalendarActivity.newIntent(getApplicationContext());
-                        startActivity(intent1);
-                        break;
-                    case 2: Toast.makeText(getApplicationContext(), "Contacts", Toast.LENGTH_SHORT).show();
-                        Intent intent2 = ContactsActivity.newIntent(getApplicationContext(), 0);
-                        startActivity(intent2);
-                        break;
-                    case 3: Toast.makeText(getApplicationContext(), "Diggernet", Toast.LENGTH_SHORT).show();
-                        Intent intent3 = DiggernetActivity.newIntent(getApplicationContext());
-                        startActivity(intent3);
-                        break;
-                    default: Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-
-            }
-        });
-    }
-
-    private void setupDrawer() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Navigation!");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mActivityTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -201,34 +154,7 @@ public class WelcomeActivity extends AppCompatActivity{
             return true;
         }
 
-        // Activate the navigation drawer toggle
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu_main; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
 
 }
