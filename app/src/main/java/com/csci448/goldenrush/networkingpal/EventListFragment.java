@@ -107,6 +107,8 @@ public class EventListFragment extends Fragment {
             Toast.makeText(getActivity(), mEvent.getEventName()+" clicked!", Toast.LENGTH_SHORT).show();
             Intent last = CalendarActivity.newIntent(getContext());
             Intent i = NewEventActivity.newIntent(getActivity(), mEvent.getId(), last);
+            //I think this is making a new event each time it is clicked
+            Log.i(TAG, "Event with id "+mEvent.getId()+" created");
             startActivity(i);
         }
 

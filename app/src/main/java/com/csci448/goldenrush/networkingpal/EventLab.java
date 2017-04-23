@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class EventLab {
     private static EventLab sEventLab;
-    //private List<Event> mEvents;
+    private List<Event> mEvents;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
@@ -36,25 +36,28 @@ public class EventLab {
         mContext = context.getApplicationContext();
         mDatabase = new EventBaseHelper(mContext).getWritableDatabase();
 
-        //mEvents = new ArrayList<>();
+        mEvents = new ArrayList<>();
 
     }
 
     public void addEvent(Event c){
-        //mEvents.add(c);
-        ContentValues values = getContentValues(c);
-        mDatabase.insert(EventTable.NAME, null, values);
+        mEvents.add(c);
+        //ContentValues values = getContentValues(c);
+        //mDatabase.insert(EventTable.NAME, null, values);
     }
 
+    /*
     public void updateEvent(Event event){
         String uuidString  = event.getId().toString();
         ContentValues values = getContentValues(event);
         mDatabase.update(EventTable.NAME,values,EventTable.Cols.UUID + " = ?",
                 new String[]{uuidString});
     }
+    */
 
     public List<Event> getEvents(){
-        //return mEvents;
+        return mEvents;
+        /*
         List<Event> events = new ArrayList<>();
 
         EventCursorWrapper cursor = queryEvents(null, null);
@@ -70,9 +73,19 @@ public class EventLab {
         }
 
         return events;
+        */
     }
 
     public Event getEvent(UUID id){
+        //search for event matching the given id
+        for(Event event : mEvents){
+            if(event.getId().equals(id)){
+                return event;
+            }
+        }
+        return null; //if event not found return null
+
+        /*
         EventCursorWrapper cursor = queryEvents(
                 EventTable.Cols.UUID + " = ?",
                 new String[] {id.toString()}
@@ -89,8 +102,10 @@ public class EventLab {
         }finally{
             cursor.close();
         }
+        */
 
     }
+
 
     private static ContentValues getContentValues(Event event){
         ContentValues values = new ContentValues();
@@ -101,6 +116,7 @@ public class EventLab {
         values.put(EventTable.Cols.DETAILS, event.getmEventDetails().toString());
         return values;
     }
+
 
     private EventCursorWrapper queryEvents(String whereClause, String[] whereArgs){
         Cursor cursor = mDatabase.query(EventTable.NAME,

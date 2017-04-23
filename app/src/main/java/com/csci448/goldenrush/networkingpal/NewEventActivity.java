@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 import java.util.Date;
 import java.util.UUID;
-
+import java.util.List;
 /**
  * Created by Sarah on 2/28/2017.
  * Activity created when creating a new event from the calendar
@@ -36,6 +36,9 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     private Event mEvent;
     private Button back;
     private static Intent mLastIntent;
+    private List<Event> mEvents;
+    private UUID eventId;
+    EventLab eventLab ;
 
     //Keys for save instance state
     private static final String EVENT_NAME = "EventNameString";
@@ -52,9 +55,20 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         Log.d(TAG,"onCreate Called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_event_activity);
+        //make the event lab
+        eventLab= EventLab.get(NewEventActivity.this);
 
-        mEvent = new Event();
-
+        //if there is an intent get it
+        eventId = (UUID) getIntent().getSerializableExtra(EXTRA_EVENT_ID);
+        //if there is already an event get it
+        if(eventId!=null){
+            mEvent = eventLab.getEvent(eventId);
+            Log.d(TAG, "Existing event grabbed");
+        }else {
+            Log.d(TAG, "No existing event - new one created");
+            mEvent = new Event();
+            EventLab.get(getApplicationContext()).addEvent(mEvent);
+        }
         setUpWidgets();
         //reload if there is a saved state
         if(savedInstanceState!=null)
@@ -102,17 +116,20 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             }
         });
 
-        UUID eventId = (UUID) getIntent().getSerializableExtra(EXTRA_EVENT_ID);
+
 
         create = (Button) findViewById(R.id.done_company_button);
         create.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //TODO: make the activity
+                //TODO: I think this is making multiple events... fix
+                Log.i(TAG, "done button pressed");
+                Log.i(TAG, "event made with id "+ mEvent.getId()+" being edited?");
                 mEvent.setEventName(name.getText().toString());
                 mEvent.setmEventDetails(details.getText().toString());
                 mEvent.setmTime(time.getText().toString());
-                EventLab.get(getApplicationContext()).addEvent(mEvent);
+                //check if it exists... then if not add it to the list
+                //EventLab.get(getApplicationContext()).addEvent(mEvent);
                 finish(); //exit out of activity
             }
         });
@@ -121,19 +138,23 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 Intent i = WelcomeActivity.newIntent(NewEventActivity.this, 2);
                 startActivity(i);
             }
         });
 
+
         if(eventId!=null){
-            EventLab eventLab = EventLab.get(NewEventActivity.this);
-            mEvent = eventLab.getEvent(eventId);
+
+
             //set all text things here
+            Log.i(TAG,mEvent.getEventName() );
             name.setText(mEvent.getEventName());
             time.setText(mEvent.getmTime());
             details.setText(mEvent.getmEventDetails());
         }
+
         //Todo: Add all listeners
 
     }
@@ -159,7 +180,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     @Override public void onPause(){
         Log.d(TAG, "onPause() called");
         super.onPause();
-        EventLab.get(this).updateEvent(mEvent);
+        //EventLab.get(this).updateEvent(mEvent);
 
     }
 
