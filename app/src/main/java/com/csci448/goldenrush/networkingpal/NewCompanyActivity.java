@@ -182,8 +182,8 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
                 else{
                     Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 0);
                 }*/
-                i.putExtra(EXTRA_COMPANY, mCompany.getID());
-                startActivity(i);
+                //mLastIntent.putExtra(EXTRA_COMPANY, mCompany.getID());
+                startActivity(mLastIntent);
             }
         });
 
@@ -192,8 +192,9 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 4);
-                startActivity(i);
+                //Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 4);
+                //startActivity(i);
+                finish();
             }
 
         });

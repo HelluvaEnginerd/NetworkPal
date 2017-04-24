@@ -243,8 +243,9 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
-                Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
-                startActivity(i);
+                //Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
+                mLastIntent.putExtra(EXTRA_CONTACT, mCompanyNameTextview.getId());
+                startActivity(mLastIntent);
             }
         });
 
@@ -253,8 +254,9 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
-                startActivity(i);
+                //Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
+                //startActivity(mLastIntent);
+                finish();
             }
 
         });

@@ -139,8 +139,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onClick(View v){
 
-                Intent i = WelcomeActivity.newIntent(NewEventActivity.this, 2);
-                startActivity(i);
+                finish();
             }
         });
 
