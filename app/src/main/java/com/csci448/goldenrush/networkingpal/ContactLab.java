@@ -52,6 +52,10 @@ public class ContactLab {
         mDatabase.insert(ContactTable.NAME, null, values);
     }
 
+    public int getNumberContacts(){
+        return getContacts().size();
+    }
+
     public Contact getContact(UUID uuid) {
         Log.d(TAG, "getContact()");
         ContactCursorWrapper cursor = queryContacts(

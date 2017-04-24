@@ -96,13 +96,13 @@ public class WelcomeActivity extends AppCompatActivity{
                         break;
                     case 2:
 
-                        mToolbar.setTitle("Events stats go here");
+                        mToolbar.setTitle("Events: " + EventLab.get(getApplicationContext()).getNumberEvents());
                         break;
                     case 3:
-                        mToolbar.setTitle("People stats go here");
+                        mToolbar.setTitle("Contacts: " + ContactLab.get(getApplicationContext()).getNumberContacts());
                         break;
                     case 4:
-                        mToolbar.setTitle("Companies stats go here");
+                        mToolbar.setTitle("Companies: " + CompanyLab.get(getApplicationContext()).getNumberCompanies());
                         break;
                     default:
                         mToolbar.setTitle("How did this happen?");

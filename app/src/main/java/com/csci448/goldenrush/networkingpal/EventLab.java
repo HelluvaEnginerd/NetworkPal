@@ -40,6 +40,10 @@ public class EventLab {
 
     }
 
+    public int getNumberEvents(){
+        return getEvents().size();
+    }
+
     public void addEvent(Event c){
         mEvents.add(c);
         //ContentValues values = getContentValues(c);

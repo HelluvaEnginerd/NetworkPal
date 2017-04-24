@@ -22,7 +22,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter{
 
         switch (position) {
             case 0:
-                ApplicationListFragment homeTab = new ApplicationListFragment();
+                HomeFragment homeTab = new HomeFragment();
                 return homeTab;
             case 1:
                 ApplicationListFragment applicationsTab = new ApplicationListFragment();
