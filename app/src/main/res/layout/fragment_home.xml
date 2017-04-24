@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:paddingTop="20dp"
+        android:background="@mipmap/ic_mynetworkpal"/>
+
+    <TextView
+        android:id="@+id/about_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NetworkingPal is an application designed by the GoldenRush software development team of Colorado School of Mines.  This app is intended to aide users with their professional networking endeavors and assist in the process of finding jobs and building a career.  You can use this app to keep track of job applications, company events, and various contacts including employers and companies.  As students who are thoroughly involved in the networking process we aim to help make this process easier and more organized! Enjoy!"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/number_contacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"/>
+    <TextView
+        android:id="@+id/next_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
+    <TextView
+        android:id="@+id/next_application"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"/>
+
+</LinearLayout>
