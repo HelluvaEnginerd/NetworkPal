@@ -59,6 +59,10 @@ public class CompanyLab {
         }
     }
 
+    public int getNumberCompanies(){
+        return getCompanies().size();
+    }
+
     public List<Company> getCompanies() {
         Log.d(TAG, "getCompanies()");
         List<Company> companies = new ArrayList<>();

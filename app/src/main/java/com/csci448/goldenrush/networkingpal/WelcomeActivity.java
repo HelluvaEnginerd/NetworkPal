@@ -60,6 +60,7 @@ public class WelcomeActivity extends AppCompatActivity{
         mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Home"));
         tabLayout.addTab(tabLayout.newTab().setText("Apps"));
         tabLayout.addTab(tabLayout.newTab().setText("Events"));
         tabLayout.addTab(tabLayout.newTab().setText("People"));
@@ -82,16 +83,20 @@ public class WelcomeActivity extends AppCompatActivity{
                  */
                 switch (mPosition) {
                     case 0:
-                        mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
+                        mToolbar.setTitle("Welcome to My Networking Pal!");
                         break;
                     case 1:
-                        mToolbar.setTitle("Events stats go here");
+                        mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
                         break;
                     case 2:
-                        mToolbar.setTitle("People stats go here");
+
+                        mToolbar.setTitle("Events: " + EventLab.get(getApplicationContext()).getNumberEvents());
                         break;
                     case 3:
-                        mToolbar.setTitle("Companies stats go here");
+                        mToolbar.setTitle("Contacts: " + ContactLab.get(getApplicationContext()).getNumberContacts());
+                        break;
+                    case 4:
+                        mToolbar.setTitle("Companies: " + CompanyLab.get(getApplicationContext()).getNumberCompanies());
                         break;
                     default:
                         mToolbar.setTitle("How did this happen?");
@@ -110,27 +115,30 @@ public class WelcomeActivity extends AppCompatActivity{
         });
 
         mFABAddThing = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
+        //if (tabLayout.getSelectedTabPosition() == 0){
+            //mFABAddThing.setVisibility(View.GONE);
+        //}
         mFABAddThing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FAB add thing");
-                if (tabLayout.getSelectedTabPosition() == 0){
-                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 0);
+                if (tabLayout.getSelectedTabPosition() == 1){
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 1);
                     Log.d(TAG, "start newApplicationActivity");
                     Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
-                } else if (tabLayout.getSelectedTabPosition() == 1){
-                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 1);
+                } else if (tabLayout.getSelectedTabPosition() == 2){
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 2);
                     Log.d(TAG, "start newEventActivity");
                     Intent intent = NewEventActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
-                } else if (tabLayout.getSelectedTabPosition() == 2) {
-                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 2);
+                } else if (tabLayout.getSelectedTabPosition() == 3) {
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 3);
                     Log.d(TAG, "start newContactActivity");
                     Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
-                } else if (tabLayout.getSelectedTabPosition() == 3){
-                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 3);
+                } else if (tabLayout.getSelectedTabPosition() == 4){
+                    Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 4);
                     Log.d(TAG, "Start newCompanyActivity");
                     Intent intent = NewCompanyActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);

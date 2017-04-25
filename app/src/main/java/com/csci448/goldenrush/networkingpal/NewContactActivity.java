@@ -1,9 +1,14 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Picture;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.UUID;
 
 /**
@@ -27,6 +33,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
     private static final String EXTRA_UUID = "uuid";
     public static final String EXTRA_CONTACT = "com.csci448.goldenrush.networkingpal.newcompanyactivity.contact";
     private static final String DIALOG_COMPANY = "DialogCompany";
+    private static final int REQUEST_PHOTO = 2;
 
 
     private boolean keepContact = false;
@@ -49,6 +56,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
     private Contact mContact;
     private static Intent mLastIntent;
     private Button mBack;
+    private File mPhotoFile;
 
     public static Intent newIntent(Context packageContext, UUID uuid, Intent i){
         Log.d(TAG, "newIntent()");
@@ -74,6 +82,17 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         mContact = new Contact();
         setUp();
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode != Activity.RESULT_OK){
+            return;
+        }
+
+        if(requestCode == REQUEST_PHOTO){
+            updatePhotoView();
+        }
     }
 
     private void setUp(){
@@ -193,15 +212,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             }
         });
 
-        mBusinessCardPhoto = (ImageView) findViewById(R.id.business_card_photo);
 
-        mBusinessCardButton = (ImageButton) findViewById(R.id.business_card_camera);
-        mBusinessCardButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //link to camera
-            }
-        });
 
         final UUID contactID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
 
@@ -231,8 +242,9 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
-                Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 2);
-                startActivity(i);
+                //Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
+                mLastIntent.putExtra(EXTRA_CONTACT, mCompanyNameTextview.getId());
+                startActivity(mLastIntent);
             }
         });
 
@@ -241,12 +253,12 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 2);
-                startActivity(i);
+                //Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
+                //startActivity(mLastIntent);
+                finish();
             }
 
         });
-
 
         if (contactID != null){
             ContactLab contactLab = ContactLab.get(NewContactActivity.this);
@@ -258,8 +270,38 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             mChooseExisting.setText(contact.getCompanyName());
             mCreateNew.setVisibility(View.GONE);
             mContactNameEditText.setText(contact.getContactName());
+            mPhotoFile = contactLab.getPhotoFile(mContact);
             }
 
+        mBusinessCardPhoto = (ImageView) findViewById(R.id.business_card_photo);
+        updatePhotoView();
+
+        mBusinessCardButton = (ImageButton) findViewById(R.id.business_card_camera);
+        final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        boolean canTakePhoto = mPhotoFile != null;
+        mBusinessCardButton.setEnabled(canTakePhoto);
+
+        if(canTakePhoto){
+            Uri uri = Uri.fromFile(mPhotoFile);
+            captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        }
+        mBusinessCardButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivityForResult(captureImage, REQUEST_PHOTO);
+            }
+        });
+
+    }
+
+    private void updatePhotoView(){
+        if(mPhotoFile == null || !mPhotoFile.exists()){
+            mBusinessCardPhoto.setImageDrawable(null);
+        } else{
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), NewContactActivity.this);
+            mBusinessCardPhoto.setImageBitmap(bitmap);
+        }
     }
 
     @Override

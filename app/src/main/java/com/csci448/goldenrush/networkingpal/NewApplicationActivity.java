@@ -34,6 +34,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_COMPANY = "DialogCompany";
     private static final String DIALOG_CONTACT = "DialogContact";
+    private static final String EXTRA_APPLICATION = "com.com.csci448.goldenrush.networkingpal.newapplicationactivity.application";
 
     private EditText mJobTitleEditText;
     private Button mCreateNewContactButton;
@@ -157,7 +158,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "Done Button");
-                Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 0);
+                Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 1);
+                i.putExtra(EXTRA_APPLICATION, mApp.getId());
                 startActivity(i);
             }
         });
@@ -167,8 +169,9 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 0);
-                startActivity(i);
+                //Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 1);
+                //startActivity(i);
+                finish();
             }
 
         });

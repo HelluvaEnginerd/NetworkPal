@@ -17,10 +17,7 @@ public class Event {
 
     public Event(){
         this(UUID.randomUUID());
-        //mId =UUID.randomUUID();
-        //mEventName="Event #";
-        //mTime = "12:00 pm";
-        //mEventDate = new Date(2000,3,23);
+        mEventDate = new Date();
     }
 
     public Event(String eventName, String eventDetails, String time, Date eventDate){

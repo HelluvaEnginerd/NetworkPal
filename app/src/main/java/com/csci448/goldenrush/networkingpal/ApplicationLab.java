@@ -6,6 +6,7 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.csci448.goldenrush.networkingpal.database.ApplicationCursorWrapper;
 import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema.ApplicationTable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,6 +52,27 @@ public class ApplicationLab {
         Log.d(TAG, "addApplication()");
         ContentValues values = getContentValues(a);
         mDatabase.insert(ApplicationTable.NAME, null, values);
+    }
+
+    /**
+     * This function needs some work....
+     * @return
+     */
+    public Application getNextApp(){
+        Date date = new Date();
+        int year = date.getYear();
+        int month = date.getMonth();
+        int day = date.getDay();
+        Application b = new Application();
+        for(Application a: getApps()){
+            int y = a.getDateDue().getYear();
+            int m = a.getDateDue().getMonth();
+            int d = a.getDateDue().getDate();
+            if(y > year && m > month && d > day){
+                b = a;
+            }
+        }
+        return b;
     }
 
     public Application getApplication(UUID id){

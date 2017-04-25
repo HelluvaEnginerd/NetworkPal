@@ -1,6 +1,8 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,10 +63,20 @@ public class EventListFragment extends Fragment {
 
 
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            Activity a = getActivity();
+            if(a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
+
     private class EventHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView mNameTextView;
         private TextView mTimeTextView;
-        private TextView mCompanyTextView;
+        private TextView mDateTextView;
 
         private Event mEvent;
 
@@ -76,7 +88,7 @@ public class EventListFragment extends Fragment {
 
             mNameTextView = (TextView) itemView.findViewById(R.id.list_item_event_name);
             mTimeTextView = (TextView) itemView.findViewById(R.id.list_item_event_time);
-            mCompanyTextView = (TextView) itemView.findViewById(R.id.list_item_event_company);
+            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_event_company);
 
 
         }
@@ -84,6 +96,8 @@ public class EventListFragment extends Fragment {
         public void bindEvent(Event event){
             mEvent = event;
             mNameTextView.setText(mEvent.getEventName());
+            mTimeTextView.setText(mEvent.getmTime());
+            mDateTextView.setText(mEvent.getmEventDate().toString());
             //add other things
         }
 
@@ -93,8 +107,11 @@ public class EventListFragment extends Fragment {
             Toast.makeText(getActivity(), mEvent.getEventName()+" clicked!", Toast.LENGTH_SHORT).show();
             Intent last = CalendarActivity.newIntent(getContext());
             Intent i = NewEventActivity.newIntent(getActivity(), mEvent.getId(), last);
+            //I think this is making a new event each time it is clicked
+            Log.i(TAG, "Event with id "+mEvent.getId()+" created");
             startActivity(i);
         }
+
     }
 
     private class EventAdapter extends RecyclerView.Adapter<EventHolder>{

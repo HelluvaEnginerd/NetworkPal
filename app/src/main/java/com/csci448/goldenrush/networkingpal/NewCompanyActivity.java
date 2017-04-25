@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -163,7 +164,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "doneButton Clicked");
-                Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 3);
+                Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 4);
 
                 if (keepCompany && companyID == null) {
                     Log.d(TAG, "updating Company");
@@ -180,8 +181,8 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
                 else{
                     Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 0);
                 }*/
-                i.putExtra(EXTRA_COMPANY, mCompany.getID());
-                startActivity(i);
+                //mLastIntent.putExtra(EXTRA_COMPANY, mCompany.getID());
+                startActivity(mLastIntent);
             }
         });
 
@@ -190,8 +191,9 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 3);
-                startActivity(i);
+                //Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 4);
+                //startActivity(i);
+                finish();
             }
 
         });
@@ -203,6 +205,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             if(company == null){
                 Log.d(TAG, "company is null");
             } else {
+
                 mCompany.setID(companyID);
                 mPhoneEditText.setText(company.getPhoneNumber());
                 mAddressEditText.setText(company.getAddress());

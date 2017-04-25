@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,6 +12,7 @@ import com.csci448.goldenrush.networkingpal.database.ContactBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.ContactCursorWrapper;
 import com.csci448.goldenrush.networkingpal.database.ContactDbSchema.ContactTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,6 +50,10 @@ public class ContactLab {
         Log.d(TAG, "addContact()");
         ContentValues values = getContentValues(contact);
         mDatabase.insert(ContactTable.NAME, null, values);
+    }
+
+    public int getNumberContacts(){
+        return getContacts().size();
     }
 
     public Contact getContact(UUID uuid) {
@@ -136,6 +142,16 @@ public class ContactLab {
         );
 
         return new ContactCursorWrapper(cursor);
+    }
+
+    public File getPhotoFile(Contact contact){
+        File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if(externalFilesDir == null){
+            return null;
+        }
+
+        return new File(externalFilesDir, contact.getPhotoFilename());
     }
 
 }
