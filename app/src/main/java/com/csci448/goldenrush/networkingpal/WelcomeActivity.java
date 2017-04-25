@@ -2,26 +2,16 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -37,10 +27,11 @@ public class WelcomeActivity extends AppCompatActivity{
      */
 
     private static String TAG = WelcomeActivity.class.getSimpleName();
-    private int mPosition;
+    private static int mPosition;
     private static final String  EXTRA_POSITION = "position";
-    private FloatingActionButton mFABAddThing;
+    private FloatingActionButton mFABAddButton;
     private Toolbar mToolbar;
+    private TabLayout mTabLayout;
 
 
     public static Intent newIntent(Context packageContext, int position) {
@@ -58,22 +49,23 @@ public class WelcomeActivity extends AppCompatActivity{
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
+        mFABAddButton = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Home"));
-        tabLayout.addTab(tabLayout.newTab().setText("Apps"));
-        tabLayout.addTab(tabLayout.newTab().setText("Events"));
-        tabLayout.addTab(tabLayout.newTab().setText("People"));
-        tabLayout.addTab(tabLayout.newTab().setText("Companies"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mTabLayout.addTab(mTabLayout.newTab().setText("Home"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("Apps"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("Events"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("People"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("Companies"));
+        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        final PagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());
 
         viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         viewPager.setCurrentItem(mPosition);
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
@@ -84,19 +76,23 @@ public class WelcomeActivity extends AppCompatActivity{
                 switch (mPosition) {
                     case 0:
                         mToolbar.setTitle("Welcome to My Networking Pal!");
+                        mFABAddButton.setVisibility(View.GONE);
                         break;
                     case 1:
                         mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
+                        mFABAddButton.setVisibility(View.VISIBLE);
                         break;
                     case 2:
-
                         mToolbar.setTitle("Events: " + EventLab.get(getApplicationContext()).getNumberEvents());
+                        mFABAddButton.setVisibility(View.VISIBLE);
                         break;
                     case 3:
                         mToolbar.setTitle("Contacts: " + ContactLab.get(getApplicationContext()).getNumberContacts());
+                        mFABAddButton.setVisibility(View.VISIBLE);
                         break;
                     case 4:
                         mToolbar.setTitle("Companies: " + CompanyLab.get(getApplicationContext()).getNumberCompanies());
+                        mFABAddButton.setVisibility(View.VISIBLE);
                         break;
                     default:
                         mToolbar.setTitle("How did this happen?");
@@ -114,30 +110,33 @@ public class WelcomeActivity extends AppCompatActivity{
             }
         });
 
-        mFABAddThing = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
-        //if (tabLayout.getSelectedTabPosition() == 0){
-            //mFABAddThing.setVisibility(View.GONE);
-        //}
-        mFABAddThing.setOnClickListener(new View.OnClickListener() {
+        /**
+         * to initially make the FAB disappear.
+         * After this the switch statement above takes care of it
+         */
+        if (mTabLayout.getSelectedTabPosition() == 0){
+            mFABAddButton.setVisibility(View.GONE);
+        }
+        mFABAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "FAB add thing");
-                if (tabLayout.getSelectedTabPosition() == 1){
+                if (mTabLayout.getSelectedTabPosition() == 1){
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 1);
                     Log.d(TAG, "start newApplicationActivity");
                     Intent intent = NewApplicationActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
-                } else if (tabLayout.getSelectedTabPosition() == 2){
+                } else if (mTabLayout.getSelectedTabPosition() == 2){
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 2);
                     Log.d(TAG, "start newEventActivity");
                     Intent intent = NewEventActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
-                } else if (tabLayout.getSelectedTabPosition() == 3) {
+                } else if (mTabLayout.getSelectedTabPosition() == 3) {
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 3);
                     Log.d(TAG, "start newContactActivity");
                     Intent intent = NewContactActivity.newIntent(WelcomeActivity.this, null, i);
                     startActivity(intent);
-                } else if (tabLayout.getSelectedTabPosition() == 4){
+                } else if (mTabLayout.getSelectedTabPosition() == 4){
                     Intent i = WelcomeActivity.newIntent(WelcomeActivity.this, 4);
                     Log.d(TAG, "Start newCompanyActivity");
                     Intent intent = NewCompanyActivity.newIntent(WelcomeActivity.this, null, i);
@@ -157,6 +156,19 @@ public class WelcomeActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void setTabPosition(int pos){
+        Log.d(TAG, "setTabPosition");
+        mPosition = pos;
+    }
+
+    @Override
+    public void onResume(){
+        Log.d(TAG, "onResume");
+        super.onResume();
+        TabLayout.Tab tab = mTabLayout.getTabAt(mPosition);
+        tab.select();
     }
 
 }
