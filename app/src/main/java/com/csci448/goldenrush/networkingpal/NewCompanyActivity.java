@@ -28,7 +28,6 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
     private static final String DIALOG_CONTACT = "DialogContact";
 
     private Company mCompany;
-    private RecentAction mRecentAction;
     private boolean keepCompany = false;
     private Button mChooseExisting;
     private Button mCreateNew;

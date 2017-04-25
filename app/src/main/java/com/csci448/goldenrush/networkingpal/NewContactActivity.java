@@ -29,7 +29,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
     private static final String DIALOG_COMPANY = "DialogCompany";
 
 
-    private RecentAction mRecentAction;
     private boolean keepContact = false;
 
     private TextView mContactNameTextview;
