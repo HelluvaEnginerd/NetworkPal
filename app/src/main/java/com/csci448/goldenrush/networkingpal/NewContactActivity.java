@@ -220,12 +220,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                /*
-                mRecentAction = new RecentAction("Contact", "Contact Name", new Date(), "Contact company name");
-                RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
-                */
-
                 Log.d(TAG, "doneButton Clicked");
 
                 if (keepContact && contactID == null) {
@@ -233,16 +227,10 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                     Toast.makeText(getApplicationContext(), mContact.getContactName() + " updated in database", Toast.LENGTH_SHORT).show();
                     ContactLab.get(getApplicationContext()).addContact(mContact);
 
-                    /*
-                    mRecentAction = new RecentAction("Company", "FILL", new Date(), mCompany.getCompanyName());
-                    RecentActionLab.get(getApplicationContext()).addRecentActivity(mRecentAction);
-                    */
-
                 } else {
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
-                //Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
                 mLastIntent.putExtra(EXTRA_CONTACT, mCompanyNameTextview.getId());
                 startActivity(mLastIntent);
             }
