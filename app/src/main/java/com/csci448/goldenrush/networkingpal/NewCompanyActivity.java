@@ -61,7 +61,12 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
         setContentView(R.layout.new_company_activity);
-        mCompany = new Company();
+        Intent i = getIntent();
+        UUID uuid = (UUID) i.getSerializableExtra(EXTRA_UUID);
+        if (uuid != null){
+            mCompany = CompanyLab.get(getApplicationContext()).getCompany(uuid);
+        } else
+            mCompany = new Company();
         setUp();
     }
 

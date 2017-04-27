@@ -43,7 +43,6 @@ public class Application {
         mResume = false;
         mCoverLetter = false;
         mSubmitted = false;
-        mDateDue = new Date();
     }
 
     public void setJobTitle(String jobTitle) {

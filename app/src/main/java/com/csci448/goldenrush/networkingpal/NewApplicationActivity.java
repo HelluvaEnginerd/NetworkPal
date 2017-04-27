@@ -57,7 +57,8 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     public static Intent newIntent(Context packageContext, UUID id, Intent i){
         mLastIntent = i;
         Intent intent = new Intent(packageContext, NewApplicationActivity.class);
-        intent.putExtra(EXTRA_UUID, id);
+        if (id != null)
+            intent.putExtra(EXTRA_UUID, id);
         return intent;
     }
 
@@ -161,6 +162,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "Done Button");
+                ApplicationLab.get(getApplicationContext()).addApplication(mApp);
                 Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 1);
                 i.putExtra(EXTRA_APPLICATION, mApp.getId());
                 startActivity(i);
@@ -180,7 +182,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         });
 
 
-        UUID appId = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
+        UUID appId = (UUID) (getIntent().getSerializableExtra(EXTRA_UUID));
         if (appId != null){
             Log.d(TAG, "loading app");
             ApplicationLab appLab = ApplicationLab.get(NewApplicationActivity.this);
@@ -218,8 +220,12 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         Log.d(TAG, "onCreate()");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        mApp = new Application();
+        Intent i = getIntent();
+        UUID uuid = (UUID) i.getSerializableExtra(EXTRA_UUID);
+        if (uuid != null) {
+            mApp = ApplicationLab.get(getApplicationContext()).getApplication(uuid);
+        } else
+            mApp = new Application();
         Log.d(TAG, "mApp UUID = " + mApp.getId());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_application_activity);

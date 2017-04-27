@@ -57,6 +57,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
     private static Intent mLastIntent;
     private Button mBack;
     private File mPhotoFile;
+    private boolean getNewCompany;
 
     public static Intent newIntent(Context packageContext, UUID uuid, Intent i){
         Log.d(TAG, "newIntent()");
@@ -69,7 +70,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
     @Override
     public void onCompanySelected(Company company){
         Log.d(TAG, "CompanyUUID: " + company.getID().toString());
-        mContact.setCompanyName(company.getCompanyName());
+        getNewCompany = true;
         mChooseExisting.setText(company.getCompanyName());
         mCreateNew.setVisibility(View.GONE);
     }
@@ -79,9 +80,13 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
         setContentView(R.layout.new_contact_activity);
-        mContact = new Contact();
+        Intent i = getIntent();
+        UUID uuid = (UUID) i.getSerializableExtra(EXTRA_UUID);
+        if (uuid != null){
+            mContact = ContactLab.get(getApplicationContext()).getContact(uuid);
+        } else
+            mContact = new Contact();
         setUp();
-
     }
 
     @Override
@@ -123,6 +128,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                 dialog.show(manager, DIALOG_COMPANY);
             }
         });
+
         mContactNameEditText = (EditText) findViewById(R.id.contact_name);
         mContactNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -133,7 +139,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null) {
-                    mContact.setContactName(s.toString());
                     keepContact = true;
                 }else {
                     keepContact = false;
@@ -155,7 +160,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null) {
-                    mContact.setEmail(s.toString());
                     keepContact = true;
                 }else {
                     keepContact = false;
@@ -177,7 +181,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null) {
-                    mContact.setPhone(s.toString());
                     keepContact = true;
                 }else {
                     keepContact = false;
@@ -199,7 +202,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null) {
-                    mContact.setTitle(s.toString());
                     keepContact = true;
                 }else {
                     keepContact = false;
@@ -224,6 +226,13 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
 
                 if (keepContact && contactID == null) {
                     Log.d(TAG, "updating Company");
+                    mContact.setContactName(mContactNameEditText.getText().toString());
+                    mContact.setEmail(mEmailEditText.getText().toString());
+                    mContact.setPhone(mPhoneEditText.getText().toString());
+                    mContact.setTitle(mTitleEditText.getText().toString());
+                    if (getNewCompany){
+                        mContact.setCompanyName(mChooseExisting.getText().toString());
+                    }
                     Toast.makeText(getApplicationContext(), mContact.getContactName() + " updated in database", Toast.LENGTH_SHORT).show();
                     ContactLab.get(getApplicationContext()).addContact(mContact);
 
@@ -299,12 +308,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         Log.d(TAG, "onPause()");
         if (keepContact)
             ContactLab.get(getApplicationContext()).updateContact(mContact);
-        /**
-         * TODO add once Contact DB is complete
-         * ContactLab.get(getApplicationContext())
-         */
-        //if (keepContact)
-            //RecentActionLab.get(getApplicationContext()).updateRecentAction(mRecentAction);
     }
 
 
