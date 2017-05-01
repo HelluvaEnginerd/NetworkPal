@@ -77,6 +77,7 @@ Strings for ApplicationSearchActivity
     <string name="create_text">Okay</string>
     <string name="enter_text">Enter Text</string>
     <string name="empty_text"></string>
+    <string name="delete_text">Delete</string>
 
     <!--
     Strings for Calendar Layout

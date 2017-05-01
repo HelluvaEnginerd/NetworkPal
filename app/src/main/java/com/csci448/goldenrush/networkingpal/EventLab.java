@@ -21,7 +21,6 @@ import java.util.UUID;
 
 public class EventLab {
     private static EventLab sEventLab;
-    //private List<Event> mEvents;
     private Context mContext;
     private SQLiteDatabase mDatabase;
     private static final String TAG = "EventLab";
@@ -54,7 +53,11 @@ public class EventLab {
 
 
     }
-
+    public void deleteEvent(UUID id){
+        Log.d(TAG,"Record to delete: "+ id.toString());
+        mDatabase.delete(EventTable.NAME, EventTable.Cols.UUID + " = ?",
+                new String[]{id.toString()});
+}
 
     public void updateEvent(Event event){
         Log.d(TAG, "updateEvent()");
@@ -64,6 +67,8 @@ public class EventLab {
         mDatabase.update(EventTable.NAME,values,EventTable.Cols.UUID + " = ?",
                 new String[]{uuidString});
     }
+
+
 
 
     public List<Event> getEvents(){

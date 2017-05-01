@@ -35,6 +35,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     private Button create;
     private Event mEvent;
     private Button back;
+    private Button delete;
     private static Intent mLastIntent;
     private List<Event> mEvents;
     private UUID eventId;
@@ -147,6 +148,14 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             }
         });
 
+        delete = (Button) findViewById(R.id.delete_event_button);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventLab.deleteEvent(mEvent.getId());
+                finish();
+            }
+        });
 
         if(eventId!=null){
 
