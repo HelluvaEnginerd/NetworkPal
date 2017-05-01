@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -24,6 +25,9 @@ public class EventListFragment extends Fragment {
     private RecyclerView mEventRecyclerView;
     private static String TAG="EventListFragment";
     private EventAdapter mAdapter;
+
+    private SimpleDateFormat formatter;
+    private String pattern = "EEE, MMM d, yyyy";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,6 +86,7 @@ public class EventListFragment extends Fragment {
 
 
 
+
         public EventHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
@@ -94,7 +99,9 @@ public class EventListFragment extends Fragment {
         }
 
         public void bindEvent(Event event){
+            formatter = new SimpleDateFormat(pattern);
             mEvent = event;
+
             mNameTextView.setText(mEvent.getEventName());
             mTimeTextView.setText(mEvent.getmTime());
             mDateTextView.setText(mEvent.getmEventDate().toString());
@@ -104,7 +111,7 @@ public class EventListFragment extends Fragment {
         @Override
         public void onClick(View v){
             //go to the event details
-            Toast.makeText(getActivity(), mEvent.getEventName()+" clicked!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), mEvent.getEventName()+" " + mEvent.getId().toString()+" clicked!", Toast.LENGTH_SHORT).show();
             Intent last = CalendarActivity.newIntent(getContext());
             Intent i = NewEventActivity.newIntent(getActivity(), mEvent.getId(), last);
             //I think this is making a new event each time it is clicked

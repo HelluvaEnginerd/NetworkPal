@@ -2,6 +2,7 @@ package com.csci448.goldenrush.networkingpal.database;
 
 import android.database.CursorWrapper;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.Event;
 import com.csci448.goldenrush.networkingpal.database.EventDbSchema.EventTable;
@@ -14,6 +15,7 @@ import java.util.UUID;
  */
 
 public class EventCursorWrapper extends CursorWrapper {
+    private static final String TAG = "EventCursorWrapper";
     public EventCursorWrapper(Cursor cursor){
         super(cursor);
     }
@@ -24,6 +26,10 @@ public class EventCursorWrapper extends CursorWrapper {
         long date = getLong(getColumnIndex(EventTable.Cols.DATE));
         String time = getString(getColumnIndex(EventTable.Cols.TIME));
         String details = getString(getColumnIndex(EventTable.Cols.DETAILS));
+
+        Log.d(TAG, "Crime gotten - "+ title);
+        Log.d(TAG, "Crime date - "+ new Date(date).toString());
+        Log.d(TAG, "Crime time - "+ time);
 
         Event event = new Event (UUID.fromString(uuidString));
         event.setEventName(title);

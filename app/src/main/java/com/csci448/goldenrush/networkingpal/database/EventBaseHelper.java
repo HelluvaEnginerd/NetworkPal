@@ -39,7 +39,7 @@ public class EventBaseHelper extends SQLiteOpenHelper {
         lockheedValues.put(EventTable.Cols.TITLE, lockheedInterview.getEventName());
         lockheedValues.put(EventTable.Cols.DATE, lockheedInterview.getmEventDate().toString());
         lockheedValues.put(EventTable.Cols.DETAILS, lockheedInterview.getmEventDetails());
-        lockheedValues.put(EventTable.Cols.TITLE, lockheedInterview.getmTime());
+        lockheedValues.put(EventTable.Cols.TIME, lockheedInterview.getmTime());
         db.insert(EventTable.NAME, null, lockheedValues);
 
         Event dunderMifflinMixer = new Event("DunderMifflin Mixer", "Brunch", "11:00am", new Date(2017, 4, 20));
@@ -48,7 +48,7 @@ public class EventBaseHelper extends SQLiteOpenHelper {
         dunderValues.put(EventTable.Cols.TITLE, dunderMifflinMixer.getEventName());
         dunderValues.put(EventTable.Cols.DATE, dunderMifflinMixer.getmEventDate().toString());
         dunderValues.put(EventTable.Cols.DETAILS, dunderMifflinMixer.getmEventDetails());
-        dunderValues.put(EventTable.Cols.TITLE, dunderMifflinMixer.getmTime());
+        dunderValues.put(EventTable.Cols.TIME, dunderMifflinMixer.getmTime());
         db.insert(EventTable.NAME, null, dunderValues);
 
         Event michaelScottPaperCompany = new Event("Buyout", "$1,000,000", "5:00pm", new Date(2016, 9, 11));
@@ -57,7 +57,7 @@ public class EventBaseHelper extends SQLiteOpenHelper {
         michaelValues.put(EventTable.Cols.TITLE, michaelScottPaperCompany.getEventName());
         michaelValues.put(EventTable.Cols.DATE, michaelScottPaperCompany.getmEventDate().toString());
         michaelValues.put(EventTable.Cols.DETAILS, michaelScottPaperCompany.getmEventDetails());
-        michaelValues.put(EventTable.Cols.TITLE, michaelScottPaperCompany.getmTime());
+        michaelValues.put(EventTable.Cols.TIME, michaelScottPaperCompany.getmTime());
         db.insert(EventTable.NAME, null, michaelValues);
     }
 

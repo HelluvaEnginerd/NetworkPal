@@ -1,11 +1,9 @@
 package com.csci448.goldenrush.networkingpal;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -164,7 +161,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
 
         final UUID companyID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
 
-        mDoneButton = (Button) findViewById(R.id.done_company_button);
+        mDoneButton = (Button) findViewById(R.id.done_event_button);
         mDoneButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

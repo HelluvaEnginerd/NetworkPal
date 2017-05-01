@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -157,7 +156,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             }
         });
 
-        mDone = (Button) findViewById(R.id.done_company_button);
+        mDone = (Button) findViewById(R.id.done_event_button);
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

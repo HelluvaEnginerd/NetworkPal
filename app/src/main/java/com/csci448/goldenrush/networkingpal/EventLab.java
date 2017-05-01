@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.EventBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.EventCursorWrapper;
@@ -20,9 +21,10 @@ import java.util.UUID;
 
 public class EventLab {
     private static EventLab sEventLab;
-    private List<Event> mEvents;
+    //private List<Event> mEvents;
     private Context mContext;
     private SQLiteDatabase mDatabase;
+    private static final String TAG = "EventLab";
 
     public static EventLab get(Context context){
         if(sEventLab == null){
@@ -36,7 +38,7 @@ public class EventLab {
         mContext = context.getApplicationContext();
         mDatabase = new EventBaseHelper(mContext).getWritableDatabase();
 
-        mEvents = new ArrayList<>();
+        //mEvents = new ArrayList<>();
 
     }
 
@@ -45,24 +47,30 @@ public class EventLab {
     }
 
     public void addEvent(Event c){
-        mEvents.add(c);
-        //ContentValues values = getContentValues(c);
-        //mDatabase.insert(EventTable.NAME, null, values);
+       // mEvents.add(c);
+        Log.d(TAG, "addEvent()");
+        ContentValues values = getContentValues(c);
+        mDatabase.insert(EventTable.NAME, null, values);
+
+
     }
 
-    /*
+
     public void updateEvent(Event event){
+        Log.d(TAG, "updateEvent()");
         String uuidString  = event.getId().toString();
+        Log.d(TAG, "UUID = " + event.getId().toString());
         ContentValues values = getContentValues(event);
         mDatabase.update(EventTable.NAME,values,EventTable.Cols.UUID + " = ?",
                 new String[]{uuidString});
     }
-    */
+
 
     public List<Event> getEvents(){
-        return mEvents;
-        /*
+        //return mEvents;
+        Log.d(TAG, "getEvent()");
         List<Event> events = new ArrayList<>();
+
 
         EventCursorWrapper cursor = queryEvents(null, null);
 
@@ -77,19 +85,11 @@ public class EventLab {
         }
 
         return events;
-        */
+
     }
 
     public Event getEvent(UUID id){
-        //search for event matching the given id
-        for(Event event : mEvents){
-            if(event.getId().equals(id)){
-                return event;
-            }
-        }
-        return null; //if event not found return null
-
-        /*
+        Log.d(TAG, "getApplicatiton()");
         EventCursorWrapper cursor = queryEvents(
                 EventTable.Cols.UUID + " = ?",
                 new String[] {id.toString()}
@@ -106,12 +106,13 @@ public class EventLab {
         }finally{
             cursor.close();
         }
-        */
+
 
     }
 
 
     private static ContentValues getContentValues(Event event){
+        Log.d(TAG, "getContentValues()");
         ContentValues values = new ContentValues();
         values.put(EventTable.Cols.UUID,event.getId().toString() );
         values.put(EventTable.Cols.TITLE, event.getEventName().toString());
@@ -123,7 +124,8 @@ public class EventLab {
 
 
     private EventCursorWrapper queryEvents(String whereClause, String[] whereArgs){
-        Cursor cursor = mDatabase.query(EventTable.NAME,
+        Cursor cursor = mDatabase.query(
+                EventTable.NAME,
                 null,
                 whereClause,
                 whereArgs,

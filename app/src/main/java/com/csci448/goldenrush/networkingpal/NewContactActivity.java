@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Picture;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -218,7 +217,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
 
         final UUID contactID = (UUID) getIntent().getSerializableExtra(EXTRA_UUID);
 
-        mDone = (Button) findViewById(R.id.done_company_button);
+        mDone = (Button) findViewById(R.id.done_event_button);
         mDone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

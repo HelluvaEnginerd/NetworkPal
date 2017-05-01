@@ -118,23 +118,27 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
 
 
 
-        create = (Button) findViewById(R.id.done_company_button);
+        create = (Button) findViewById(R.id.done_event_button); // Wrong ids
         create.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 //TODO: I think this is making multiple events... fix
+                //need to update and not just set the date and time?
                 Log.i(TAG, "done button pressed");
-                Log.i(TAG, "event made with id "+ mEvent.getId()+" being edited?");
+//                Log.i(TAG, "event made with id "+ mEvent.getId()+" being edited?");
+
                 mEvent.setEventName(name.getText().toString());
                 mEvent.setmEventDetails(details.getText().toString());
                 mEvent.setmTime(time.getText().toString());
+
+                eventLab.updateEvent(mEvent);
                 //check if it exists... then if not add it to the list
                 //EventLab.get(getApplicationContext()).addEvent(mEvent);
                 finish(); //exit out of activity
             }
         });
 
-        back = (Button) findViewById(R.id.back_company_button);
+        back = (Button) findViewById(R.id.back_company_button); // wrong ids
         back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -154,6 +158,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             details.setText(mEvent.getmEventDetails());
         }
 
+
         //Todo: Add all listeners
 
     }
@@ -161,7 +166,8 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         mLastIntent = in;
         Log.d(TAG, "newIntent()");
         Intent i = new Intent(packageContext, NewEventActivity.class);
-        i.putExtra(EXTRA_EVENT_ID, eventId);
+        if(eventId!=null)
+            i.putExtra(EXTRA_EVENT_ID, eventId);
 
         return i ;
     }
