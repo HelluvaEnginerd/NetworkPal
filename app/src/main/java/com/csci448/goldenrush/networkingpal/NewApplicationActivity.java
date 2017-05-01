@@ -161,7 +161,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "Done Button");
-                ApplicationLab.get(getApplicationContext()).addApplication(mApp);
+                ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
                 Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 1);
                 i.putExtra(EXTRA_APPLICATION, mApp.getId());
                 startActivity(i);
@@ -223,8 +223,10 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         UUID uuid = (UUID) i.getSerializableExtra(EXTRA_UUID);
         if (uuid != null) {
             mApp = ApplicationLab.get(getApplicationContext()).getApplication(uuid);
-        } else
+        } else {
             mApp = new Application();
+            ApplicationLab.get(getApplicationContext()).addApplication(mApp);
+        }
         Log.d(TAG, "mApp UUID = " + mApp.getId());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_application_activity);
