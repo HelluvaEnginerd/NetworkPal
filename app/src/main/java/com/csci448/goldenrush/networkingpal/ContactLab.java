@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.csci448.goldenrush.networkingpal.database.ContactBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.ContactCursorWrapper;
+import com.csci448.goldenrush.networkingpal.database.ContactDbSchema;
 import com.csci448.goldenrush.networkingpal.database.ContactDbSchema.ContactTable;
+import com.csci448.goldenrush.networkingpal.database.EventDbSchema;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -81,6 +83,12 @@ public class ContactLab {
         ContentValues values = getContentValues(contact);
 
         mDatabase.update(ContactTable.NAME, values, ContactTable.Cols.UUID + " = ?", new String[] {uuidString});
+    }
+
+    public void deleteContact(UUID id){
+        Log.d(TAG,"Record to delete: "+ id.toString());
+        mDatabase.delete(ContactDbSchema.ContactTable.NAME, ContactDbSchema.ContactTable.Cols.UUID + " = ?",
+                new String[]{id.toString()});
     }
 
     public List<Contact> getContacts() {

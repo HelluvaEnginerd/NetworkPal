@@ -61,6 +61,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
 
         //if there is an intent get it
         eventId = (UUID) getIntent().getSerializableExtra(EXTRA_EVENT_ID);
+
         //if there is already an event get it
         if(eventId!=null){
             mEvent = eventLab.getEvent(eventId);
@@ -71,6 +72,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             EventLab.get(getApplicationContext()).addEvent(mEvent);
         }
         setUpWidgets();
+
         //reload if there is a saved state
         if(savedInstanceState!=null)
         {

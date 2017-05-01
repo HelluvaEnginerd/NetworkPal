@@ -52,6 +52,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
     private ImageButton mBusinessCardButton;
     private ImageView mBusinessCardPhoto;
     private Button mDone;
+    private Button delete;
     private Contact mContact;
     private static Intent mLastIntent;
     private Button mBack;
@@ -83,8 +84,10 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         UUID uuid = (UUID) i.getSerializableExtra(EXTRA_UUID);
         if (uuid != null){
             mContact = ContactLab.get(getApplicationContext()).getContact(uuid);
-        } else
+        } else {
             mContact = new Contact();
+            ContactLab.get(getApplicationContext()).addContact(mContact);
+        }
         setUp();
     }
 
@@ -223,6 +226,8 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             public void onClick(View v) {
                 Log.d(TAG, "doneButton Clicked");
 
+                //trying something to see if it works
+                /*
                 if (keepContact && contactID == null) {
                     Log.d(TAG, "updating Company");
                     mContact.setContactName(mContactNameEditText.getText().toString());
@@ -239,6 +244,20 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                     Log.d(TAG, "Empty Company - discard");
                     Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
+                */
+
+                Log.d(TAG, "updating Company");
+                mContact.setContactName(mContactNameEditText.getText().toString());
+                mContact.setEmail(mEmailEditText.getText().toString());
+                mContact.setPhone(mPhoneEditText.getText().toString());
+                mContact.setTitle(mTitleEditText.getText().toString());
+                if (getNewCompany){
+                    mContact.setCompanyName(mChooseExisting.getText().toString());
+                }
+                Toast.makeText(getApplicationContext(), mContact.getContactName() + " updated in database", Toast.LENGTH_SHORT).show();
+                ContactLab.get(getApplicationContext()).updateContact(mContact);
+
+
                 mLastIntent.putExtra(EXTRA_CONTACT, mCompanyNameTextview.getId());
                 startActivity(mLastIntent);
             }
@@ -254,6 +273,15 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
                 finish();
             }
 
+        });
+
+        delete = (Button) findViewById(R.id.delete_contact_button);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContactLab.get(getApplicationContext()).deleteContact(mContact.getUUID());
+                finish();
+            }
         });
 
         if (contactID != null){

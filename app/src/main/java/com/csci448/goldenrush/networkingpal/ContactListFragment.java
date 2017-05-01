@@ -47,6 +47,11 @@ public class ContactListFragment extends Fragment {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        updateUI();
+    }
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");

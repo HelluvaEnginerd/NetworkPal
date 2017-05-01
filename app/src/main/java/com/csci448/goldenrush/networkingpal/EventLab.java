@@ -57,7 +57,7 @@ public class EventLab {
         Log.d(TAG,"Record to delete: "+ id.toString());
         mDatabase.delete(EventTable.NAME, EventTable.Cols.UUID + " = ?",
                 new String[]{id.toString()});
-}
+    }
 
     public void updateEvent(Event event){
         Log.d(TAG, "updateEvent()");
