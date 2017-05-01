@@ -49,6 +49,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     private CheckBox mSubmittedCheckBox;
     private Button mDone;
     private Button mBack;
+    private Button delete;
     private static Intent mLastIntent;
 
     private Application mApp;
@@ -180,6 +181,15 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
         });
 
+
+        delete = (Button) findViewById(R.id.delete_event_button);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApplicationLab.get(getApplicationContext()).deleteApplication(mApp.getId());
+                finish();
+            }
+        });
 
         UUID appId = (UUID) (getIntent().getSerializableExtra(EXTRA_UUID));
         if (appId != null){

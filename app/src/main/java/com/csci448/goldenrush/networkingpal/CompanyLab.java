@@ -8,7 +8,9 @@ import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.CompanyBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.CompanyCursorWrapper;
+import com.csci448.goldenrush.networkingpal.database.CompanyDbSchema;
 import com.csci448.goldenrush.networkingpal.database.CompanyDbSchema.CompanyTable;
+import com.csci448.goldenrush.networkingpal.database.EventDbSchema;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,11 @@ public class CompanyLab {
         mDatabase.insert(CompanyTable.NAME, null, values);
     }
 
+    public void deleteCompany(UUID id){
+        Log.d(TAG,"Record to delete: "+ id.toString());
+        mDatabase.delete(CompanyDbSchema.CompanyTable.NAME, EventDbSchema.EventTable.Cols.UUID + " = ?",
+                new String[]{id.toString()});
+    }
     public Company getCompany(UUID id){
         Log.d(TAG, "getCompany()");
         CompanyCursorWrapper cursor = queryCompanies(CompanyTable.Cols.UUID + " = ?", new String[] {id.toString()});

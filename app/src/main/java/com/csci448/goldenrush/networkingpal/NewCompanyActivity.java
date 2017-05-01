@@ -33,6 +33,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
     private EditText mPhoneEditText;
     private EditText mAddressEditText;
     private Button mDoneButton;
+    private Button delete;
     private static Intent mLastIntent;
     private Button mBack;
 
@@ -198,6 +199,16 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
                 finish();
             }
 
+        });
+
+
+        delete = (Button) findViewById(R.id.delete_event_button);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CompanyLab.get(getApplicationContext()).deleteCompany(mCompany.getID());
+                finish();
+            }
         });
 
 

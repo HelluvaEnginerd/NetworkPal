@@ -45,6 +45,12 @@ public class CompanyListFragment extends Fragment{
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        updateUI();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView()");
         Log.d(TAG, "inflate fragment_list");

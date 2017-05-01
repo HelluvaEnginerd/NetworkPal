@@ -13,7 +13,9 @@ import android.util.Log;
 
 import com.csci448.goldenrush.networkingpal.database.ApplicationBaseHelper;
 import com.csci448.goldenrush.networkingpal.database.ApplicationCursorWrapper;
+import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema;
 import com.csci448.goldenrush.networkingpal.database.ApplicationDbSchema.ApplicationTable;
+import com.csci448.goldenrush.networkingpal.database.EventDbSchema;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,6 +75,12 @@ public class ApplicationLab {
             }
         }
         return b;
+    }
+
+    public void deleteApplication(UUID id){
+        Log.d(TAG,"Record to delete: "+ id.toString());
+        mDatabase.delete(ApplicationDbSchema.ApplicationTable.NAME, ApplicationDbSchema.ApplicationTable.Cols.UUID + " = ?",
+                new String[]{id.toString()});
     }
 
     public Application getApplication(UUID id){
