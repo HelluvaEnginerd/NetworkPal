@@ -237,8 +237,6 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                //Intent i = WelcomeActivity.newIntent(NewContactActivity.this, 3);
-                //startActivity(mLastIntent);
                 finish();
             }
 
@@ -289,7 +287,7 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
     }
 
     public void setValues(){
-        mContact.setCompanyName(mCompanyNameTextview.getText().toString());
+        mContact.setCompanyName(mChooseExisting.getText().toString());
         mContact.setContactName(mContactNameEditText.getText().toString());
         mContact.setEmail(mEmailEditText.getText().toString());
         mContact.setPhone(mPhoneEditText.getText().toString());

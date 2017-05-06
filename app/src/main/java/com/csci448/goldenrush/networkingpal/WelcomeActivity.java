@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -32,6 +33,7 @@ public class WelcomeActivity extends AppCompatActivity{
     private FloatingActionButton mFABAddButton;
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
+    private Button mDiggernetButton;
 
 
     public static Intent newIntent(Context packageContext, int position) {
@@ -50,6 +52,15 @@ public class WelcomeActivity extends AppCompatActivity{
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("Welcome to My Networking Pal!");
         mFABAddButton = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
+
+        mDiggernetButton = (Button) findViewById(R.id.diggernet_button);
+        mDiggernetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = DiggernetActivity.newIntent(WelcomeActivity.this);
+                startActivity(intent);
+            }
+        });
 
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mTabLayout.addTab(mTabLayout.newTab().setText("Home"));
