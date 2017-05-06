@@ -36,6 +36,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
     private Button delete;
     private static Intent mLastIntent;
     private Button mBack;
+    private boolean newCompany;
 
 
     public static Intent newIntent(Context packageContext, UUID uuid, Intent i){
@@ -62,9 +63,12 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
         Intent i = getIntent();
         UUID uuid = (UUID) i.getSerializableExtra(EXTRA_UUID);
         if (uuid != null){
+            newCompany = false;
             mCompany = CompanyLab.get(getApplicationContext()).getCompany(uuid);
-        } else
+        } else {
+            newCompany = true;
             mCompany = new Company();
+        }
         setUp();
     }
 
@@ -176,15 +180,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
 
                 } else {
                     Log.d(TAG, "Empty Company - discard");
-                    //Toast.makeText(getApplicationContext(), "Blank Company discarded", Toast.LENGTH_SHORT).show();
                 }
-                /**
-                if(mLastIntent!=null)
-                    startActivity(i);
-                else{
-                    Intent i = WelcomeActivity.newIntent(NewCompanyActivity.this, 0);
-                }*/
-                //mLastIntent.putExtra(EXTRA_COMPANY, mCompany.getID());
                 startActivity(mLastIntent);
             }
         });

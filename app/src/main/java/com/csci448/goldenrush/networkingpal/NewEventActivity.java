@@ -27,12 +27,14 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
+    private boolean newEvent;
+
     //all widgets
     private EditText name;
     private Button date;
     private EditText time;
     private EditText details;
-    private Button create;
+    private Button done;
     private Event mEvent;
     private Button back;
     private Button delete;
@@ -64,12 +66,13 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
 
         //if there is already an event get it
         if(eventId!=null){
+            newEvent = false;
             mEvent = eventLab.getEvent(eventId);
             Log.d(TAG, "Existing event grabbed");
         }else {
+            newEvent = true;
             Log.d(TAG, "No existing event - new one created");
             mEvent = new Event();
-            EventLab.get(getApplicationContext()).addEvent(mEvent);
         }
         setUpWidgets();
 
@@ -121,19 +124,16 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
 
 
 
-        create = (Button) findViewById(R.id.done_event_button); // Wrong ids
-        create.setOnClickListener(new View.OnClickListener(){
+        done = (Button) findViewById(R.id.done_event_button); // Wrong ids
+        done.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 //TODO: I think this is making multiple events... fix
                 //need to update and not just set the date and time?
                 Log.i(TAG, "done button pressed");
-//                Log.i(TAG, "event made with id "+ mEvent.getId()+" being edited?");
+                //Log.i(TAG, "event made with id "+ mEvent.getId()+" being edited?");
 
-                mEvent.setEventName(name.getText().toString());
-                mEvent.setmEventDetails(details.getText().toString());
-                mEvent.setmTime(time.getText().toString());
-
+                setValues();
                 eventLab.updateEvent(mEvent);
                 //check if it exists... then if not add it to the list
                 //EventLab.get(getApplicationContext()).addEvent(mEvent);
@@ -173,6 +173,15 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         //Todo: Add all listeners
 
     }
+
+    public void setValues(){
+        mEvent.setEventName(name.getText().toString());
+        mEvent.setmEventDetails(details.getText().toString());
+        mEvent.setmTime(time.getText().toString());
+        if (newEvent)
+            EventLab.get(getApplicationContext()).addEvent(mEvent);
+    }
+
     public static Intent newIntent(Context packageContext, UUID eventId, Intent in){
         mLastIntent = in;
         Log.d(TAG, "newIntent()");

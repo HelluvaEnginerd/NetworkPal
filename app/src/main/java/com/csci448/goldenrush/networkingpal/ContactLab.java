@@ -93,33 +93,20 @@ public class ContactLab {
 
     public List<Contact> getContacts() {
         Log.d(TAG, "getContacts()");
-        List<Contact> contacts = new ArrayList<Contact>();
+        final List<Contact> contacts = new ArrayList<Contact>();
 
         ContactCursorWrapper cursor = queryContacts(null, null);
 
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
+                Log.d(TAG, "contact: " + cursor.getContact().getFirstName() + " added");
                 contacts.add(cursor.getContact());
                 cursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
-        /**
-         * Trying to sort by the first name every time the contacts are gotten.
-         * We'll see how it goes
-         * Doesnt work
-         */
-        Collections.sort(contacts, new Comparator<Contact>() {
-            @Override
-            public int compare(Contact contact2, Contact contact1)
-            {
-                Log.d(TAG, "sorted Contacts");
-                return  contact1.getFirstName().compareTo(contact2.getFirstName());
-            }
-        });
-
         return contacts;
     }
 
@@ -144,11 +131,10 @@ public class ContactLab {
                 null, //Columns - null selects all columns
                 whereClause,
                 whereArgs,
-                null, //groupBy
-                null, //having
-                null //orderBy
+                null,  // groupBy
+                null,  // having
+                null   // orderBy
         );
-
         return new ContactCursorWrapper(cursor);
     }
 
@@ -158,7 +144,6 @@ public class ContactLab {
         if(externalFilesDir == null){
             return null;
         }
-
         return new File(externalFilesDir, contact.getPhotoFilename());
     }
 

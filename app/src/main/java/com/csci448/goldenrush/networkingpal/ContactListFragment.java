@@ -12,10 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -105,9 +108,7 @@ public class ContactListFragment extends Fragment {
         private List<Contact> mContacts;
 
 
-        public ContactsAdapter(List<Contact> contacts) {
-            mContacts = contacts;
-        }
+        public ContactsAdapter(List<Contact> contacts) {mContacts = contacts;}
 
 
         @Override

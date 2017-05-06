@@ -50,6 +50,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     private Button mDone;
     private Button mBack;
     private Button delete;
+    private boolean newApp;
     private static Intent mLastIntent;
 
     private Application mApp;
@@ -162,6 +163,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "Done Button");
+                setValues();
                 ApplicationLab.get(getApplicationContext()).updateApplication(mApp);
                 Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 1);
                 i.putExtra(EXTRA_APPLICATION, mApp.getId());
@@ -174,8 +176,6 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v){
                 Log.d(TAG, "back button pressed");
-                //Intent i = WelcomeActivity.newIntent(NewApplicationActivity.this, 1);
-                //startActivity(i);
                 finish();
             }
 
@@ -224,6 +224,17 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
 
     }
 
+    public void setValues(){
+        mApp.setJobTitle(mJobTitleEditText.getText().toString());
+        mApp.setCompanyName(mChooseExistingCompanyButton.getText().toString());
+        mApp.setCompanyContact(mChooseExistingContactButton.getText().toString());
+        mApp.setCoverLetter(mCoverLetterCheckBox.isActivated());
+        mApp.setResume(mResumeCheckBox.isActivated());
+        mApp.setSubmitted(mSubmittedCheckBox.isActivated());
+        if (newApp)
+            ApplicationLab.get(getApplicationContext()).addApplication(mApp);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         Log.d(TAG, "onCreate()");
@@ -232,10 +243,11 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         Intent i = getIntent();
         UUID uuid = (UUID) i.getSerializableExtra(EXTRA_UUID);
         if (uuid != null) {
+            newApp = false;
             mApp = ApplicationLab.get(getApplicationContext()).getApplication(uuid);
         } else {
+            newApp = true;
             mApp = new Application();
-            ApplicationLab.get(getApplicationContext()).addApplication(mApp);
         }
         Log.d(TAG, "mApp UUID = " + mApp.getId());
         super.onCreate(savedInstanceState);

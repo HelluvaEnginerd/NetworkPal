@@ -48,7 +48,7 @@ public class WelcomeActivity extends AppCompatActivity{
         mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("Applications: " + ApplicationLab.get(getApplicationContext()).getNumberApps());
+        mToolbar.setTitle("Welcome to My Networking Pal!");
         mFABAddButton = (FloatingActionButton) findViewById(R.id.fab_add_contacts);
 
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);

@@ -27,9 +27,9 @@ public class EventCursorWrapper extends CursorWrapper {
         String time = getString(getColumnIndex(EventTable.Cols.TIME));
         String details = getString(getColumnIndex(EventTable.Cols.DETAILS));
 
-        Log.d(TAG, "Crime gotten - "+ title);
-        Log.d(TAG, "Crime date - "+ new Date(date).toString());
-        Log.d(TAG, "Crime time - "+ time);
+        Log.d(TAG, "Event gotten - "+ title);
+        Log.d(TAG, "Event date - "+ new Date(date).toString());
+        Log.d(TAG, "Event time - "+ time);
 
         Event event = new Event (UUID.fromString(uuidString));
         event.setEventName(title);
