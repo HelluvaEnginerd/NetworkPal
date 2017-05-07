@@ -14,6 +14,8 @@ public class Event {
     private String mEventDetails;
     private Date mEventDate;
     private String mTime;
+    private int mHour;
+    private int mMin;
 
     public Event(){
         this(UUID.randomUUID());
