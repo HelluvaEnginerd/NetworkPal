@@ -206,4 +206,9 @@ public class WelcomeActivity extends AppCompatActivity{
         tab.select();
     }
 
+    public static Intent newIntent(Context context){
+        return new Intent(context, WelcomeActivity.class);
+    }
+
+
 }
