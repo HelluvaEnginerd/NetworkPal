@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -104,7 +105,7 @@ public class EventListFragment extends Fragment {
 
             mNameTextView.setText(mEvent.getEventName());
             mTimeTextView.setText(mEvent.getmTime());
-            mDateTextView.setText(mEvent.getmEventDate().toString());
+            mDateTextView.setText(DateFormat.format("MMM dd, yyyy", event.getmEventDate()).toString());
             //add other things
         }
 

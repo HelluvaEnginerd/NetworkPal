@@ -106,7 +106,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         });
 
         date= (Button) findViewById(R.id.date_box);
-        date.setText(DateFormat.format("Mmm dd, yyyy", mEvent.getmEventDate()).toString());
+
         date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -179,6 +179,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             name.setText(mEvent.getEventName());
             time.setText(mEvent.getmTime());
             details.setText(mEvent.getmEventDetails());
+            date.setText(DateFormat.format("MMM dd, yyyy", mEvent.getmEventDate()).toString());
         }
 
 
@@ -241,13 +242,13 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         Log.d(TAG, "Date selected");
         mEvent.setmEventDate(d);
 
-        date.setText(DateFormat.format("yyyy.MM.dd", d).toString());
+        DateFormat.format("MMM dd, yyyy", mEvent.getmEventDate()).toString();
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day){
         Log.d(TAG, "Date picked");
-        date.setText(Integer.toString(month) + "/" + Integer.toString(day) + Integer.toString(year));
+
     }
 
     @Override
