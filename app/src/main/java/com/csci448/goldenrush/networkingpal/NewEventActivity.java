@@ -3,15 +3,18 @@ package com.csci448.goldenrush.networkingpal;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.FragmentManager;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import java.util.Date;
 import java.util.UUID;
@@ -21,7 +24,7 @@ import java.util.List;
  * Activity created when creating a new event from the calendar
  */
 
-public class NewEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, DatePickerFragment.DateCallbacks {
+public class NewEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, DatePickerFragment.DateCallbacks, TimePickerDialog.OnTimeSetListener, TimePickerFragment.TimeCallbacks{
     private static final String TAG = "NewEventActivity";
 
     private static final String DIALOG_DATE = "DialogDate";
@@ -32,7 +35,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     //all widgets
     private EditText name;
     private Button date;
-    private EditText time;
+    private Button time;
     private EditText details;
     private Button done;
     private Event mEvent;
@@ -42,6 +45,10 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     private List<Event> mEvents;
     private UUID eventId;
     EventLab eventLab ;
+
+    //temps
+    int hour;
+    int min;
 
     //Keys for save instance state
     private static final String EVENT_NAME = "EventNameString";
@@ -107,11 +114,14 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             }
         });
 
-        time = (EditText) findViewById(R.id.time_box);
+        time = (Button) findViewById(R.id.time_box);
         time.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                time.setText(R.string.empty_text);
+                DialogFragment newFragment = TimePickerFragment.newInstance(1,1);
+                newFragment.show(getSupportFragmentManager(), "timePicker");
+
+
             }
         });
         details = (EditText) findViewById(R.id.details_box);
@@ -225,6 +235,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
 
     @Override
     public void onDateSelected(Date d){
+        Log.d(TAG, "Date selected");
         mEvent.setmEventDate(d);
         date.setText(d.toString());
     }
@@ -233,5 +244,18 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     public void onDateSet(DatePicker view, int year, int month, int day){
         Log.d(TAG, "Date picked");
         date.setText(Integer.toString(month) + "/" + Integer.toString(day) + Integer.toString(year));
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+        Log.d(TAG, "Time picked");
+        time.setText("time has been changed");
+        // DO HERE ANYTHING WITH DATA
+    }
+    @Override
+    public void onTimeSelected(int hour, int min){
+        Log.d(TAG, "Time selected");
+        time.setText("time has been changed");
     }
 }

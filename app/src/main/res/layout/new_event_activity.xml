@@ -64,16 +64,18 @@
                 android:text="@string/time_text"
                 android:padding="10dp"
                 android:layout_weight="1"/>
-            <EditText
+            <Button
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/time_box"
 
                 android:padding="10dp"
-                android:hint="@string/enter_text"
-                android:inputType="text" />
+                android:hint="@string/enter_time"
+                android:inputType="text"
+                />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
