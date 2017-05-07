@@ -124,6 +124,8 @@ public class EventLab {
         values.put(EventTable.Cols.DATE, event.getmEventDate().getTime());
         values.put(EventTable.Cols.TIME, event.getmTime().toString());
         values.put(EventTable.Cols.DETAILS, event.getmEventDetails().toString());
+        values.put(EventTable.Cols.HOUR, Integer.toString(event.getmHour()));
+        values.put(EventTable.Cols.MIN, Integer.toString(event.getmMin()));
         return values;
     }
 

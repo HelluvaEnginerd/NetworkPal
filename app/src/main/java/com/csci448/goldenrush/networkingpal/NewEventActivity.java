@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -89,6 +90,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
             name.setText(savedInstanceState.getString(EVENT_NAME));
             date.setText(savedInstanceState.getString(DATE));
             time.setText(savedInstanceState.getString(TIME));
+
             details.setText(savedInstanceState.getString(DETAILS));
         }
     }
@@ -104,7 +106,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         });
 
         date= (Button) findViewById(R.id.date_box);
-        date.setText("test");
+        date.setText(DateFormat.format("Mmm dd, yyyy", mEvent.getmEventDate()).toString());
         date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -188,6 +190,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         mEvent.setEventName(name.getText().toString());
         mEvent.setmEventDetails(details.getText().toString());
         mEvent.setmTime(time.getText().toString());
+
         if (newEvent)
             EventLab.get(getApplicationContext()).addEvent(mEvent);
     }
@@ -237,7 +240,8 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     public void onDateSelected(Date d){
         Log.d(TAG, "Date selected");
         mEvent.setmEventDate(d);
-        date.setText(d.toString());
+
+        date.setText(DateFormat.format("yyyy.MM.dd", d).toString());
     }
 
     @Override
@@ -250,12 +254,49 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
         Log.d(TAG, "Time picked");
-        time.setText("time has been changed");
         // DO HERE ANYTHING WITH DATA
     }
     @Override
     public void onTimeSelected(int hour, int min){
         Log.d(TAG, "Time selected");
-        time.setText("time has been changed");
+        mEvent.setmHour(hour);
+        mEvent.setmMin(min);
+        Log.d(TAG, "hour =>"+mEvent.getmHour());
+        setTimeBox(hour,min);
+
+    }
+
+    public void setTimeBox(int hour, int min){
+        String stringMin = "";
+        String stringHour="";
+        String temp="";
+        String amPm = "";
+        //set minutes text
+        if(min<10){
+            stringMin="0"+Integer.toString(min);
+        }
+        else{
+            stringMin =Integer.toString(min) ;
+        }
+
+        //Set hour text
+        if(hour>12){
+            stringHour=Integer.toString(hour-12);
+            amPm="PM";
+        }
+        else if (hour>0&&hour<12){
+            stringHour=Integer.toString(hour);
+            amPm="AM";
+        }
+        else if(hour==12){
+            stringHour=Integer.toString(hour);
+            amPm="PM";
+        }
+        else if(hour==0){
+            stringHour=Integer.toString(12);
+            amPm="AM";
+        }
+        temp=stringHour+":"+ stringMin+" "+amPm;
+        time.setText(temp);
     }
 }

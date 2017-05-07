@@ -30,7 +30,9 @@ public class EventBaseHelper extends SQLiteOpenHelper {
         EventTable.Cols.TITLE+", "+
         EventTable.Cols.DATE+", "+
         EventTable.Cols.TIME+", "+
-        EventTable.Cols.DETAILS+ ")"
+        EventTable.Cols.DETAILS+","+
+        EventTable.Cols.HOUR+","+
+        EventTable.Cols.MIN+")"
         );
 
         Event lockheedInterview = new Event("Interview", "Skype", "1:00pm", new Date(2017, 3, 12));

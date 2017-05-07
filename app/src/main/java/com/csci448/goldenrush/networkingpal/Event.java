@@ -27,6 +27,8 @@ public class Event {
         mEventDetails = eventDetails;
         mTime = time;
         mEventDate = eventDate;
+        mHour = 8;
+        mMin=0;
     }
 
     public Event(UUID id){
@@ -35,6 +37,8 @@ public class Event {
         mTime = "12:00 pm";
         mEventDate = new Date();
         mEventDetails = "Enter Details";
+        mHour =8 ;
+        mMin=0;
     }
 
     public UUID getId() {
@@ -71,5 +75,21 @@ public class Event {
 
     public void setmEventDate(Date mEventDate) {
         this.mEventDate = mEventDate;
+    }
+
+    public int getmHour() {
+        return mHour;
+    }
+
+    public void setmHour(int mHour) {
+        this.mHour = mHour;
+    }
+
+    public int getmMin() {
+        return mMin;
+    }
+
+    public void setmMin(int mMin) {
+        this.mMin = mMin;
     }
 }

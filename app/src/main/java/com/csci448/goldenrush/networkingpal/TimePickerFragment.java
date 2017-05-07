@@ -84,7 +84,7 @@ public class TimePickerFragment extends DialogFragment {
 
 
                         //sendResult(Activity.RESULT_OK, date);
-                        mTimeCallbacks.onTimeSelected(10,10);
+                        mTimeCallbacks.onTimeSelected(hour, min);
                         dismiss();
                     }
                 })

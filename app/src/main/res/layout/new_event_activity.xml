@@ -47,7 +47,7 @@
                 android:id="@+id/date_box"
                 android:padding="10dp"
 
-                android:hint="@string/enter_text"
+                android:hint="@string/enter_date"
                 />
 
         </LinearLayout>

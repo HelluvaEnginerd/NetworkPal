@@ -26,16 +26,22 @@ public class EventCursorWrapper extends CursorWrapper {
         long date = getLong(getColumnIndex(EventTable.Cols.DATE));
         String time = getString(getColumnIndex(EventTable.Cols.TIME));
         String details = getString(getColumnIndex(EventTable.Cols.DETAILS));
+        int hour = getInt(getColumnIndex(EventTable.Cols.HOUR));
+        int min = getInt(getColumnIndex(EventTable.Cols.MIN));
 
         Log.d(TAG, "Event gotten - "+ title);
         Log.d(TAG, "Event date - "+ new Date(date).toString());
         Log.d(TAG, "Event time - "+ time);
+        Log.d(TAG, "Event hour - "+ hour);
+        Log.d(TAG, "Event min - "+ min);
 
         Event event = new Event (UUID.fromString(uuidString));
         event.setEventName(title);
         event.setmEventDate(new Date(date));
         event.setmTime(time);
         event.setmEventDetails(details);
+        event.setmHour(hour);
+        event.setmMin(min);
 
         return event;
 
