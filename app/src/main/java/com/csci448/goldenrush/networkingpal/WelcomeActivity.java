@@ -2,6 +2,7 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.WorkSource;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
@@ -10,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -155,14 +158,35 @@ public class WelcomeActivity extends AppCompatActivity{
                 }
             }
         });
-    }
 
+        //Create the service
+        //Intent i = NotificationService.newIntent(WelcomeActivity.this);
+        //NotificationService.setServiceAlarm(WelcomeActivity.this, true);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+
+        MenuItem toggleItem = menu.findItem(R.id.menu_item_toggle_notifications);
+        if(NotificationService.isServiceAlarmOn(WelcomeActivity.this)){
+            toggleItem.setTitle(R.string.stop_notifications);
+        }else{
+            toggleItem.setTitle(R.string.start_notifications);
+        }
+
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            Toast.makeText(getApplicationContext(), "Currently no settings :)", Toast.LENGTH_SHORT).show();
+        if (id == R.id.menu_item_toggle_notifications) {
+            boolean shouldStartAlarm= !NotificationService.isServiceAlarmOn(WelcomeActivity.this);
+            NotificationService.setServiceAlarm(WelcomeActivity.this, shouldStartAlarm);
+            WelcomeActivity.this.invalidateOptionsMenu();
             return true;
         }
 

@@ -161,8 +161,8 @@ public class ApplicationSearchActivity extends AppCompatActivity{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            Toast.makeText(getApplicationContext(), "Currently no settings :)", Toast.LENGTH_SHORT).show();
+        if (id == R.id.menu_item_toggle_notifications) {
+            Toast.makeText(getApplicationContext(), "notifications turned on", Toast.LENGTH_SHORT).show();
             return true;
         }
 

@@ -100,4 +100,12 @@ Strings for ApplicationSearchActivity
     Strings for new Company Layout
     -->
     <string name="address">Address</string>
+
+    <!--
+    Strings for notifications Layout
+    -->
+    <string name="start_notifications">Turn on notifications</string>
+    <string name="stop_notifications">Turn off notifications</string>
+    <string name="default_notification">Upcoming Event</string>
+    <string name="default_details">You have an upcoming event! Better start preparing.</string>
 </resources>
