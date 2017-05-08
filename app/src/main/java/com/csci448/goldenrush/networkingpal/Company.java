@@ -21,10 +21,8 @@ public class Company {
     }
 
     public void setContact(String contact) {
-        this.mContact = contact;
+        mContact = contact;
     }
-
-
 
     public Company(String companyName, String phoneNumber, String address){
         mID = UUID.randomUUID();

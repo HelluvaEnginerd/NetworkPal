@@ -251,23 +251,11 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
             }
         });
 
-        if (contactID != null){
-            ContactLab contactLab = ContactLab.get(NewContactActivity.this);
-            Contact contact = contactLab.getContact(contactID);
-            mContact.setUUID(contact.getUUID());
-            mPhoneEditText.setText(contact.getPhone());
-            mEmailEditText.setText(contact.getEmail());
-            mTitleEditText.setText(contact.getTitle());
-            mChooseExisting.setText(contact.getCompanyName());
-            mCreateNew.setVisibility(View.GONE);
-            mContactNameEditText.setText(contact.getContactName());
-            mPhotoFile = contactLab.getPhotoFile(mContact);
-            }
-
         mBusinessCardPhoto = (ImageView) findViewById(R.id.business_card_photo);
         updatePhotoView();
 
         mBusinessCardButton = (ImageButton) findViewById(R.id.business_card_camera);
+
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         boolean canTakePhoto = mPhotoFile != null;
@@ -280,9 +268,25 @@ public class NewContactActivity extends AppCompatActivity implements CompanyPick
         mBusinessCardButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Log.d(TAG, "SMILE!");
                 startActivityForResult(captureImage, REQUEST_PHOTO);
             }
         });
+
+        if (contactID != null){
+            ContactLab contactLab = ContactLab.get(NewContactActivity.this);
+            Contact contact = contactLab.getContact(contactID);
+            mContact.setUUID(contact.getUUID());
+            mPhoneEditText.setText(contact.getPhone());
+            mEmailEditText.setText(contact.getEmail());
+            mTitleEditText.setText(contact.getTitle());
+            mChooseExisting.setText(contact.getCompanyName());
+            mCreateNew.setVisibility(View.GONE);
+            mContactNameEditText.setText(contact.getContactName());
+            mPhotoFile = contactLab.getPhotoFile(mContact);
+        }
+
+
 
     }
 

@@ -36,8 +36,11 @@ public class HomeFragment extends Fragment {
 
         mNextEvent= (TextView) view.findViewById(R.id.next_event);
         Event nextEvent = EventLab.get(getContext()).getNextEvent();
-        mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + DateFormat.format("MMM dd, yyyy", nextEvent.getmEventDate()));
-
+        if (nextEvent == null){
+            mNextEvent.setText("You have no upcoming events!");
+        } else {
+            mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + DateFormat.format("MMM dd, yyyy", nextEvent.getmEventDate()));
+        }
         mNextApp= (TextView) view.findViewById(R.id.next_application);
         if(ApplicationLab.get(getActivity().getApplicationContext()).getNextApp() == null) {
             mNextApp.setText("You have no upcoming applications!");
