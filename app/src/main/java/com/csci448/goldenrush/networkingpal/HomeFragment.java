@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
         mNumberContactsTextView.setText("You have " + ContactLab.get(getActivity().getApplicationContext()).getNumberContacts() + " contacts and " + CompanyLab.get(getActivity().getApplicationContext()).getNumberCompanies() + " companies!");
 
         mNextEvent= (TextView) view.findViewById(R.id.next_event);
-        mNextEvent.setText("Your next event is: " + " blah " + " on " + " some date!");
+        mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + EventLab.get(getContext()).getNextEvent().getmEventDate().toString());
 
         mNextApp= (TextView) view.findViewById(R.id.next_application);
         if(ApplicationLab.get(getActivity().getApplicationContext()).getNextApp() == null) {
@@ -45,6 +45,17 @@ public class HomeFragment extends Fragment {
         }
 
         return view;
+    }
+
+    public void updateUI(){
+        mNumberContactsTextView.setText("You have " + ContactLab.get(getActivity().getApplicationContext()).getNumberContacts() + " contacts and " + CompanyLab.get(getActivity().getApplicationContext()).getNumberCompanies() + " companies!");
+        mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + EventLab.get(getContext()).getNextEvent().getmEventDate().toString());
+        if(ApplicationLab.get(getActivity().getApplicationContext()).getNextApp() == null) {
+            mNextApp.setText("You have no upcoming applications!");
+        } else{
+            Application a = ApplicationLab.get(getActivity().getApplicationContext()).getNextApp();
+            mNextApp.setText("Your next application is due " + a.getDateDue().toString() + " for " + a.getCompanyName());
+        }
     }
 }
 

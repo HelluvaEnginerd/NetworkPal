@@ -2,6 +2,7 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.WorkSource;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -37,6 +38,8 @@ public class WelcomeActivity extends AppCompatActivity{
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private Button mDiggernetButton;
+    private Button mCalendarButton;
+    HomeFragment hometab;
 
 
     public static Intent newIntent(Context packageContext, int position) {
@@ -60,7 +63,18 @@ public class WelcomeActivity extends AppCompatActivity{
         mDiggernetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = DiggernetActivity.newIntent(WelcomeActivity.this);
+                String url = "http://www.diggernet.net";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
+        mCalendarButton = (Button) findViewById(R.id.calendar_button);
+        mCalendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CalendarActivity.newIntent(WelcomeActivity.this);
                 startActivity(intent);
             }
         });

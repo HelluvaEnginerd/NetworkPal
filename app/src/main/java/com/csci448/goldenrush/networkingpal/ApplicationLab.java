@@ -66,7 +66,9 @@ public class ApplicationLab {
         int month = date.getMonth();
         int day = date.getDay();
         Application b = new Application();
-        for(Application a: getApps()){
+        List<Application> apps = getApps();
+        for(Application a: apps){
+            Log.d(TAG, "next app:" + a.getCompanyName());
             int y = a.getDateDue().getYear();
             int m = a.getDateDue().getMonth();
             int d = a.getDateDue().getDate();
@@ -74,6 +76,9 @@ public class ApplicationLab {
                 b = a;
             }
         }
+        Log.d(TAG, "getNextApp: " + b.getCompanyName());
+        if (b.getCompanyName() == null)
+            return apps.get(0);
         return b;
     }
 

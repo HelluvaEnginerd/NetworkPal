@@ -30,15 +30,11 @@ public class EventLab {
             sEventLab = new EventLab(context);
         }
         return sEventLab;
-
     }
 
     private EventLab(Context context){
         mContext = context.getApplicationContext();
         mDatabase = new EventBaseHelper(mContext).getWritableDatabase();
-
-        //mEvents = new ArrayList<>();
-
     }
 
     public int getNumberEvents(){
@@ -46,13 +42,22 @@ public class EventLab {
     }
 
     public void addEvent(Event c){
-       // mEvents.add(c);
         Log.d(TAG, "addEvent()");
         ContentValues values = getContentValues(c);
         mDatabase.insert(EventTable.NAME, null, values);
-
-
     }
+
+    public Event getNextEvent() {
+        List<Event> events = getEvents();
+        Event temp = events.get(0);
+        for (int j = 0; j < events.size(); j++) {
+            if (temp.getmEventDate().getDay() > events.get(j).getmEventDate().getDay()){
+                temp = events.get(j);
+            }
+        }
+        return temp;
+    }
+
     public void deleteEvent(UUID id){
         Log.d(TAG,"Record to delete: "+ id.toString());
         mDatabase.delete(EventTable.NAME, EventTable.Cols.UUID + " = ?",
@@ -68,15 +73,9 @@ public class EventLab {
                 new String[]{uuidString});
     }
 
-
-
-
     public List<Event> getEvents(){
-        //return mEvents;
         Log.d(TAG, "getEvent()");
         List<Event> events = new ArrayList<>();
-
-
         EventCursorWrapper cursor = queryEvents(null, null);
 
         try{
@@ -90,7 +89,6 @@ public class EventLab {
         }
 
         return events;
-
     }
 
     public Event getEvent(UUID id){
@@ -111,8 +109,6 @@ public class EventLab {
         }finally{
             cursor.close();
         }
-
-
     }
 
 
