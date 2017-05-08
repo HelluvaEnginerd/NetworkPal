@@ -67,6 +67,8 @@ public class ApplicationLab {
         int day = date.getDay();
         Application b = new Application();
         List<Application> apps = getApps();
+        if (apps.size() == 0)
+            return null;
         for(Application a: apps){
             Log.d(TAG, "next app:" + a.getCompanyName());
             int y = a.getDateDue().getYear();

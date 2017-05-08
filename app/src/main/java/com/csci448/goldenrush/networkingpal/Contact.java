@@ -1,5 +1,6 @@
 package com.csci448.goldenrush.networkingpal;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -15,6 +16,7 @@ public class Contact {
     private String mTitle;
     private UUID mUUID;
     private long mPHOTOID;
+    Random rng = new Random();
 
     public Contact(String contactName, String companyName, String email, String phone, String title){
         mUUID = UUID.randomUUID();

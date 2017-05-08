@@ -50,6 +50,8 @@ public class EventLab {
 
     public Event getNextEvent() {
         List<Event> events = getEvents();
+        if (events.size() == 0)
+            return null;
         Event temp = events.get(0);
         for (int j = 0; j < events.size(); j++) {
             if (temp.getmEventDate().getDay() > events.get(j).getmEventDate().getDay()){

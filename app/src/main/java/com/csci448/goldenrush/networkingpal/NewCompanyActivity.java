@@ -27,7 +27,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
 
     private Company mCompany;
     private boolean keepCompany = false;
-    private Button mChooseExisting;
+    private Button mChooseExistingContact;
     private Button mCreateNew;
     private EditText mCompanyEditText;
     private EditText mPhoneEditText;
@@ -51,7 +51,7 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
     public void onContactSelected(Contact contact){
         Log.d(TAG, "contact selected: " + contact.getContactName());
         mCompany.setContact(contact.getContactName());
-        mChooseExisting.setText(contact.getContactName());
+        mChooseExistingContact.setText(contact.getContactName());
         mCreateNew.setVisibility(View.GONE);
     }
 
@@ -130,8 +130,8 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
             }
         });
 
-        mChooseExisting = (Button) findViewById(R.id.choose_existing_company_button3);
-        mChooseExisting.setOnClickListener(new View.OnClickListener(){
+        mChooseExistingContact = (Button) findViewById(R.id.choose_existing_company_button3);
+        mChooseExistingContact.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 FragmentManager manager = getFragmentManager();
@@ -209,18 +209,18 @@ public class NewCompanyActivity extends AppCompatActivity implements ContactPick
 
 
         if (companyID != null){
-            CompanyLab companyLab = CompanyLab.get(NewCompanyActivity.this);
+            CompanyLab companyLab = CompanyLab.get(getApplicationContext());
             Company company = companyLab.getCompany(companyID);
             if(company == null){
                 Log.d(TAG, "company is null");
             } else {
-
+                Log.d(TAG, "setting up");
                 mCompany.setID(companyID);
                 mPhoneEditText.setText(company.getPhoneNumber());
                 mAddressEditText.setText(company.getAddress());
                 mCompanyEditText.setText(company.getCompanyName());
-                mChooseExisting.setText(company.getContact());
                 mCreateNew.setVisibility(View.GONE);
+                mChooseExistingContact.setText(company.getContact());
             }
         }
 
