@@ -26,7 +26,6 @@ public class EventListFragment extends Fragment {
     private RecyclerView mEventRecyclerView;
     private static String TAG="EventListFragment";
     private EventAdapter mAdapter;
-
     private SimpleDateFormat formatter;
     private String pattern = "EEE, MMM d, yyyy";
 
@@ -41,12 +40,10 @@ public class EventListFragment extends Fragment {
              * Set the things
              */
         }
-
         mEventRecyclerView = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         mEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
-
         return view;
     }
     @Override
@@ -65,8 +62,6 @@ public class EventListFragment extends Fragment {
             mAdapter.setEvents(events);
             mAdapter.notifyDataSetChanged();
         }
-
-
     }
 
     @Override
@@ -84,10 +79,6 @@ public class EventListFragment extends Fragment {
         private TextView mDateTextView;
 
         private Event mEvent;
-
-
-
-
         public EventHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
@@ -123,9 +114,6 @@ public class EventListFragment extends Fragment {
 
     private class EventAdapter extends RecyclerView.Adapter<EventHolder>{
         private List<Event> mEvents;
-
-
-
         public EventAdapter(List<Event> events){
             mEvents = events;
         }

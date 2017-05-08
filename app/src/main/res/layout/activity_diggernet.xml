@@ -43,7 +43,7 @@ https://www.tutorialspoint.com/android/android_login_screen.htm
         android:layout_marginTop = "20dp"
     />
 
-
+<!--
     <EditText
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
@@ -72,18 +72,20 @@ https://www.tutorialspoint.com/android/android_login_screen.htm
         android:layout_alignEnd="@+id/enter_username_edit_text"
         android:hint="@string/password"
     />
-
+-->
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/enter_pw_edit_text"
-        android:layout_centerHorizontal="true">
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="50dp"
+    >
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="go to diggernet"
         />
 
         <Button

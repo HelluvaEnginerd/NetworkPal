@@ -19,42 +19,36 @@ http://blog.teamtreehouse.com/add-navigation-drawer-android
         android:layout_centerHorizontal="true"
         xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-        <Spinner
-            android:id="@+id/contacts_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:layout_below="@id/contacts_header"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:entries="@array/sort_choice_array"
-            android:textAlignment="center">
-        </Spinner>
-
-        <SearchView
-            android:id="@+id/contacts_search_view"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:layout_below="@+id/contacts_header"
-            android:layout_toRightOf="@+id/contacts_spinner"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:queryHint="@string/search_hint">
-        </SearchView>
-
-        <Button
-            android:id="@+id/diggernet_button"
-            android:layout_below="@id/contacts_header"
-            android:layout_toRightOf="@id/contacts_search_view"
+        <RelativeLayout
+            android:id="@+id/top_button_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:text="@string/diggernet"
-        />
+            android:layout_centerHorizontal="true"
+        >
+
+            <Button
+                android:id="@+id/calendar_button"
+                android:layout_below="@id/contacts_header"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="@string/calendar"
+            />
+            <Button
+                android:id="@+id/diggernet_button"
+                android:layout_below="@id/contacts_header"
+                android:layout_toRightOf="@id/calendar_button"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/diggernet"
+            />
+        </RelativeLayout>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/diggernet_button"
+            android:layout_below="@id/top_button_layout"
             android:background="?attr/colorPrimary"
             android:elevation="6dp"
             android:minHeight="?attr/actionBarSize"
