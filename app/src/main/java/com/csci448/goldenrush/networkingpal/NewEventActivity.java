@@ -242,7 +242,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
         Log.d(TAG, "Date selected");
         mEvent.setmEventDate(d);
 
-        DateFormat.format("MMM dd, yyyy", mEvent.getmEventDate()).toString();
+        date.setText(DateFormat.format("MMM dd, yyyy", mEvent.getmEventDate()).toString());
     }
 
     @Override

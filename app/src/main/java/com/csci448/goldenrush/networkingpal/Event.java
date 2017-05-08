@@ -17,6 +17,7 @@ public class Event {
     private int mHour;
     private int mMin;
 
+
     public Event(){
         this(UUID.randomUUID());
     }
@@ -29,6 +30,7 @@ public class Event {
         mEventDate = eventDate;
         mHour = 8;
         mMin=0;
+
     }
 
     public Event(UUID id){
@@ -39,6 +41,7 @@ public class Event {
         mEventDetails = "Enter Details";
         mHour =8 ;
         mMin=0;
+
     }
 
     public UUID getId() {
@@ -92,4 +95,6 @@ public class Event {
     public void setmMin(int mMin) {
         this.mMin = mMin;
     }
+
+
 }

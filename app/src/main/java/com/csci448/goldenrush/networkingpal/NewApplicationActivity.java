@@ -11,6 +11,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,7 +85,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
             }
         });
         mDateDue = (Button) findViewById(R.id.date_due_button);
-        mDateDue.setText(mApp.getDateDue().toString());
+        mDateDue.setText(DateFormat.format("MMM dd, yyyy", mApp.getDateDue()).toString());
         mDateDue.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

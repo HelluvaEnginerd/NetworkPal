@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,9 +21,11 @@ import java.util.List;
  */
 
 public class NotificationService extends IntentService {
-    private static final int POLL_INTERVAL = 1000*60;//
+    private static final int POLL_INTERVAL = 1000*60*60*6;//
 
     private static final String TAG = "NotificationService";
+
+    private Date curDate;
 
 
     public static Intent newIntent(Context context){
@@ -33,25 +36,43 @@ public class NotificationService extends IntentService {
     protected void onHandleIntent(Intent intent){
         Log.i(TAG, "Received and intent: "+intent);
 
+        //get the current date
+        curDate = new Date();
+        Log.i(TAG, curDate.toString());
+
         Resources resources = getResources();
         Intent i = WelcomeActivity.newIntent(this);
         PendingIntent pi = PendingIntent.getActivity(this, 0, i , 0);
 
         EventLab eventLab = EventLab.get(getApplicationContext());
         List<Event> events = eventLab.getEvents();
-        Log.i(events.get(i).getmEventName());
 
-        Notification notification = new Notification.Builder(this)
-                .setTicker(resources.getString(R.string.default_notification))
-                .setSmallIcon(R.mipmap.ic_mynetworkpal)
-                .setContentTitle(resources.getString(R.string.default_notification))
-                .setContentText(resources.getString(R.string.default_details))
-                .setContentIntent(pi)
-                .setAutoCancel(true)
-                .build();
+        //loop through events and see if one is coming up in the next day
+        for (int j = 0; j<events.size(); j++){
+            //Comparing dates
+            long difference = Math.abs(events.get(j).getmEventDate().getTime() - curDate.getTime());
+            long differenceDates = difference / (60 * 60 * 1000);
+            Log.i(TAG, "Difference: "+differenceDates);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0,notification);
+            //if within one hour - notify
+            if(differenceDates<=24){
+                Log.i(TAG, "Event found");
+
+                Notification notification = new Notification.Builder(this)
+                        .setTicker(resources.getString(R.string.default_notification))
+                        .setSmallIcon(R.mipmap.ic_mynetworkpal)
+                        .setContentTitle(resources.getString(R.string.default_notification))
+                        .setContentText(resources.getString(R.string.default_details))
+                        .setContentIntent(pi)
+                        .setAutoCancel(true)
+                        .build();
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                notificationManager.notify(0,notification);
+            }
+        }
+
+
 
 
 
