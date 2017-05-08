@@ -46,4 +46,5 @@ dependencies {
         transitive = true;
     }
     compile 'com.android.support:design:25.3.0'
+    compile 'com.github.sundeepk:compact-calendar-view:2.0.1'
 }
