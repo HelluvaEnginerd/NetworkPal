@@ -2,6 +2,7 @@ package com.csci448.goldenrush.networkingpal;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,14 +35,15 @@ public class HomeFragment extends Fragment {
         mNumberContactsTextView.setText("You have " + ContactLab.get(getActivity().getApplicationContext()).getNumberContacts() + " contacts and " + CompanyLab.get(getActivity().getApplicationContext()).getNumberCompanies() + " companies!");
 
         mNextEvent= (TextView) view.findViewById(R.id.next_event);
-        mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + EventLab.get(getContext()).getNextEvent().getmEventDate().toString());
+        Event nextEvent = EventLab.get(getContext()).getNextEvent();
+        mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + DateFormat.format("MMM dd, yyyy", nextEvent.getmEventDate()));
 
         mNextApp= (TextView) view.findViewById(R.id.next_application);
         if(ApplicationLab.get(getActivity().getApplicationContext()).getNextApp() == null) {
             mNextApp.setText("You have no upcoming applications!");
         } else{
             Application a = ApplicationLab.get(getActivity().getApplicationContext()).getNextApp();
-            mNextApp.setText("Your next application is due " + a.getDateDue().toString() + " for " + a.getCompanyName());
+            mNextApp.setText("Your next application is due " + DateFormat.format("MMM dd, yyyy",a.getDateDue()) + " for " + a.getCompanyName());
         }
 
         return view;
@@ -49,14 +51,13 @@ public class HomeFragment extends Fragment {
 
     public void updateUI(){
         mNumberContactsTextView.setText("You have " + ContactLab.get(getActivity().getApplicationContext()).getNumberContacts() + " contacts and " + CompanyLab.get(getActivity().getApplicationContext()).getNumberCompanies() + " companies!");
-        mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + EventLab.get(getContext()).getNextEvent().getmEventDate().toString());
+        Event nextEvent = EventLab.get(getContext()).getNextEvent();
+        mNextEvent.setText("Your next event is: " + EventLab.get(getContext()).getNextEvent().getEventName() + " on " + DateFormat.format("MMM dd, yyyy", nextEvent.getmEventDate()));
         if(ApplicationLab.get(getActivity().getApplicationContext()).getNextApp() == null) {
             mNextApp.setText("You have no upcoming applications!");
         } else{
             Application a = ApplicationLab.get(getActivity().getApplicationContext()).getNextApp();
-            mNextApp.setText("Your next application is due " + a.getDateDue().toString() + " for " + a.getCompanyName());
+            mNextApp.setText("Your next application is due " + DateFormat.format("MMM dd, yyyy",a.getDateDue()) + " for " + a.getCompanyName());
         }
     }
 }
-
-

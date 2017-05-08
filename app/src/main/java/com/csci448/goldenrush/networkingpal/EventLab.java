@@ -12,6 +12,7 @@ import com.csci448.goldenrush.networkingpal.database.EventDbSchema;
 import com.csci448.goldenrush.networkingpal.database.EventDbSchema.EventTable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
