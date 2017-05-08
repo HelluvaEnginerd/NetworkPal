@@ -47,7 +47,6 @@ public class ContactPickerFragment extends DialogFragment {
 
     public static ContactPickerFragment newInstance(){
         Log.d(TAG, "newInstance()");
-
         ContactPickerFragment fragment = new ContactPickerFragment();
         return fragment;
     }
@@ -63,7 +62,6 @@ public class ContactPickerFragment extends DialogFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
-
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setTitle(R.string.contact_picker_title)

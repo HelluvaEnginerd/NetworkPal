@@ -39,6 +39,7 @@ public class WelcomeActivity extends AppCompatActivity{
     private TabLayout mTabLayout;
     private Button mDiggernetButton;
     private Button mCalendarButton;
+    HomeFragment hometab;
 
 
     public static Intent newIntent(Context packageContext, int position) {

@@ -42,10 +42,20 @@ public class EventLab {
     }
 
     public void addEvent(Event c){
-       // mEvents.add(c);
         Log.d(TAG, "addEvent()");
         ContentValues values = getContentValues(c);
         mDatabase.insert(EventTable.NAME, null, values);
+    }
+
+    public Event getNextEvent() {
+        List<Event> events = getEvents();
+        Event temp = events.get(0);
+        for (int j = 0; j < events.size(); j++) {
+            if (temp.getmEventDate().getDay() > events.get(j).getmEventDate().getDay()){
+                temp = events.get(j);
+            }
+        }
+        return temp;
     }
 
     public void deleteEvent(UUID id){
@@ -99,8 +109,6 @@ public class EventLab {
         }finally{
             cursor.close();
         }
-
-
     }
 
 

@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 public class TabPagerAdapter extends FragmentStatePagerAdapter{
 
     int mNumOfTabs;
+    HomeFragment homeTab;
 
     public TabPagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
@@ -22,7 +23,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter{
 
         switch (position) {
             case 0:
-                HomeFragment homeTab = new HomeFragment();
+                homeTab = new HomeFragment();
                 return homeTab;
             case 1:
                 ApplicationListFragment applicationsTab = new ApplicationListFragment();
@@ -44,5 +45,9 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter{
     @Override
     public int getCount() {
         return mNumOfTabs;
+    }
+
+    public Fragment getHomeFragmentForReasonsJustDontWorryAboutIt(){
+        return homeTab;
     }
 }
