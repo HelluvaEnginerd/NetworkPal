@@ -124,6 +124,9 @@ public class CalendarActivity extends AppCompatActivity {
         return i ;
     }
 
+    /**
+     * so when an event is changed it is added back correctly
+     */
     @Override
     public void onResume(){
         super.onResume();
