@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 public class NotificationService extends IntentService {
-    private static final int POLL_INTERVAL = 1000*60;//*60*6;
+    private static final int POLL_INTERVAL = 1000*60*60*6;
 
     private static final String TAG = "NotificationService";
 

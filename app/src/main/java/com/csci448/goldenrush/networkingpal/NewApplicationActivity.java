@@ -216,7 +216,10 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
                 mChooseExistingContactButton.setText("Choose Existing");
             if(app.getCompanyContact()!=null)
                 mCreateNewContactButton.setVisibility(View.GONE);
-            mCoverLetterCheckBox.setChecked(app.hasCoverLetter());
+            if(app.hasCoverLetter()){
+                mCoverLetterCheckBox.setChecked(true);
+            }
+
             mApp.setResume(app.hasResume());
             mResumeCheckBox.setChecked(app.hasResume());
             mApp.setSubmitted(app.isSubmitted());
@@ -229,9 +232,16 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
         mApp.setJobTitle(mJobTitleEditText.getText().toString());
         mApp.setCompanyName(mChooseExistingCompanyButton.getText().toString());
         mApp.setCompanyContact(mChooseExistingContactButton.getText().toString());
-        mApp.setCoverLetter(mCoverLetterCheckBox.isActivated());
-        mApp.setResume(mResumeCheckBox.isActivated());
-        mApp.setSubmitted(mSubmittedCheckBox.isActivated());
+        if(mApp.hasCoverLetter()) {
+            Log.d(TAG, "has cover letter");
+            mApp.setCoverLetter(true);
+        }
+        if(mApp.hasResume()) {
+            mApp.setResume(true);
+        }
+        if(mApp.isSubmitted()) {
+            mApp.setSubmitted(true);
+        }
         if (newApp)
             ApplicationLab.get(getApplicationContext()).addApplication(mApp);
     }
