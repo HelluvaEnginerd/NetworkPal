@@ -21,12 +21,14 @@ import java.util.List;
  */
 
 public class NotificationService extends IntentService {
-    private static final int POLL_INTERVAL = 1000*60*60*6;
+    private static final int POLL_INTERVAL = 1000*60;//*60*6;
 
     private static final String TAG = "NotificationService";
 
     private Date curDate;
-
+    private PendingIntent eventIntent;
+    private PendingIntent pi;
+    private Intent onTap;
 
     public static Intent newIntent(Context context){
         return new Intent(context, NotificationService.class);
@@ -36,13 +38,16 @@ public class NotificationService extends IntentService {
     protected void onHandleIntent(Intent intent){
         Log.i(TAG, "Received and intent: "+intent);
 
+        //clear old pending intents
+        if(onTap!=null) {
+            PendingIntent.getBroadcast(getApplicationContext(), 0, onTap, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+        }
+
         //get the current date
         curDate = new Date();
         Log.i(TAG, curDate.toString());
 
         Resources resources = getResources();
-        Intent i = WelcomeActivity.newIntent(this);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, i , 0);
 
         EventLab eventLab = EventLab.get(getApplicationContext());
         List<Event> events = eventLab.getEvents();
@@ -52,27 +57,65 @@ public class NotificationService extends IntentService {
             //Comparing dates
             long difference = Math.abs(events.get(j).getmEventDate().getTime() - curDate.getTime());
             long differenceDates = difference / (60 * 60 * 1000);
-            Log.i(TAG, "Difference: "+differenceDates);
+            Log.i(TAG, "Event Difference: "+differenceDates);
 
             //if within one hour - notify
             if(differenceDates<=24){
                 Log.i(TAG, "Event found");
 
+                //make intent for notification to go to
+                onTap = NewEventActivity.newIntent(getApplicationContext(), events.get(j).getId(), null);
+                eventIntent = PendingIntent.getActivity(this, 0, onTap , 0);
+
                 Notification notification = new Notification.Builder(this)
                         .setTicker(resources.getString(R.string.default_notification))
                         .setSmallIcon(R.mipmap.ic_mynetworkpal)
-                        .setContentTitle(resources.getString(R.string.default_notification))
+                        .setContentTitle(resources.getString(R.string.default_notification)+ " "+events.get(j).getEventName())
                         .setContentText(resources.getString(R.string.default_details))
+                        .setContentIntent(eventIntent)
+                        .setAutoCancel(true)
+                        .build();
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                notificationManager.notify(0,notification);
+
+                break;
+            }
+        }
+
+        ApplicationLab appLab = ApplicationLab.get(getApplicationContext());
+        List<Application> applications  = appLab.getApps();
+
+        //loop through applications and see if one is coming up in the next day
+        for (int j = 0; j<applications.size(); j++){
+            //Comparing dates
+            long difference = Math.abs(applications.get(j).getDateDue().getTime() - curDate.getTime());
+            long differenceDates = difference / (60 * 60 * 1000);
+            Log.i(TAG, "Application Difference: "+differenceDates);
+
+            //if within one hour - notify
+            if(differenceDates<=24 && !applications.get(j).isSubmitted()){
+                Log.i(TAG, "Application found");
+                //make intent for notification to go to
+                onTap = NewApplicationActivity.newIntent(getApplicationContext(), applications.get(j).getId(), null);
+                pi = PendingIntent.getActivity(this, 0, onTap , 0);
+
+                Notification notification = new Notification.Builder(this)
+                        .setTicker(resources.getString(R.string.default_notification))
+                        .setSmallIcon(R.mipmap.ic_mynetworkpal)
+                        .setContentTitle(resources.getString(R.string.app_notification)+ " "+applications.get(j).getJobTitle())
+                        .setContentText("You have an application due with "+applications.get(j).getCompanyName())
                         .setContentIntent(pi)
                         .setAutoCancel(true)
                         .build();
 
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
                 notificationManager.notify(0,notification);
+
+                break;
+
             }
         }
-
-
 
 
 
