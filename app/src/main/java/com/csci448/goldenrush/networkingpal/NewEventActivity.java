@@ -197,7 +197,7 @@ public class NewEventActivity extends AppCompatActivity implements DatePickerDia
     }
 
     public static Intent newIntent(Context packageContext, UUID eventId, Intent in){
-        mLastIntent = in;
+        //mLastIntent = in;
         Log.d(TAG, "newIntent()");
         Intent i = new Intent(packageContext, NewEventActivity.class);
         if(eventId!=null)

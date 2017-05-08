@@ -307,7 +307,7 @@ public class NewApplicationActivity extends AppCompatActivity implements DatePic
     @Override
     public void onDateSelected(Date date){
         mApp.setDateDue(date);
-        mDateDue.setText(date.toString());
+        mDateDue.setText(DateFormat.format("MMM dd, yyyy", mApp.getDateDue()).toString());
     }
 
     @Override
